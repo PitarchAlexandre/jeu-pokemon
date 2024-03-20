@@ -43,6 +43,7 @@ const scoreBot = document.getElementById('scoreBot');
 let niveauJoueur = document.getElementById('niveauJoueur');
 let compteurNiveauJoueur = 1;
 
+
 //Nombre vie du joueur
 const nbrVie = document.getElementById('nbrVie');
 let tabVie = ['♡','♡','♡','♡','♡'];
