@@ -13,6 +13,9 @@ const button = document.querySelectorAll('button');
 const pokemon1 = document.getElementById('pokemon1');
 const pokemon2 = document.getElementById('pokemon2');
 const pokemon3 = document.getElementById('pokemon3');
+
+//Variable qui contient le pokémon avec lequel l'utilisateur souhaite attaquer
+let pokemonJoueur = '';
 //Attaques du Pokémon
 const attaque1 = document.getElementById('attaque1');
 const attaque2 = document.getElementById('attaque2');
@@ -37,13 +40,29 @@ let compteurNiveauJoueur = 1;
 const nbrVie = document.getElementById('nbrVie');
 let tabVie = ['♡','♡','♡','♡','♡'];
 
-//Tableau d'objet des pokemons, attaques et images de l'utilisateur
+let tabPokemonUtili = [
+    { pokemon: 'Racaillou',
+        attaque: ['Jet de pierre!', 'Charge'],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/074.png'},
+    { pokemon: 'Herbizarre',
+        attaque: ['Tranch\'Herbe!','Fouet Lianes'],
+        imgPokemon: "https://preview.redd.it/pokemon-of-the-day-ivysaur-v0-4pinv95tbnlb1.png?width=475&format=png&" +
+            "auto=webp&s=940399261f3648bf9339ae31ebb5abd53f6d933b"},
+    { pokemon: 'Krabby',
+        attaque: 'Pince-Masse!',
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/099.png'},
+    {pokemon: 'Tropius',
+        attaque: 'Tempête Verte!',
+        imgPokemon: 'https://www.pokepedia.fr/images/thumb/2/2e/Tropius-RS.png/250px-Tropius-RS.png'}
+];
+
+//Tableau d'objet des pokemons, attaques et images de l'IA
 let tabPokemonOrdi = [
     { pokemon: 'Racaillou',
         attaque: ['Jet de pierre!', 'Charge'],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/074.png'},
     { pokemon: 'Herbizarre',
-        attaque: 'Tranch\'Herbe!',
+        attaque: ['Tranch\'Herbe!','Fouet Lianes'],
         imgPokemon: "https://preview.redd.it/pokemon-of-the-day-ivysaur-v0-4pinv95tbnlb1.png?width=475&format=png&" +
             "auto=webp&s=940399261f3648bf9339ae31ebb5abd53f6d933b"},
     { pokemon: 'Krabby',
@@ -59,16 +78,19 @@ vieJoueur();
 pokemon1.addEventListener('click', function () {
     //la fonction setTimeout() permet de faire attendre une du temps avant de s'exécuter
     setTimeout(function() {
-        jouer('pokemon1');
+        pokemonJoueur = tabPokemonUtili[0];
+        jouer(pokemonJoueur);
     }, 500);
 });
 
 pokemon2 .addEventListener('click', function () {
-    jouer('pokemon2');
+    pokemonJoueur = tabPokemonUtili[1];
+    jouer(pokemonJoueur);
 });
 
 pokemon3.addEventListener('click', function () {
-    jouer('pokemon3');
+    pokemonJoueur = tabPokemonUtili[2];
+    jouer(pokemonJoueur);
 });
 
 function generateurAttaqueOrdi(){
