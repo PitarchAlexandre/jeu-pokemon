@@ -17,8 +17,11 @@ const pokemon3 = document.getElementById('pokemon3');
 //Variable qui contient le pokémon avec lequel l'utilisateur souhaite attaquer
 let pokemonJoueur = '';
 //Attaques du Pokémon
-const attaque1 = document.getElementById('attaque1');
-const attaque2 = document.getElementById('attaque2');
+const btnAttaque1 = document.getElementById('attaque1');
+const btnAttaque2 = document.getElementById('attaque2');
+let attaque1 = '';
+let attaque2 = '';
+
 //Points de vies des pokémon
 let pvPokemon1 = document.getElementById('pvPokemon1');
 let pvPokemon2 = document.getElementById('pvPokemon2');
@@ -47,6 +50,7 @@ let tabVie = ['♡','♡','♡','♡','♡'];
 let tabPokemonUtili = [
     { pokemon: 'Racaillou',
         attaque: ['Jet de pierre!', 'Charge'],
+        puissanceAttaque: [20, 30],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/074.png',
         viePokemon: 100,
     },
@@ -88,12 +92,56 @@ let tabPokemonOrdi = [
 vieJoueur();
 
 pokemon1.addEventListener('click', function () {
-    //la fonction setTimeout() permet de faire attendre une du temps avant de s'exécuter
-    setTimeout(function() {
+
+        //active la visibilité des boutons d'attaques
+        let btnAttaques =document.getElementsByClassName('btnAttaques');
+        for (let i = 0; i < btnAttaques.length; i++) {
+            if (btnAttaques[i].style.display === 'none') {
+                btnAttaques[i].style.display = 'block';
+            } else {
+                btnAttaques[i].style.display = 'none';
+            }
+        }
+        let puissanceAttaque1 = tabPokemonUtili[0].puissanceAttaque[0];
+        let puissanceAttaque2 = tabPokemonUtili[1].puissanceAttaque[1];
         pokemonJoueur = tabPokemonUtili[0].pokemon;
-        jouer(pokemonJoueur);
-    }, 300);
+       // jouer(pokemonJoueur);
+        appelPokemon(pokemonJoueur, puissanceAttaque1, puissanceAttaque2)
 });
+
+function appelPokemon(pokemonJoueur,attaque1, attaque2) {
+    let attaque = '';
+
+    switch (pokemonJoueur) {
+        case 'Racaillou':
+            if (attaquePokemonOrdi === 'Herbizarre' || attaquePokemonOrdi === 'Tropius')
+            {
+
+            }
+        break;
+
+    /*    case 'Racaillou':
+            if (attaquePokemonOrdi === 'Herbizarre' || attaquePokemonOrdi === 'Tropius')
+            {
+                compteurIa++;
+                resultatManche.innerText = 'Perdu!'
+                perteVieJoueur(resultatManche.innerText);
+            }
+            else if (attaquePokemonOrdi === 'Krabby'){
+                compteurJoueur++;
+                resultatManche.innerText = 'Gagné!';
+            }
+            else {
+                resultatManche.innerText = 'Egalité!';
+            }
+            break;
+
+            }
+*/
+
+    }
+}
+
 
 pokemon2 .addEventListener('click', function () {
     pokemonJoueur = tabPokemonUtili[1].pokemon;
@@ -230,23 +278,31 @@ function perduPartie() {
 function game() {
     compteurJoueur = 0;
     compteurIa = 0;
-    tabVie = ['♡','♡','♡','♡','♡'];
+    tabVie = ['♡', '♡', '♡', '♡', '♡'];
     niveauJoueur.innerText = 1;
     compteurNiveauJoueur = 1;
     tabPokemonOrdi = [
-        { pokemon: 'Racaillou',
+        {
+            pokemon: 'Racaillou',
             attaque: 'Jet de pierre!',
-            imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/074.png'},
-        { pokemon: 'Herbizarre',
+            imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/074.png'
+        },
+        {
+            pokemon: 'Herbizarre',
             attaque: 'Tranch\'Herbe!',
             imgPokemon: "https://preview.redd.it/pokemon-of-the-day-ivysaur-v0-4pinv95tbnlb1.png?width=475&format=" +
-                "png&auto=webp&s=940399261f3648bf9339ae31ebb5abd53f6d933b"},
-        { pokemon: 'Krabby',
+                "png&auto=webp&s=940399261f3648bf9339ae31ebb5abd53f6d933b"
+        },
+        {
+            pokemon: 'Krabby',
             attaque: 'Pince-Masse!',
-            imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/099.png'},
-        {pokemon: 'Tropius',
+            imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/099.png'
+        },
+        {
+            pokemon: 'Tropius',
             attaque: 'Tempête Verte!',
-            imgPokemon: 'https://www.pokepedia.fr/images/thumb/2/2e/Tropius-RS.png/250px-Tropius-RS.png'}
+            imgPokemon: 'https://www.pokepedia.fr/images/thumb/2/2e/Tropius-RS.png/250px-Tropius-RS.png'
+        }
     ];
     afficheScore();
-}
+};
