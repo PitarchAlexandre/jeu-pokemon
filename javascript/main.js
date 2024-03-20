@@ -90,18 +90,18 @@ vieJoueur();
 pokemon1.addEventListener('click', function () {
     //la fonction setTimeout() permet de faire attendre une du temps avant de s'exécuter
     setTimeout(function() {
-        pokemonJoueur = tabPokemonUtili[0];
+        pokemonJoueur = tabPokemonUtili[0].pokemon;
         jouer(pokemonJoueur);
-    }, 500);
+    }, 300);
 });
 
 pokemon2 .addEventListener('click', function () {
-    pokemonJoueur = tabPokemonUtili[1];
+    pokemonJoueur = tabPokemonUtili[1].pokemon;
     jouer(pokemonJoueur);
 });
 
 pokemon3.addEventListener('click', function () {
-    pokemonJoueur = tabPokemonUtili[2];
+    pokemonJoueur = tabPokemonUtili[2].pokemon;
     jouer(pokemonJoueur);
 });
 
@@ -118,7 +118,7 @@ function jouer(attaqueJoueur){
     switch (attaqueJoueur){
 
 //controle lorsque l'utilisateur utilise le 1er pokémon
-        case 'pokemon1':
+        case 'Racaillou':
             if (attaquePokemonOrdi === 'Herbizarre' || attaquePokemonOrdi === 'Tropius')
             {
                 compteurIa++;
