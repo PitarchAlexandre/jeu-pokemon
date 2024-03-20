@@ -113,7 +113,7 @@ button img {
     height: 28px;
     margin: 0;
     background: radial-gradient(circle, rgb(255, 255, 160), rgb(255, 127, 0));
-
+    border: solid black 0.5px;
 }
 
 .btnAttaques button:hover {
