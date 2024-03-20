@@ -1,0 +1,139 @@
+/*Le code css de la pokeball provient de https://codepen.io/raubaca/pen/obaZmG*/
+*{
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    height: 100vh;
+    margin:0;
+    font-family: Trebuchet MS, sans-serif;
+
+
+    text-align:center;
+}
+
+ul {
+    display:flex;
+    justify-content:center;
+}
+
+li {
+    list-style-type: none;
+    margin:10px 10px 0;
+}
+
+button {
+    height: 150px;
+    width: 150px;
+    border-radius: 18px;
+    border:solid gray 1px;
+}
+
+button img {
+    max-width:140px
+}
+
+.btnAttaques button {
+    border-radius: 8px;
+    max-width: 160px;
+    height: 28px;
+    margin: 0px;
+}
+
+.pokemonSauvage {
+    display:flex;
+    justify-content:center;
+    margin:20px;
+}
+
+p {
+    display: inline;
+    font-size:large;
+}
+
+.contourPokemonEnemi {
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    height: 340px;
+    width: 600px;
+    border-radius: 25px;
+    background-color: lightgray;
+    border: solid black 1px;
+}
+
+.rectAttaquePokemonSauv {
+    height: 290px;
+    width: 550px;
+    border: solid black 0.5px;
+    border-radius: 25px;
+    background-image: url('https://www.bhmpics.com/downloads/pokemon-forest-background-/15.512.png');
+    background-size: cover;
+}
+
+.rectAttaquePokemonSauv > p {
+    font-size:24px;
+    color: white;
+    -webkit-text-stroke-width: 0.1px;
+    -webkit-text-stroke-color: black;
+}
+
+.pokemonSauvage img {
+    display: flex;
+    margin: 15px auto;
+    height: 200px;
+}
+
+.manche {
+    margin-bottom:1px;
+}
+
+/*POKEBALL ET MUSIQUE*/
+.conteneurBtnMusique {
+    position: fixed;
+    top: 200px;
+    left: 300px;
+    width: 200px;
+    height: 100%;
+
+}
+
+/*Le code css de la pokeball provient de https://codepen.io/raubaca/pen/obaZmG*/
+.pokeball {
+    position: relative;
+    z-index: 1000;
+    display: block;
+    width: 192px;
+    height: 192px;
+    background: radial-gradient(
+            white 16px,
+            black 17px 18px,
+            white 19px 24px,
+            black 25px 32px,
+            transparent 33px, transparent 192px);
+    background: radial-gradient(
+            white 16px,
+            black 17px 18px,
+            white 19px 24px,
+            black 25px 32px,
+            transparent 33px),
+    linear-gradient(to bottom, red 0 80px, black 81px 96px, white 97px 100%);
+    border-radius: 50%;
+    border: 8px solid black;
+    box-shadow: inset -16px -8px 0 0 rgba(0, 0, 0, 0.2);
+    animation: fall 0.5s ease-in-out 1s,
+    shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) 1.5s 3,
+    catch 0.5s ease-out 5.25s forwards;
+}
+
+.battlePokemonMusic {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    /*Permet de rendre insivisble le bouton pour l'utilisateur*/
+    opacity: 1%;
+}
+
