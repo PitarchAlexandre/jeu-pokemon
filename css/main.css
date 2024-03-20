@@ -101,6 +101,12 @@ button img {
     max-width:140px
 }
 
+.pvPokemon {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+
 .btnAttaques button {
     border-radius: 8px;
     max-width: 160px;

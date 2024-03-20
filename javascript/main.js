@@ -19,6 +19,10 @@ let pokemonJoueur = '';
 //Attaques du Pokémon
 const attaque1 = document.getElementById('attaque1');
 const attaque2 = document.getElementById('attaque2');
+//Points de vies des pokémon
+let pvPokemon1 = document.getElementById('pvPokemon1');
+let pvPokemon2 = document.getElementById('pvPokemon2');
+let pvPokemon3 = document.getElementById('pvPokemon3');
 
 const attaqueOrdi = document.getElementById('attaqueOrdi');
 const pokemonAdversaire = document.getElementById('imgPokemonAdversaire');
@@ -43,17 +47,25 @@ let tabVie = ['♡','♡','♡','♡','♡'];
 let tabPokemonUtili = [
     { pokemon: 'Racaillou',
         attaque: ['Jet de pierre!', 'Charge'],
-        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/074.png'},
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/074.png',
+        viePokemon: 100,
+    },
     { pokemon: 'Herbizarre',
         attaque: ['Tranch\'Herbe!','Fouet Lianes'],
         imgPokemon: "https://preview.redd.it/pokemon-of-the-day-ivysaur-v0-4pinv95tbnlb1.png?width=475&format=png&" +
-            "auto=webp&s=940399261f3648bf9339ae31ebb5abd53f6d933b"},
+            "auto=webp&s=940399261f3648bf9339ae31ebb5abd53f6d933b",
+        viePokemon: 100
+    },
     { pokemon: 'Krabby',
-        attaque: 'Pince-Masse!',
-        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/099.png'},
+        attaque: ['Pince-Masse!'],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/099.png',
+        viePokemon: 100
+    },
     {pokemon: 'Tropius',
         attaque: 'Tempête Verte!',
-        imgPokemon: 'https://www.pokepedia.fr/images/thumb/2/2e/Tropius-RS.png/250px-Tropius-RS.png'}
+        imgPokemon: 'https://www.pokepedia.fr/images/thumb/2/2e/Tropius-RS.png/250px-Tropius-RS.png',
+        viePokemon: 100
+    }
 ];
 
 //Tableau d'objet des pokemons, attaques et images de l'IA
