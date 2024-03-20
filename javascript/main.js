@@ -17,10 +17,10 @@ const pokemon3 = document.getElementById('pokemon3');
 const attaque1 = document.getElementById('attaque1');
 const attaque2 = document.getElementById('attaque2');
 
-let jeuOrdi;
-let attaquePokemonOrdi;
 const attaqueOrdi = document.getElementById('attaqueOrdi');
 const pokemonAdversaire = document.getElementById('imgPokemonAdversaire');
+let jeuOrdi;
+let attaquePokemonOrdi;
 
 //Le score et les manches
 const resultatManche = document.getElementById('resultatManche');
@@ -38,13 +38,14 @@ const nbrVie = document.getElementById('nbrVie');
 let tabVie = ['♡','♡','♡','♡','♡'];
 
 //Tableau d'objet des pokemons, attaques et images de l'utilisateur
-const tabPokemonOrdi = [
+let tabPokemonOrdi = [
     { pokemon: 'Racaillou',
-        attaque: 'Jet de pierre!',
+        attaque: ['Jet de pierre!', 'Charge'],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/074.png'},
     { pokemon: 'Herbizarre',
         attaque: 'Tranch\'Herbe!',
-        imgPokemon: "https://preview.redd.it/pokemon-of-the-day-ivysaur-v0-4pinv95tbnlb1.png?width=475&format=png&auto=webp&s=940399261f3648bf9339ae31ebb5abd53f6d933b"},
+        imgPokemon: "https://preview.redd.it/pokemon-of-the-day-ivysaur-v0-4pinv95tbnlb1.png?width=475&format=png&" +
+            "auto=webp&s=940399261f3648bf9339ae31ebb5abd53f6d933b"},
     { pokemon: 'Krabby',
         attaque: 'Pince-Masse!',
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/099.png'},
@@ -124,11 +125,6 @@ function jouer(attaqueJoueur){
                 compteurJoueur++;
                 resultatManche.innerText = 'Gagné!';
             }
-            else if (attaquePokemonOrdi === 'Tropius'){
-                compteurIa++;
-                resultatManche.innerText = 'Perdu!';
-                perteVieJoueur(resultatManche.innerText);
-            }
             else {
                 resultatManche.innerText = 'Egalité!';
             }
@@ -160,6 +156,7 @@ function afficheScore () {
     }
 }
 
+//Fonction permettant de faire augmenter le niveau du joueur
 function niveauSuperieur() {
     //le niveau du joueur augmente s'il a gagné 5 manche
     compteurNiveauJoueur++;
@@ -167,14 +164,17 @@ function niveauSuperieur() {
     niveauJoueur.innerText = compteurNiveauJoueur;
 }
 
+//Permet de mettre à jour et d'afficher les vies du joueur grace à un tableau
 function vieJoueur() {
-    // Mise à jour de l'affichage des vies du joueur
-    nbrVie.innerText = ''; // Efface le contenu actuel
+    //Permet d'effacer la nombre de vie affiché
+    nbrVie.innerText = '';
+    //Remet à jour le nombre de vies du joueur
     for (let i = 0; i < tabVie.length; i++) {
         nbrVie.innerText += tabVie[i]; // Ajoute chaque cœur au texte affiché
     }
 }
 
+//
 function perteVieJoueur(resultatManche) {
     // Si le joueur a perdu la manche, réduire le nombre de vies
     if (resultatManche === 'Perdu!') {
@@ -187,6 +187,7 @@ function perteVieJoueur(resultatManche) {
     }
 }
 
+//Affiche une alerte qui previent l'utilisateur de ça défaite et redémarre une partie
 function perduPartie() {
     alert('GAME OVER')
     game();
@@ -204,7 +205,8 @@ function game() {
             imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/074.png'},
         { pokemon: 'Herbizarre',
             attaque: 'Tranch\'Herbe!',
-            imgPokemon: "https://preview.redd.it/pokemon-of-the-day-ivysaur-v0-4pinv95tbnlb1.png?width=475&format=png&auto=webp&s=940399261f3648bf9339ae31ebb5abd53f6d933b"},
+            imgPokemon: "https://preview.redd.it/pokemon-of-the-day-ivysaur-v0-4pinv95tbnlb1.png?width=475&format=" +
+                "png&auto=webp&s=940399261f3648bf9339ae31ebb5abd53f6d933b"},
         { pokemon: 'Krabby',
             attaque: 'Pince-Masse!',
             imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/099.png'},
