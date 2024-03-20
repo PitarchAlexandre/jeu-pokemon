@@ -134,7 +134,7 @@ function jouer(attaqueJoueur){
             }
             break;
 //controle lorsque l'utilisateur utilise le 2ème pokémon
-        case 'pokemon2':
+        case 'Herbizarre':
             if (attaquePokemonOrdi === 'Racaillou'){
                 compteurJoueur++;
                 resultatManche.innerText = 'Gagné!'
@@ -149,7 +149,7 @@ function jouer(attaqueJoueur){
             }
             break;
 //controle lorsque l'utilisateur utilise le 3ème pokémon
-        case 'pokemon3':
+        case 'Krabby':
             if (attaquePokemonOrdi === 'Racaillou' || attaquePokemonOrdi === 'Tropius'){
                 compteurIa++;
                 resultatManche.innerText = 'Perdu!';

@@ -27,6 +27,27 @@ li {
     margin:10px 10px 0;
 }
 
+.btnPokemonUtilisateur  button {
+    border: solid black 0.5px;
+    background-image: linear-gradient(30deg, rgba(0, 0, 0, 0.8) 20%, rgba(128, 128, 128, 0.8) 50%, rgba(0, 0, 0, 0.8) 80%);
+    background-color: #fff;
+    background-size: 600% 100%;
+    background-repeat: no-repeat;
+    color: black;
+    text-shadow: 3px 3px 4px black;
+    font-family: sans-serif, system-ui, -apple-system, BlinkMacSystemFont;
+    animation: scanner 5s linear alternate infinite;
+}
+
+    @keyframes scanner {
+        0% {
+            background-position: 100% 0;
+        }
+        to {
+            background-position: 0 100%;
+        }
+    }
+
 .btnPokemonUtilisateur button:hover {
     transform: scale(1.2);
     transition: all 0.2s ease-in-out;
