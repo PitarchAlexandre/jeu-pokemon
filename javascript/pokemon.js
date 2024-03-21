@@ -35,6 +35,9 @@ let pvPokAdverseActuel;
 let puissanceAttAdversaire;
 //Nombre de dégats que le pokémon IA inflige au pokemon du joueur
 let degatRecuPokUtilisateur;
+
+let degatsSubis = document.getElementById('degatsSubis');
+
 //Points de vies des pokémon
 let pvPokemon1 = document.getElementById('pvPokemon1');
 let pvPokemon2 = document.getElementById('pvPokemon2');
@@ -137,7 +140,7 @@ vieJoueur();
 //Génère un tableau de 3 pokémons enemis
 let pokemonNiveau1 = popNiveau1();
 //Montre le pokémon adverse à l'utilisateur
-pokemonAdversaire = affichagePokAdverse(pokemonNiveau1);
+pokemonAdverse = affichagePokAdverse(pokemonNiveau1);
 //L'utilisateur choisi un pokémon et une attaque
 
 /////////////////////////////////
@@ -148,10 +151,10 @@ btn1AttaquePok1.addEventListener('click' ,function () {
     nomAttaque.innerText = tabPokemon[0].attaque[0];
     attaquePoKBot(tabPokemon[0]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
-    puissanceAttAdversaire = choixAttaqueBot(pokemonAdversaire);
-    console.log(pokemonJoueurCible);
+    //ajouter un setTimeOut() quand ce sera prêt
+    puissanceAttAdversaire =choixAttaqueBot(pokemonAdversaire);
+    pokemonStartUtilisateur(pokemonJoueurCible, puissanceAttAdversaire)
 
-        botAttaqueUtilisateur(pokemonJoueurCible);
 })
 
 /////////////////
@@ -182,9 +185,7 @@ function pokemonStartUtilisateur() {
     btn1AttaquePok3.innerText = pokemon2.attaque[0];
     btn2AttaquePok3.innerText = pokemon2.attaque[1];
 
-    let tabPokemonJoueurActuel = [pokemon1, pokemon2, pokemon3];
-
-    return tabPokemonJoueurActuel;
+    return [pokemon1, pokemon2, pokemon3];
 }
 //Permet de mettre à jour et d'afficher les vies du joueur grace à un tableau
 function vieJoueur() {
@@ -218,8 +219,8 @@ function affichagePokAdverse(pokemonNiveau1) {
     imgPokemonAdversaire.src = pokemonAdverse.imgPokemon;
     // Initialisation des points de vie actuels
     pvPokAdverseActuel = pokemonAdverse.viePokemon;
-    pvAdversaire.innerText = pvPokAdverseActuel
-    return pokemonAdversaire;
+    pvAdversaire.innerText = pvPokAdverseActuel;
+    return pokemonAdverse;
 }
 //Fonction qui déduits les pv du bots suite à une attaque de l'utilisateur
 function attaquePoKBot(pokemon) {
@@ -237,13 +238,13 @@ function randomizerAttaqueBot(tabPokemonUtilisateur) {
     pokemonJoueurCible = Math.round(Math.random() * tabPokemonUtilisateur.length);
     return pokemonJoueurCible;
 }
-//Fonction qui permet de choisir l'attaque que le bot va effectuer
+//Fonction qui permet de choisir l'attaque que le bot va effectuer et affiche l'attaque ainsi que le nbr dégats
+//Renvoie le nombre de dégats
 function choixAttaqueBot(pokemonAdversaire){
-    puissanceAttAdversaire = Math.round(Math.random() * pokemonAdversaire.puissanceAttaque.length);
-
+    let indexAttaque = Math.round(Math.random() * pokemonAdversaire.puissanceAttaque.length);
+    nomAttaque.innerText = puissanceAttAdversaire.attaque[indexAttaque];
+    puissanceAttAdversaire = puissanceAttAdversaire.puissanceAttaque[indexAttaque];
+    degatsSubis.innerText = puissanceAttAdversaire;
     return puissanceAttAdversaire;
 }
-//Fonction qui permet au bot d'attaquer
-function botAttaqueUtilisateur(pokemonJoueurCible) {
 
-}

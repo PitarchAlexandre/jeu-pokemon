@@ -29,6 +29,7 @@ let pvPokemon3 = document.getElementById('pvPokemon3');
 
 const attaqueOrdi = document.getElementById('attaqueOrdi');
 let pokemonAdversaire = document.getElementById('imgPokemonAdversaire');
+let po
 let jeuOrdi;
 let attaquePokemonOrdi;
 
