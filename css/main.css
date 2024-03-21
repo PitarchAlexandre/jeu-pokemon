@@ -128,8 +128,9 @@ button img {
     padding: 0;
 }
 
+/*REMETTRE LE DISPLAY NONE*/
 .btnAttaques {
-    display: none;
+
 }
 
 .btnAttaques button {
