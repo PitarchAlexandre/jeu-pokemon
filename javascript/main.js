@@ -307,3 +307,36 @@ function game() {
     ];
     afficheScore();
 };
+
+function affichagePokAdverse(pokemonNiveau1) {
+    pokemonAdverse = pokemonNiveau1[0];
+    imgPokemonAdversaire.src = pokemonAdverse.imgPokemon;
+    pvPokAdverseActuel = pokemonAdverse.viePokemon; // Initialisation des points de vie actuels
+    pvAdversaire.innerText = pvAdversaireActuel; // Affichage des points de vie
+}
+
+function attaquePoKBot(pokemon) {
+    let degatContreBot = pokemon.puissanceAttaque[0];
+    //Déduits les points points de vies suite à l'attaque
+    pvPokAdverseActuel -= degatContreBot;
+    //Si les dégats sont inférieurs à zéro, ils seront initiatlisés à zéro
+    if (pvAdversaireActuel < 0) {
+        pvPokAdverseActuel = 0;
+    }
+    pvAdversaire.innerText = pvAdversaireActuel;
+}
+
+//Sélectionne le premier pokémon dans le tableau et affiche son image et ses pv
+function affichagePokAdverse(pokemonNiveau1) {
+    pokemonAdverse = pokemonNiveau1[0];
+    imgPokemonAdversaire.src = pokemonAdverse.imgPokemon;
+    pvAdversaire.innerText = pokemonAdverse.viePokemon;
+    console.log(imgPokemonAdversaire.src)
+
+    return pokemonAdverse;
+}
+//Contient les pvActuelle du bot
+function pvPokmemonAdverse(degatContreBot) {
+    pokemonAdverse = affichagePokAdverse();
+
+}

@@ -19,8 +19,6 @@ const imgPokemon1 = document.getElementById('imgPokemon1');
 const imgPokemon2 = document.getElementById('imgPokemon2');
 const imgPokemon3 = document.getElementById('imgPokemon3');
 
-//Variable qui contient le pokémon avec lequel l'utilisateur souhaite attaquer
-let pokemonJoueur = '';
 //Attaques du Pokémon
 let btn1AttaquePok1 = document.getElementById('attaque1');
 let btn2AttaquePok1 = document.getElementById('attaque2');
@@ -29,23 +27,22 @@ let btn2AttaquePok2 = document.getElementById('attaque4');
 let btn1AttaquePok3 = document.getElementById('attaque5');
 let btn2AttaquePok3 = document.getElementById('attaque6');
 
-
+let pokemonAdverse;
+let pvPokAdverseActuel;
+//Nombre de dégats que le pokémon IA inflige au pokemon du joueur
+let degatRecuPokUtilisateur;
 //Points de vies des pokémon
 let pvPokemon1 = document.getElementById('pvPokemon1');
 let pvPokemon2 = document.getElementById('pvPokemon2');
 let pvPokemon3 = document.getElementById('pvPokemon3');
+//Points de vie du pokémon adverse en combat
+let pvAdversaire = document.getElementById('pvAvdersaire')
 
-const attaqueOrdi = document.getElementById('attaqueOrdi');
+//Les variables qui contiennent les nom et attaque du pokemon (lors d'une attaque)
+let nomPokemonAtt = document.getElementById('nomPokemonAtt');
+let nomAttaque = document.getElementById('nomAttaque');
+
 const imgPokemonAdversaire = document.getElementById('imgPokemonAdversaire');
-let jeuOrdi;
-let attaquePokemonOrdi;
-
-//Le score et les manches
-const resultatManche = document.getElementById('resultatManche');
-let compteurJoueur = 0;
-let compteurIa = 0;
-const scoreJoueur = document.getElementById('scoreJoueur');
-const scoreBot = document.getElementById('scoreBot');
 
 //Niveau du joueur
 let niveauJoueur = document.getElementById('niveauJoueur');
@@ -130,7 +127,7 @@ let tabPokemon = [
 /////////////////////
 
 //Affiche les Pokémons et la vie des Pokémons de l'utilisiateur
-pokemonStartUtilisateur()
+let tabPokemonUtilisateur = pokemonStartUtilisateur()
 //Affiche la vie du joueur
 vieJoueur();
 //Génère un tableau de 3 pokémons enemis
@@ -138,6 +135,21 @@ let pokemonNiveau1 = popNiveau1();
 //Montre le pokémon adverse à l'utilisateur
 affichagePokAdverse(pokemonNiveau1);
 //L'utilisateur choisi un pokémon et une attaque
+
+/////////////////////////////////
+//CLIQUE! L'UTILISATEUR ATTAQUE//
+/////////////////////////////////
+btn1AttaquePok1.addEventListener('click' ,function () {
+    //attaque: ['Jet de pierre!', 'Charge'],
+      //  puissanceAttaque: [20, 30],
+    nomPokemonAtt.innerText = tabPokemon[0].pokemon;
+    nomAttaque.innerText = tabPokemon[0].attaque[0];
+    attaquePoKBot(tabPokemon[0]);
+
+    degatRecuPokUtilisateur = randomizerAttaqueBot(tabPokemonUtilisateur);
+    console.log(degatRecuPokUtilisateur)
+    botAttaqueUtilisateur();
+})
 
 /////////////////
 //LES FONCTIONS//
@@ -166,6 +178,10 @@ function pokemonStartUtilisateur() {
     btn2AttaquePok2.innerText = pokemon2.attaque[1];
     btn1AttaquePok3.innerText = pokemon2.attaque[0];
     btn2AttaquePok3.innerText = pokemon2.attaque[1];
+
+    let tabPokemonJoueurActuel = [pokemon1, pokemon2, pokemon3];
+
+    return tabPokemonJoueurActuel;
 }
 //Permet de mettre à jour et d'afficher les vies du joueur grace à un tableau
 function vieJoueur() {
@@ -195,7 +211,29 @@ function generateurPokemonNiveau(nbrPokemon) {
     return pokemonNiveau;
 }
 function affichagePokAdverse(pokemonNiveau1) {
-    let pokemonAdverse = pokemonNiveau1[0];
+    pokemonAdverse = pokemonNiveau1[0];
     imgPokemonAdversaire.src = pokemonAdverse.imgPokemon;
-    console.log(imgPokemonAdversaire.src)
+    // Initialisation des points de vie actuels
+    pvPokAdverseActuel = pokemonAdverse.viePokemon;
+    pvAdversaire.innerText = pvPokAdverseActuel
+}
+//Fonction qui déduits les pv du bots suite à une attaque de l'utilisateur
+function attaquePoKBot(pokemon) {
+    let degatContreBot = pokemon.puissanceAttaque[0];
+    //Déduits les points points de vies suite à l'attaque
+    pvPokAdverseActuel -= degatContreBot;
+    //Si les dégats sont inférieurs à zéro, ils seront initiatlisés à zéro
+    if ( pvPokAdverseActuel < 0) {
+        pvPokAdverseActuel = 0;
+    }
+    pvAdversaire.innerText =  pvPokAdverseActuel;
+}
+//Fonction qui permet au bot de choisir un pokémon au hasard
+function randomizerAttaqueBot(tabPokemonUtilisateur) {
+    degatRecuPokUtilisateur = Math.round(Math.random() * tabPokemonUtilisateur.length);
+    return degatRecuPokUtilisateur;
+}
+//Fonction qui permet au bot d'attaquer
+function botAttaqueUtilisateur() {
+
 }
