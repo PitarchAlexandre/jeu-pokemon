@@ -148,7 +148,7 @@ btn1AttaquePok1.addEventListener('click' ,function () {
     nomAttaque.innerText = tabPokemon[0].attaque[0];
     attaquePoKBot(tabPokemon[0]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
-   puissanceAttAdversaire =
+    puissanceAttAdversaire = choixAttaqueBot(pokemonAdversaire);
     console.log(pokemonJoueurCible);
 
         botAttaqueUtilisateur(pokemonJoueurCible);
@@ -236,6 +236,12 @@ function attaquePoKBot(pokemon) {
 function randomizerAttaqueBot(tabPokemonUtilisateur) {
     pokemonJoueurCible = Math.round(Math.random() * tabPokemonUtilisateur.length);
     return pokemonJoueurCible;
+}
+//Fonction qui permet de choisir l'attaque que le bot va effectuer
+function choixAttaqueBot(pokemonAdversaire){
+    puissanceAttAdversaire = Math.round(Math.random() * pokemonAdversaire.puissanceAttaque.length);
+
+    return puissanceAttAdversaire;
 }
 //Fonction qui permet au bot d'attaquer
 function botAttaqueUtilisateur(pokemonJoueurCible) {
