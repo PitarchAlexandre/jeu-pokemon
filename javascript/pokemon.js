@@ -27,8 +27,12 @@ let btn2AttaquePok2 = document.getElementById('attaque4');
 let btn1AttaquePok3 = document.getElementById('attaque5');
 let btn2AttaquePok3 = document.getElementById('attaque6');
 
+//Stocke le pokemon que le bot choisi d'attaquer
+let pokemonJoueurCible;
 let pokemonAdverse;
 let pvPokAdverseActuel;
+//Permet de stocker la puissance des dégats du pokémon adverse
+let puissanceAttAdversaire;
 //Nombre de dégats que le pokémon IA inflige au pokemon du joueur
 let degatRecuPokUtilisateur;
 //Points de vies des pokémon
@@ -133,22 +137,21 @@ vieJoueur();
 //Génère un tableau de 3 pokémons enemis
 let pokemonNiveau1 = popNiveau1();
 //Montre le pokémon adverse à l'utilisateur
-affichagePokAdverse(pokemonNiveau1);
+pokemonAdversaire = affichagePokAdverse(pokemonNiveau1);
 //L'utilisateur choisi un pokémon et une attaque
 
 /////////////////////////////////
 //CLIQUE! L'UTILISATEUR ATTAQUE//
 /////////////////////////////////
 btn1AttaquePok1.addEventListener('click' ,function () {
-    //attaque: ['Jet de pierre!', 'Charge'],
-      //  puissanceAttaque: [20, 30],
     nomPokemonAtt.innerText = tabPokemon[0].pokemon;
     nomAttaque.innerText = tabPokemon[0].attaque[0];
     attaquePoKBot(tabPokemon[0]);
+    pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
+   puissanceAttAdversaire =
+    console.log(pokemonJoueurCible);
 
-    degatRecuPokUtilisateur = randomizerAttaqueBot(tabPokemonUtilisateur);
-    console.log(degatRecuPokUtilisateur)
-    botAttaqueUtilisateur();
+        botAttaqueUtilisateur(pokemonJoueurCible);
 })
 
 /////////////////
@@ -216,6 +219,7 @@ function affichagePokAdverse(pokemonNiveau1) {
     // Initialisation des points de vie actuels
     pvPokAdverseActuel = pokemonAdverse.viePokemon;
     pvAdversaire.innerText = pvPokAdverseActuel
+    return pokemonAdversaire;
 }
 //Fonction qui déduits les pv du bots suite à une attaque de l'utilisateur
 function attaquePoKBot(pokemon) {
@@ -230,10 +234,10 @@ function attaquePoKBot(pokemon) {
 }
 //Fonction qui permet au bot de choisir un pokémon au hasard
 function randomizerAttaqueBot(tabPokemonUtilisateur) {
-    degatRecuPokUtilisateur = Math.round(Math.random() * tabPokemonUtilisateur.length);
-    return degatRecuPokUtilisateur;
+    pokemonJoueurCible = Math.round(Math.random() * tabPokemonUtilisateur.length);
+    return pokemonJoueurCible;
 }
 //Fonction qui permet au bot d'attaquer
-function botAttaqueUtilisateur() {
+function botAttaqueUtilisateur(pokemonJoueurCible) {
 
 }
