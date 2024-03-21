@@ -51,10 +51,13 @@ const scoreBot = document.getElementById('scoreBot');
 let niveauJoueur = document.getElementById('niveauJoueur');
 let compteurNiveauJoueur = 1;
 
-
 //Nombre vie du joueur
 const nbrVie = document.getElementById('nbrVie');
 let tabVie = ['♡'];
+
+///////////////////////////////////
+//LE TABLEAU CONTENANT LES OBJETS//
+///////////////////////////////////
 
 //Tableau contenant tous les pokémons du jeu
 let tabPokemon = [
@@ -122,18 +125,24 @@ let tabPokemon = [
     }
 ];
 
-//LE JEU DEBUTE ICI
+/////////////////////
+//LE JEU DEBUTE ICI//
+/////////////////////
 
 //Affiche les Pokémons et la vie des Pokémons de l'utilisiateur
 pokemonStartUtilisateur()
 //Affiche la vie du joueur
 vieJoueur();
-//génère un tableau de 3 pokémons enemis
+//Génère un tableau de 3 pokémons enemis
 let pokemonNiveau1 = popNiveau1();
 //Montre le pokémon adverse à l'utilisateur
-function pokAdverseDuel(pokemonNiveau1) {
-    let pokemonAdverse = pokemonNiveau1[]
-}
+affichagePokAdverse(pokemonNiveau1);
+//L'utilisateur choisi un pokémon et une attaque
+
+/////////////////
+//LES FONCTIONS//
+/////////////////
+
 //Function permettant d'afficher les 3 premiers pokémons de départ de l'utilisateur ainsi que leur PV et attaques
 function pokemonStartUtilisateur() {
     //sélectionne les pokémons de l'utilisateur
@@ -158,33 +167,35 @@ function pokemonStartUtilisateur() {
     btn1AttaquePok3.innerText = pokemon2.attaque[0];
     btn2AttaquePok3.innerText = pokemon2.attaque[1];
 }
-
+//Permet de mettre à jour et d'afficher les vies du joueur grace à un tableau
+function vieJoueur() {
+    //Permet d'effacer la nombre de vie affiché
+    nbrVie.innerText = '';
+    //Remet à jour le nombre de vies du joueur
+    for (let i = 0; i < tabVie.length; i++) {
+        nbrVie.innerText += tabVie[i]; // Ajoute chaque cœur au texte affiché
+    }
+}
 //Fonction permettant de générer le premier niveau et générer les premiers pokémons
 function popNiveau1() {
     //variable contenant le nombre de pokémons dans le niveau
     let nbrPokemon = 3;
     let pokemonNiveau1 = generateurPokemonNiveau(nbrPokemon)
-
+    console.log(pokemonNiveau1)
     return pokemonNiveau1;
 }
-
 // Fonction pour générer Pokémons aléatoires pour le niveau
 function generateurPokemonNiveau(nbrPokemon) {
     let pokemonNiveau = [];
     for (let i = 0; i < nbrPokemon; i++) {
         let randomIndex = Math.floor(Math.random() * tabPokemon.length);
         pokemonNiveau.push(tabPokemon[randomIndex]);
-        console.log(pokemonNiveau)
     }
+    console.log(pokemonNiveau)
     return pokemonNiveau;
 }
-
-
-//les boutons pokémons sont devenus obseleète
-pokemon1.addEventListener('click', function () {
-
-})
-
-btn1AttaquePok1.addEventListener('click', function () {
-
-})
+function affichagePokAdverse(pokemonNiveau1) {
+    let pokemonAdverse = pokemonNiveau1[0];
+    imgPokemonAdversaire.src = pokemonAdverse.imgPokemon;
+    console.log(imgPokemonAdversaire.src)
+}
