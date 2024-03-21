@@ -4,7 +4,7 @@
  * @version 2.1
  * @since   2024-03-11
  */
-
+/*
 'use strict'; // Active le mode strict du JavaScript
 
 const button = document.querySelectorAll('button');
@@ -140,7 +140,7 @@ function appelPokemon(pokemonJoueur,attaque1, attaque2) {
 
             }
 */
-
+/*
     }
 }
 
@@ -339,5 +339,4 @@ function affichagePokAdverse(pokemonNiveau1) {
 //Contient les pvActuelle du bot
 function pvPokmemonAdverse(degatContreBot) {
     pokemonAdverse = affichagePokAdverse();
-
 }

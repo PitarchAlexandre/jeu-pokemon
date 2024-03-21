@@ -146,16 +146,17 @@ pokemonAdverse = affichagePokAdverse(pokemonNiveau1);
 /////////////////////////////////
 //CLIQUE! L'UTILISATEUR ATTAQUE//
 /////////////////////////////////
-btn1AttaquePok1.addEventListener('click' ,function () {
+btn1AttaquePok1.addEventListener('click', function () {
     nomPokemonAtt.innerText = tabPokemon[0].pokemon;
     nomAttaque.innerText = tabPokemon[0].attaque[0];
     attaquePoKBot(tabPokemon[0]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
-    //ajouter un setTimeOut() quand ce sera prêt
-    puissanceAttAdversaire =choixAttaqueBot(pokemonAdversaire);
-    pokemonStartUtilisateur(pokemonJoueurCible, puissanceAttAdversaire)
-
+    puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse); // Correction ici
+    tabPokemonUtilisateur = pokemonStartUtilisateur();
+    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
+    console.log(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon);
 })
+
 
 /////////////////
 //LES FONCTIONS//
@@ -241,10 +242,17 @@ function randomizerAttaqueBot(tabPokemonUtilisateur) {
 //Fonction qui permet de choisir l'attaque que le bot va effectuer et affiche l'attaque ainsi que le nbr dégats
 //Renvoie le nombre de dégats
 function choixAttaqueBot(pokemonAdversaire){
-    let indexAttaque = Math.round(Math.random() * pokemonAdversaire.puissanceAttaque.length);
-    nomAttaque.innerText = puissanceAttAdversaire.attaque[indexAttaque];
-    puissanceAttAdversaire = puissanceAttAdversaire.puissanceAttaque[indexAttaque];
+    let indexAttaque = 0;
+    while (indexAttaque >=3) {
+        indexAttaque = Math.round(Math.random() * pokemonAdversaire.puissanceAttaque.length);
+    }
+    puissanceAttAdversaire = String(puissanceAttAdversaire)
+    nomAttaque.innerText = pokemonAdversaire.attaque[indexAttaque];
+    puissanceAttAdversaire = pokemonAdversaire.puissanceAttaque[indexAttaque];
     degatsSubis.innerText = puissanceAttAdversaire;
+    puissanceAttAdversaire = parseInt(puissanceAttAdversaire);
+    console.log(puissanceAttAdversaire);
+
     return puissanceAttAdversaire;
 }
 
