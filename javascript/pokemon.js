@@ -144,6 +144,9 @@ function pokemonStartUtilisateur() {
 }
 
 function afficherAttaques(pokemon){
+    btnAttaque1 = document.getElementById('attaque1');
+    btnAttaque2 = document.getElementById('attaque2');
+
     btnAttaque1.innerText = pokemon.attaque[0];
     btnAttaque2.innerText = pokemon.attaque[1];
 }
