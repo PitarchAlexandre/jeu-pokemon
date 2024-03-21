@@ -22,8 +22,13 @@ const imgPokemon3 = document.getElementById('imgPokemon3');
 //Variable qui contient le pokémon avec lequel l'utilisateur souhaite attaquer
 let pokemonJoueur = '';
 //Attaques du Pokémon
-let btnAttaque1 = document.getElementById('attaque1');
-let btnAttaque2 = document.getElementById('attaque2');
+let btn1AttaquePok1 = document.getElementById('attaque1');
+let btn2AttaquePok1 = document.getElementById('attaque2');
+let btn1AttaquePok2 = document.getElementById('attaque3');
+let btn2AttaquePok2 = document.getElementById('attaque4');
+let btn1AttaquePok3 = document.getElementById('attaque5');
+let btn2AttaquePok3 = document.getElementById('attaque6');
+
 
 //Points de vies des pokémon
 let pvPokemon1 = document.getElementById('pvPokemon1');
@@ -128,28 +133,31 @@ vieJoueur();
 //génère les pokémons enemis
 popNiveau1();
 
-//Function permettant d'afficher les 3 premiers pokémons de départ de l'utilisateur ainsi que leur PV
+//Function permettant d'afficher les 3 premiers pokémons de départ de l'utilisateur ainsi que leur PV et attaques
 function pokemonStartUtilisateur() {
+    //sélectionne les pokémons de l'utilisateur
     pokemon1 = tabPokemon[0];
     pokemon2 = tabPokemon[1];
     pokemon3 = tabPokemon[2];
 
+    //affiche les pokémons de l'utilisateurs (en image)
     imgPokemon1.src = pokemon1.imgPokemon;
     imgPokemon2.src = pokemon2.imgPokemon;
     imgPokemon3.src = pokemon3.imgPokemon;
 
+    //Affiche les points de vie du pokémon
     pvPokemon1.innerText = pokemon1.viePokemon;
     pvPokemon2.innerText = pokemon2.viePokemon;
     pvPokemon3.innerText = pokemon3.viePokemon;
+
+    btn1AttaquePok1.innerText = pokemon1.attaque[0];
+    btn2AttaquePok1.innerText = pokemon1.attaque[1];
+    btn1AttaquePok2.innerText = pokemon2.attaque[0];
+    btn2AttaquePok2.innerText = pokemon2.attaque[1];
+    btn1AttaquePok3.innerText = pokemon2.attaque[0];
+    btn2AttaquePok3.innerText = pokemon2.attaque[1];
 }
 
-function afficherAttaques(pokemon){
-    btnAttaque1 = document.getElementById('attaque1');
-    btnAttaque2 = document.getElementById('attaque2');
-
-    btnAttaque1.innerText = pokemon.attaque[0];
-    btnAttaque2.innerText = pokemon.attaque[1];
-}
 //Fonction permettant de générer le premier niveau et générer les premiers pokémons
 function popNiveau1() {
     //variable contenant le nombre de pokémons dans le niveau
@@ -168,6 +176,7 @@ function generateurPokemonNiveau(nbrPokemon) {
     return pokemonNiveau;
 }
 
+//les boutons pokémons sont devenus obseleète
 pokemon1.addEventListener('click', function () {
-    afficherAttaques(tabPokemon[0])
+
 })
