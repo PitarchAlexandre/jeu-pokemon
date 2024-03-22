@@ -307,15 +307,16 @@ function randomizerAttaqueBot(tabPokemonUtilisateur) {
 //Fonction qui permet de choisir l'attaque que le bot va effectuer et affiche l'attaque ainsi que le nbr dégats
 //Renvoie le nombre de dégats
 function choixAttaqueBot(pokemonAdversaire){
-    let indexAttaque = 0;
-    while (indexAttaque >=3) {
+    let indexAttaque;
+    while (indexAttaque != 0 && indexAttaque != 1) {
         indexAttaque = Math.round(Math.random() * pokemonAdversaire.puissanceAttaque.length);
     }
-    puissanceAttAdversaire = String(puissanceAttAdversaire)
+
     nomAttaque.innerText = pokemonAdversaire.attaque[indexAttaque];
     puissanceAttAdversaire = pokemonAdversaire.puissanceAttaque[indexAttaque];
     degatsSubis.innerText = puissanceAttAdversaire;
     puissanceAttAdversaire = parseInt(puissanceAttAdversaire);
+
     console.log(puissanceAttAdversaire);
 
     return puissanceAttAdversaire;
