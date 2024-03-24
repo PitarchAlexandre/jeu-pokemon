@@ -67,67 +67,76 @@ let tabVie = ['♡'];
 
 //Tableau contenant tous les pokémons du jeu
 let tabPokemon = [
+    { pokemon: 'Bulbizarre',
+        attaque: ['Vive-Attaque', 'Tranch\'Herbe'],
+        puissanceAttaque: [25, 35],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png',
+        viePokemon: 100,
+        categorieNiveau:1
+    },
+    { pokemon: 'Salamèche',
+        attaque: ['Flammèche', 'Griffe'],
+        puissanceAttaque: [30, 25],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png',
+        viePokemon: 95,
+        categorieNiveau:1
+    },
+    { pokemon: 'Carapuce',
+        attaque: ['Pistolet à O', 'Charge'],
+        puissanceAttaque: [20, 30],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png',
+        viePokemon: 110,
+        categorieNiveau:1
+    },
     { pokemon: 'Racaillou',
         attaque: ['Jet de pierre!', 'Charge'],
         puissanceAttaque: [20, 30],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/074.png',
+        viePokemon: 120,
+        categorieNiveau:1
+    },
+    { pokemon: 'Krabby',
+        attaque: ['Pince-Masse!', 'Martobois'],
+        puissanceAttaque: [15, 25],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/099.png',
         viePokemon: 1,
+        categorieNiveau:1
     },
     { pokemon: 'Herbizarre',
         attaque: ['Tranch\'Herbe!','Fouet Lianes'],
         puissanceAttaque: [15, 35],
         imgPokemon: "https://preview.redd.it/pokemon-of-the-day-ivysaur-v0-4pinv95tbnlb1.png?width=475&format=png&" +
             "auto=webp&s=940399261f3648bf9339ae31ebb5abd53f6d933b",
-        viePokemon: 1
-    },
-    { pokemon: 'Krabby',
-        attaque: ['Pince-Masse!', 'Martobois'],
-        puissanceAttaque: [15, 25],
-        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/099.png',
-        viePokemon: 1
+        viePokemon: 1,
+        categorieNiveau:2
     },
     { pokemon: 'Tropius',
         attaque: ['Tempête Verte!', 'Dracogriffe'],
         puissanceAttaque: [30, 40],
         imgPokemon: 'https://www.pokepedia.fr/images/thumb/2/2e/Tropius-RS.png/250px-Tropius-RS.png',
-        viePokemon: 150
-    },
-    // Ajout de 6 nouveaux pokémons de la première génération
-    { pokemon: 'Bulbizarre',
-        attaque: ['Vive-Attaque', 'Tranch\'Herbe'],
-        puissanceAttaque: [25, 35],
-        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png',
-        viePokemon: 100
-    },
-    { pokemon: 'Salamèche',
-        attaque: ['Flammèche', 'Griffe'],
-        puissanceAttaque: [30, 25],
-        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png',
-        viePokemon: 95
-    },
-    { pokemon: 'Carapuce',
-        attaque: ['Pistolet à O', 'Charge'],
-        puissanceAttaque: [20, 30],
-        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png',
-        viePokemon: 110
+        viePokemon: 150,
+        categorieNiveau: 4
     },
     { pokemon: 'Pikachu',
         attaque: ['Éclair', 'Queue de Fer'],
         puissanceAttaque: [35, 25],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png',
-        viePokemon: 85
+        viePokemon: 85,
+        categorieNiveau:2
     },
     { pokemon: 'Mewtwo',
         attaque: ['Psycho', 'Lance-Soleil'],
         puissanceAttaque: [40, 30],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/150.png',
-        viePokemon: 180
+        viePokemon: 180,
+        categorieNiveau:4
     },
     { pokemon: 'Dracaufeu',
         attaque: ['Lance-Flammes', 'Griffe'],
         puissanceAttaque: [45, 25],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png',
-        viePokemon: 160
+        viePokemon: 160,
+        categorieNiveau:3
     }
 ];
 
@@ -140,9 +149,9 @@ let tabPokemonUtilisateur = pokemonStartUtilisateur()
 //Affiche la vie du joueur
 vieJoueur();
 //Génère un tableau de 3 pokémons enemis
-let pokemonNiveau1 = popNiveau1();
+let pokemonNiveau = popNiveau1();
 //Montre le pokémon adverse à l'utilisateur
-pokemonAdverse = affichagePokAdverse(pokemonNiveau1);
+pokemonAdverse = affichagePokAdverse(pokemonNiveau);
 //L'utilisateur choisi un pokémon et une attaque
 
 //////////////////////////////////
@@ -165,7 +174,10 @@ btn1AttaquePok1.addEventListener('click', function () {
     //Attaque le pokémon de l'utilisateur grace au pokémon sélectionné dans le randomsizer sélectionné auparavant
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
 
-    // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
+    //Mets à jour l'affichage des points de vie du Pokémon de l'utilisateur qui été attaqué
+    updatePokemonHealthDisplay(pokemonJoueurCible);
+
+    //Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
         if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
             tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = 0
@@ -183,6 +195,8 @@ btn2AttaquePok1.addEventListener('click', function () {
     tabPokemonUtilisateur = pokemonStartUtilisateur();
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
     console.log(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon);
+
+    updatePokemonHealthDisplay(pokemonJoueurCible);
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
@@ -204,6 +218,8 @@ btn1AttaquePok2.addEventListener('click', function () {
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
     console.log(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon);
 
+    updatePokemonHealthDisplay(pokemonJoueurCible);
+
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
         if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
@@ -224,6 +240,8 @@ btn2AttaquePok2.addEventListener('click', function () {
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
     console.log(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon);
 
+    updatePokemonHealthDisplay(pokemonJoueurCible);
+
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
         if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
@@ -242,8 +260,9 @@ btn1AttaquePok3.addEventListener('click', function () {
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     tabPokemonUtilisateur = pokemonStartUtilisateur();
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    attaquePokemonUtilisateur()
     console.log(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon);
+
+    updatePokemonHealthDisplay(pokemonJoueurCible);
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
@@ -264,6 +283,8 @@ btn2AttaquePok3.addEventListener('click', function () {
     tabPokemonUtilisateur = pokemonStartUtilisateur();
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
     console.log(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon);
+
+    updatePokemonHealthDisplay(pokemonJoueurCible);
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
@@ -346,8 +367,8 @@ function generateurPokemonNiveau(nbrPokemon) {
     return pokemonNiveau;
 }
 //Affiche le premier pokémon du niveau après la génération du niveau et du tableau des pokémons
-function affichagePokAdverse(pokemonNiveau1) {
-    pokemonAdverse = pokemonNiveau1[0];
+function affichagePokAdverse(pokemonNiveau) {
+    pokemonAdverse = pokemonNiveau[0];
     imgPokemonAdversaire.src = pokemonAdverse.imgPokemon;
     // Initialisation des points de vie actuels
     pvPokAdverseActuel = pokemonAdverse.viePokemon;
@@ -364,26 +385,35 @@ function attaquePoKBot(pokemon) {
     if (pvPokAdverseActuel < 0) {
         pvPokAdverseActuel = 0;
         // Supprime le Pokémon adverse si ses PV sont nuls
-        if (pokemonNiveau1.length > 0) {
+        if (pokemonNiveau.length > 0) {
             // Supprime le premier Pokémon adverse du tableau
-            pokemonNiveau1.shift();
+            pokemonNiveau.shift();
             // Afficher le prochain Pokémon adverse s'il en reste
-            if (pokemonNiveau1.length > 0) {
-                pokemonAdverse = affichagePokAdverse(pokemonNiveau1);
+            if (pokemonNiveau.length > 0) {
+                pokemonAdverse = affichagePokAdverse(pokemonNiveau);
             } else {
                 // Si aucun Pokémon adverse n'est reste dans le tableau, afficher un message de victoire
                 alert('Vous avez vaincu tous les Pokémon adverses !')
             }
+            if (pokemonNiveau.length === 0) {
+                //appel la fonction qui permet de charger le niveau supperieur
+                niveauSuperieur();
+            }
         }
     }
+    // Met à jour l'affichage des PV après l'attaque
     pvAdversaire.innerText = pvPokAdverseActuel;
 }
+
  //Fonction qui permet au bot de choisir un pokémon au hasard
 function randomizerAttaqueBot(tabPokemonUtilisateur) {
     //Permet de controler que le Pokémon attaqué est toujours des points de vie
     //Autrement le pokémon IA pourrait attaquer des pokémons qui n'ont plus de pv
     do {
             pokemonJoueurCible = Math.floor(Math.random() * tabPokemonUtilisateur.length);
+            if (tabPokemonUtilisateur.length === 0) {
+                alert('Vous avez perdu!')
+            }
     }while(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0)
 
 
@@ -394,7 +424,7 @@ function randomizerAttaqueBot(tabPokemonUtilisateur) {
 function choixAttaqueBot(pokemonAdversaire){
     let indexAttaque;
     while (indexAttaque !== 0 && indexAttaque !== 1) {
-        indexAttaque = Math.round(Math.random() * pokemonAdversaire.puissanceAttaque.length);
+        indexAttaque = Math.floor(Math.random() * pokemonAdversaire.puissanceAttaque.length);
     }
 
     //Affiche le nom, l'attaque et la puissance d'attaque du pokémon adverse
@@ -433,4 +463,49 @@ function disableAttackButtons(pokemonIndex) {
         alert('Vous avez perdu !')
     }
 }
+//Fonction qui permet de mettre l'affichage des pv utilisateur à jour
+function updatePokemonHealthDisplay(pokemonJoueurCible) {
+    switch (pokemonJoueurCible) {
+        case 0:
+            pvPokemon1.innerText = tabPokemonUtilisateur[0].viePokemon;
+            break;
+        case 1:
+            pvPokemon2.innerText = tabPokemonUtilisateur[1].viePokemon;
+            break;
+        case 2:
+            pvPokemon3.innerText = tabPokemonUtilisateur[2].viePokemon;
+            break;
+        default:
+            break;
+    }
+}
+//fonction qui permet d'augmenter de niveau
+function niveauSuperieur() {
+    compteurNiveauJoueur++;
 
+    // Appelez la fonction de génération de niveau en fonction du niveau actuel
+    switch (compteurNiveauJoueur) {
+        case 2:
+            // Chargement du niveau 2
+            let pokemonNiveau2 = popNiveau2();
+            // Montre le premier pokémon du niveau 2 à l'utilisateur
+            pokemonAdverse = affichagePokAdverse(pokemonNiveau2);
+            alert('Félicitations, vous allez au niveau 2!');
+            break;
+        case 3:
+
+            break;
+        case 4:
+
+            break;
+
+         case 5:
+
+             break;
+
+        default:
+            // Si tous les niveaux sont passés un message de victoire s'affiche
+            alert('Félicitations, vous avez terminé tous les niveaux !');
+            break;
+    }
+}
