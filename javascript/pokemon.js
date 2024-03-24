@@ -190,13 +190,12 @@ btn1AttaquePok1.addEventListener('click', function () {
     //Fonction qui renvoie la puissance d'attaque du pokémon Adverse et affiche le nom, l'attaque et la puissance
     //d'attaque du pokémon adverse
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
-    //Reprend le tableau de pokémon que l'utilisateur possède
-    tabPokemonUtilisateur = pokemonStartUtilisateur();
     //Attaque le pokémon de l'utilisateur grace au pokémon sélectionné dans le randomsizer sélectionné auparavant
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-
+    //Mise à jour des points de vie du Pokémon dans tabPokemonUtilisateur
+    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = pvPokAdverseActuel;
     //Mets à jour l'affichage des points de vie du Pokémon de l'utilisateur qui été attaqué
-    updatePokemonHealthDisplay(pokemonJoueurCible);
+    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 
     //Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
@@ -213,11 +212,9 @@ btn2AttaquePok1.addEventListener('click', function () {
     attaquePoKBot(tabPokemon[0]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
-    tabPokemonUtilisateur = pokemonStartUtilisateur();
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    console.log(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon);
-
-    updatePokemonHealthDisplay(pokemonJoueurCible);
+    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = pvPokAdverseActuel;
+    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
@@ -235,11 +232,9 @@ btn1AttaquePok2.addEventListener('click', function () {
     attaquePoKBot(tabPokemon[1]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
-    tabPokemonUtilisateur = pokemonStartUtilisateur();
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    console.log(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon);
-
-    updatePokemonHealthDisplay(pokemonJoueurCible);
+    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = pvPokAdverseActuel;
+    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
@@ -257,11 +252,9 @@ btn2AttaquePok2.addEventListener('click', function () {
     attaquePoKBot(tabPokemon[1]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
-    tabPokemonUtilisateur = pokemonStartUtilisateur();
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    console.log(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon);
-
-    updatePokemonHealthDisplay(pokemonJoueurCible);
+    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = pvPokAdverseActuel;
+    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
@@ -279,11 +272,9 @@ btn1AttaquePok3.addEventListener('click', function () {
     attaquePoKBot(tabPokemon[2]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
-    tabPokemonUtilisateur = pokemonStartUtilisateur();
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    console.log(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon);
-
-    updatePokemonHealthDisplay(pokemonJoueurCible);
+    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = pvPokAdverseActuel;
+    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
@@ -301,11 +292,9 @@ btn2AttaquePok3.addEventListener('click', function () {
     attaquePoKBot(tabPokemon[2]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
-    tabPokemonUtilisateur = pokemonStartUtilisateur();
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    console.log(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon);
-
-    updatePokemonHealthDisplay(pokemonJoueurCible);
+    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = pvPokAdverseActuel;
+    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
@@ -427,7 +416,7 @@ function popNiveau4() {
 }
 //Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
 //de pokémons ennemis.
-function popNiveau3() {
+function popNiveau5() {
     //variable contenant le nombre de pokémons dans le niveau
     let nbrPokemon = 5;
     let pokemonNiveau5 = generateurPokemonNiveau(nbrPokemon)
@@ -544,9 +533,10 @@ function disableAttackButtons(pokemonIndex) {
     }
 }
 //Fonction qui permet de mettre l'affichage des pv utilisateur à jour
-function updatePokemonHealthDisplay(pokemonJoueurCible) {
+function misAjourPvPokemonUtilisateur(pokemonJoueurCible) {
     switch (pokemonJoueurCible) {
         case 0:
+
             pvPokemon1.innerText = tabPokemonUtilisateur[0].viePokemon;
             break;
         case 1:
@@ -566,23 +556,31 @@ function niveauSuperieur() {
     // Appelez la fonction de génération de niveau en fonction du niveau actuel
     switch (compteurNiveauJoueur) {
         case 2:
-            // Chargement du niveau 2
+            //Chargement du niveau 2
             let pokemonNiveau2 = popNiveau2();
             // Montre le premier pokémon du niveau 2 à l'utilisateur
             pokemonAdverse = affichagePokAdverse(pokemonNiveau2);
             alert('Félicitations, vous allez au niveau 2!');
             break;
         case 3:
-
+            //Niveau 3
+            let pokemonNiveau3 = popNiveau3();
+            // Montre le premier pokémon du niveau 2 à l'utilisateur
+            pokemonAdverse = affichagePokAdverse(pokemonNiveau2);
+            alert('Félicitations, vous allez au niveau 2!');
             break;
         case 4:
-
+            let pokemonNiveau4 = popNiveau4();
+            // Montre le premier pokémon du niveau 2 à l'utilisateur
+            pokemonAdverse = affichagePokAdverse(pokemonNiveau2);
+            alert('Félicitations, vous allez au niveau 2!');
             break;
-
          case 5:
-
+             let pokemonNiveau5 = popNiveau5();
+             // Montre le premier pokémon du niveau 2 à l'utilisateur
+             pokemonAdverse = affichagePokAdverse(pokemonNiveau2);
+             alert('Félicitations, vous allez au niveau 2!');
              break;
-
         default:
             // Si tous les niveaux sont passés un message de victoire s'affiche
             alert('Félicitations, vous avez terminé tous les niveaux !');
