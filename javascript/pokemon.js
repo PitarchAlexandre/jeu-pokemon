@@ -145,9 +145,9 @@ let pokemonNiveau1 = popNiveau1();
 pokemonAdverse = affichagePokAdverse(pokemonNiveau1);
 //L'utilisateur choisi un pokémon et une attaque
 
-/////////////////////////////////
-//LES CLIQUES//ADDEVENTLISTENER//
-/////////////////////////////////
+//////////////////////////////////
+//LES CLIQUES / ADDEVENTLISTENER//
+//////////////////////////////////
 btn1AttaquePok1.addEventListener('click', function () {
     //Affiche le nom du pokémon dans le bouton 1
     nomPokemonAtt.innerText = tabPokemonUtilisateur[0].pokemon;
