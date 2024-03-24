@@ -192,8 +192,6 @@ btn1AttaquePok1.addEventListener('click', function () {
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     //Attaque le pokémon de l'utilisateur grace au pokémon sélectionné dans le randomsizer sélectionné auparavant
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    //Mise à jour des points de vie du Pokémon dans tabPokemonUtilisateur
-    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = pvPokAdverseActuel;
     //Mets à jour l'affichage des points de vie du Pokémon de l'utilisateur qui été attaqué
     misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 
@@ -213,7 +211,6 @@ btn2AttaquePok1.addEventListener('click', function () {
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = pvPokAdverseActuel;
     misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
@@ -233,7 +230,6 @@ btn1AttaquePok2.addEventListener('click', function () {
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = pvPokAdverseActuel;
     misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
@@ -253,7 +249,6 @@ btn2AttaquePok2.addEventListener('click', function () {
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = pvPokAdverseActuel;
     misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
@@ -273,7 +268,6 @@ btn1AttaquePok3.addEventListener('click', function () {
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = pvPokAdverseActuel;
     misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
@@ -293,7 +287,6 @@ btn2AttaquePok3.addEventListener('click', function () {
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = pvPokAdverseActuel;
     misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
@@ -383,7 +376,8 @@ function vieJoueur() {
 function popNiveau1() {
     //variable contenant le nombre de pokémons dans le niveau
     let nbrPokemon = 3;
-    let pokemonNiveau1 = generateurPokemonNiveau(nbrPokemon)
+    let categoriePokemon = 1;
+    let pokemonNiveau1 = generateurPokemonNiveau(nbrPokemon, categoriePokemon);
     console.log(pokemonNiveau1)
     return pokemonNiveau1;
 }
@@ -392,7 +386,8 @@ function popNiveau1() {
 function popNiveau2() {
     //variable contenant le nombre de pokémons dans le niveau
     let nbrPokemon = 4;
-    let pokemonNiveau2 = generateurPokemonNiveau(nbrPokemon)
+    let categoriePokemon = 1;
+    let pokemonNiveau2 = generateurPokemonNiveau(nbrPokemon, categoriePokemon);
     console.log(pokemonNiveau2)
     return pokemonNiveau2;
 }
@@ -400,8 +395,9 @@ function popNiveau2() {
 //de pokémons ennemis.
 function popNiveau3() {
     //variable contenant le nombre de pokémons dans le niveau
-    let nbrPokemon = 5;
-    let pokemonNiveau3 = generateurPokemonNiveau(nbrPokemon)
+    let nbrPokemon = 4;
+    let categoriePokemon = 2;
+    let pokemonNiveau3 = generateurPokemonNiveau(nbrPokemon, categoriePokemon);
 
     return pokemonNiveau3;
 }
@@ -409,8 +405,9 @@ function popNiveau3() {
 //de pokémons ennemis.
 function popNiveau4() {
     //variable contenant le nombre de pokémons dans le niveau
-    let nbrPokemon = 5;
-    let pokemonNiveau4 = generateurPokemonNiveau(nbrPokemon)
+    let nbrPokemon = 3;
+    let categoriePokemon = 3;
+    let pokemonNiveau4 = generateurPokemonNiveau(nbrPokemon, categoriePokemon);
 
     return pokemonNiveau3;
 }
@@ -418,22 +415,33 @@ function popNiveau4() {
 //de pokémons ennemis.
 function popNiveau5() {
     //variable contenant le nombre de pokémons dans le niveau
-    let nbrPokemon = 5;
-    let pokemonNiveau5 = generateurPokemonNiveau(nbrPokemon)
+    let nbrPokemon = 2;
+    let categoriePokemon = 4;
+    let pokemonNiveau5 = generateurPokemonNiveau(nbrPokemon, categoriePokemon);
 
     return pokemonNiveau5;
 }
 // Fonction pour générer Pokémons aléatoires pour le niveau
-function generateurPokemonNiveau(nbrPokemon) {
-    let pokemonNiveau = [];
-    for (let i = 0; i < nbrPokemon; i++) {
-        //sélectionne un Index au hasard pour trouver un pokémon adverse
-        let randomIndex = Math.floor(Math.random() * tabPokemon.length);
-        //ajoute un pokémon dans le tableau du niveau des pokémons
-        pokemonNiveau.push(tabPokemon[randomIndex]);
+function generateurPokemonNiveau(nombrePokemons, categorieNiveau) {
+    let pokemons = [];
+    // Parcours le tableau tabPokemon
+    for (let i = 0; i < tabPokemon.length; i++) {
+        // Vérifie si la catégorieNiveau du Pokémon correspond à celle spécifiée
+        if (tabPokemon[i].categorieNiveau === categorieNiveau) {
+            // Ajoute le Pokémon au tableau pokemons
+            pokemons.push(tabPokemon[i]);
+        }
     }
-    console.log(pokemonNiveau)
-    return pokemonNiveau;
+    // Sélectionne aléatoirement le nombre de Pokémons requis
+    let pokemonsSelectionnes = [];
+    for (let j = 0; j < nombrePokemons; j++) {
+        // Sélectionne un index aléatoire dans le tableau des Pokémons de la catégorieNiveau spécifiée
+        let randomIndex = Math.floor(Math.random() * pokemons.length);
+        // Ajoute le Pokémon sélectionné aléatoirement au tableau des Pokémons sélectionnés
+        pokemonsSelectionnes.push(pokemons[randomIndex]);
+    }
+    console.log(pokemonsSelectionnes);
+    return pokemonsSelectionnes;
 }
 //Affiche le premier pokémon du niveau après la génération du niveau et du tableau des pokémons
 function affichagePokAdverse(pokemonNiveau) {
