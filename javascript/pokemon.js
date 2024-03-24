@@ -81,13 +81,13 @@ let tabPokemon = [
         viePokemon: 90
     },
     { pokemon: 'Krabby',
-        attaque: ['Pince-Masse!'],
+        attaque: ['Pince-Masse!', 'Martobois'],
         puissanceAttaque: [15, 25],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/099.png',
         viePokemon: 110
     },
     { pokemon: 'Tropius',
-        attaque: 'Tempête Verte!',
+        attaque: ['Tempête Verte!', 'Dracogriffe'],
         puissanceAttaque: [30, 40],
         imgPokemon: 'https://www.pokepedia.fr/images/thumb/2/2e/Tropius-RS.png/250px-Tropius-RS.png',
         viePokemon: 150
@@ -239,8 +239,8 @@ function pokemonStartUtilisateur() {
     btn2AttaquePok1.innerText = pokemon1.attaque[1];
     btn1AttaquePok2.innerText = pokemon2.attaque[0];
     btn2AttaquePok2.innerText = pokemon2.attaque[1];
-    btn1AttaquePok3.innerText = pokemon2.attaque[0];
-    btn2AttaquePok3.innerText = pokemon2.attaque[1];
+    btn1AttaquePok3.innerText = pokemon3.attaque[0];
+    btn2AttaquePok3.innerText = pokemon3.attaque[1];
 
     return [pokemon1, pokemon2, pokemon3];
 }
