@@ -68,7 +68,22 @@ WORK IN PROGRESS...
 </aside>
 
 <!--POP UP-->
-<div class="popUp"></div>
+<div class="overlay" id="overlay">
+    <div class="popUp-container" id="popUp-container">
+        <h2>Bienvenue sur le jeu pokémon</h2>
+
+        <p>Vous pouvez choisir différent moyens de commencer votre partie. Vous pouvez commencer en jouant avec des
+            Bulbizarre, Salamèche et Carapuce ou commencer trois pokémons générés aléatoirement </p>
+
+        <ul>
+            <li><button class="btnChoixPokStart" id="btnPokemonClassique"><img src="https://www.pokepedia.fr/images/thumb/b/b5/Bulbizarre%26Salam%C3%A8che%26Carapuce.png/250px-Bulbizarre%26Salam%C3%A8che%26Carapuce.png"></button>
+                <h3>Pokémons classique</h3></li>
+            <li><button class="btnChoixPokStart" id="btnPokemonAleatoire"><img src="https://content.imageresizer.com/images/memes/who-is-that-pokemon-meme-hirzn.jpg" alt=""></button>
+                <h3>Pokémons aléatoire</h3></li>
+            <li><button class="btnChoixPokStart"></button></li>
+        </ul>
+    </div>
+</div>
 <script src="javascript/pokemon.js"></script>
 </body>
 </html>

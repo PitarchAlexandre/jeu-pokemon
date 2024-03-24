@@ -53,6 +53,8 @@ let nomPokemonAdv = document.getElementById('nomPokemonAdv');
 
 const imgPokemonAdversaire = document.getElementById('imgPokemonAdversaire');
 
+//Contitent les pokémons que l'utilisateur possède dans son jeu
+let tabPokemonUtilisateur;
 //Niveau du joueur
 let niveauJoueur = document.getElementById('niveauJoueur');
 let compteurNiveauJoueur = 1;
@@ -60,6 +62,25 @@ let compteurNiveauJoueur = 1;
 //Nombre vie du joueur
 const nbrVie = document.getElementById('nbrVie');
 let tabVie = ['♡'];
+
+///////////////////////////////////
+/// POP UP  /  POP UP /  POP UP ///
+///////////////////////////////////
+const overlay = document.getElementById('overlay');
+const btnPokemonClassique = document.getElementById('btnPokemonClassique');
+const btnPokemonAleatoire = document.getElementById('btnPokemonAleatoire');
+
+//Permet à l'utilisateur de commencer avec Bulbizzare, Salamèche et Carapuce
+btnPokemonClassique.addEventListener('click', () => {
+    //Affiche les Pokémons et la vie des Pokémons de l'utilisiateur
+    tabPokemonUtilisateur = modePokemonClassique();
+    overlay.style.display = 'none';
+})
+btnPokemonAleatoire.addEventListener('click', () => {
+    //Affiche les Pokémons et la vie des de l'utilisateur
+    tabPokemonUtilisateur = modePokemonAleatoire();
+    overlay.style.display = 'none';
+})
 
 ///////////////////////////////////
 //LE TABLEAU CONTENANT LES OBJETS//
@@ -144,19 +165,19 @@ let tabPokemon = [
 //LE JEU DEBUTE ICI//
 /////////////////////
 
-//Affiche les Pokémons et la vie des Pokémons de l'utilisiateur
-let tabPokemonUtilisateur = pokemonStartUtilisateur()
 //Affiche la vie du joueur
 vieJoueur();
 //Génère un tableau de 3 pokémons enemis
 let pokemonNiveau = popNiveau1();
 //Montre le pokémon adverse à l'utilisateur
 pokemonAdverse = affichagePokAdverse(pokemonNiveau);
-//L'utilisateur choisi un pokémon et une attaque
 
+//L'utilisateur choisi un pokémon et une attaque
 //////////////////////////////////
 //LES CLIQUES / ADDEVENTLISTENER//
 //////////////////////////////////
+//L'utilisateur choisi un pokémon et une attaque
+
 btn1AttaquePok1.addEventListener('click', function () {
     //Affiche le nom du pokémon dans le bouton 1
     nomPokemonAtt.innerText = tabPokemonUtilisateur[0].pokemon;
@@ -301,11 +322,43 @@ btn2AttaquePok3.addEventListener('click', function () {
 /////////////////
 
 //Function permettant d'afficher les 3 premiers pokémons de départ de l'utilisateur ainsi que leur PV et attaques
-function    pokemonStartUtilisateur() {
+function    modePokemonClassique() {
     //sélectionne les pokémons de l'utilisateur
     pokemon1 = tabPokemon[0];
     pokemon2 = tabPokemon[1];
     pokemon3 = tabPokemon[2];
+
+    //affiche les pokémons de l'utilisateurs (en image)
+    imgPokemon1.src = pokemon1.imgPokemon;
+    imgPokemon2.src = pokemon2.imgPokemon;
+    imgPokemon3.src = pokemon3.imgPokemon;
+
+    //Affiche les points de vie du pokémon
+    pvPokemon1.innerText = pokemon1.viePokemon;
+    pvPokemon2.innerText = pokemon2.viePokemon;
+    pvPokemon3.innerText = pokemon3.viePokemon;
+
+    //Affiche le nom des attaques dans les boutons
+    btn1AttaquePok1.innerText = pokemon1.attaque[0];
+    btn2AttaquePok1.innerText = pokemon1.attaque[1];
+    btn1AttaquePok2.innerText = pokemon2.attaque[0];
+    btn2AttaquePok2.innerText = pokemon2.attaque[1];
+    btn1AttaquePok3.innerText = pokemon3.attaque[0];
+    btn2AttaquePok3.innerText = pokemon3.attaque[1];
+
+    return [pokemon1, pokemon2, pokemon3];
+}
+
+function modePokemonAleatoire() {
+    //sélectionne les indices des pokémons de l'utilisateur aléatoirement
+    let index1 = Math.floor(Math.random() * tabPokemon.length);
+    let index2 = Math.floor(Math.random() * tabPokemon.length);
+    let index3 = Math.floor(Math.random() * tabPokemon.length);
+
+    // Assigne les Pokémon choisis aléatoirement aux variables pokemon1, pokemon2 et pokemon3
+    pokemon1 = tabPokemon[index1];
+    pokemon2 = tabPokemon[index2];
+    pokemon3 = tabPokemon[index3];
 
     //affiche les pokémons de l'utilisateurs (en image)
     imgPokemon1.src = pokemon1.imgPokemon;
@@ -353,6 +406,33 @@ function popNiveau2() {
     let pokemonNiveau2 = generateurPokemonNiveau(nbrPokemon)
     console.log(pokemonNiveau2)
     return pokemonNiveau2;
+}
+//Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
+//de pokémons ennemis.
+function popNiveau3() {
+    //variable contenant le nombre de pokémons dans le niveau
+    let nbrPokemon = 5;
+    let pokemonNiveau3 = generateurPokemonNiveau(nbrPokemon)
+
+    return pokemonNiveau3;
+}
+//Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
+//de pokémons ennemis.
+function popNiveau4() {
+    //variable contenant le nombre de pokémons dans le niveau
+    let nbrPokemon = 5;
+    let pokemonNiveau4 = generateurPokemonNiveau(nbrPokemon)
+
+    return pokemonNiveau3;
+}
+//Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
+//de pokémons ennemis.
+function popNiveau3() {
+    //variable contenant le nombre de pokémons dans le niveau
+    let nbrPokemon = 5;
+    let pokemonNiveau5 = generateurPokemonNiveau(nbrPokemon)
+
+    return pokemonNiveau5;
 }
 // Fonction pour générer Pokémons aléatoires pour le niveau
 function generateurPokemonNiveau(nbrPokemon) {
