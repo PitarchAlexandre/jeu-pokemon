@@ -47,7 +47,9 @@ let pvAdversaire = document.getElementById('pvAvdersaire')
 
 //Les variables qui contiennent les nom et attaque du pokemon (lors d'une attaque)
 let nomPokemonAtt = document.getElementById('nomPokemonAtt');
+let nomAdvPokemonAtt = document.getElementById('nomAdvPokemonAtt');
 let nomAttaque = document.getElementById('nomAttaque');
+let nomAttaqueAdv = document.getElementById('nomAttaqueAdv');
 
 const imgPokemonAdversaire = document.getElementById('imgPokemonAdversaire');
 
@@ -147,8 +149,8 @@ pokemonAdverse = affichagePokAdverse(pokemonNiveau1);
 //CLIQUE! L'UTILISATEUR ATTAQUE//
 /////////////////////////////////
 btn1AttaquePok1.addEventListener('click', function () {
-    nomPokemonAtt.innerText = tabPokemon[0].pokemon;
-    nomAttaque.innerText = tabPokemon[0].attaque[0];
+    nomPokemonAtt.innerText = tabPokemonUtilisateur[0].pokemon;
+    nomAttaque.innerText = pokemon1.attaque[0];
     attaquePoKBot(tabPokemon[0]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse); // Correction ici
@@ -157,8 +159,8 @@ btn1AttaquePok1.addEventListener('click', function () {
     console.log(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon);
 })
 btn2AttaquePok1.addEventListener('click', function () {
-    nomPokemonAtt.innerText = tabPokemon[0].pokemon;
-    nomAttaque.innerText = tabPokemon[0].attaque[1];
+    nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
+    nomAttaque.innerText = pokemon1.attaque[1];
     attaquePoKBot(tabPokemon[0]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
@@ -168,8 +170,8 @@ btn2AttaquePok1.addEventListener('click', function () {
 })
 
 btn1AttaquePok2.addEventListener('click', function () {
-    nomPokemonAtt.innerText = tabPokemon[1].pokemon;
-    nomAttaque.innerText = tabPokemon[1].attaque[0];
+    nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
+    nomAttaque.innerText = pokemon2.attaque[0];
     attaquePoKBot(tabPokemon[1]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
@@ -179,8 +181,8 @@ btn1AttaquePok2.addEventListener('click', function () {
 })
 
 btn2AttaquePok2.addEventListener('click', function () {
-    nomPokemonAtt.innerText = tabPokemon[1].pokemon;
-    nomAttaque.innerText = tabPokemon[1].attaque[1];
+    nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
+    nomAttaque.innerText = pokemon2.attaque[1];
     attaquePoKBot(tabPokemon[1]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
@@ -190,8 +192,8 @@ btn2AttaquePok2.addEventListener('click', function () {
 })
 
 btn1AttaquePok3.addEventListener('click', function () {
-    nomPokemonAtt.innerText = tabPokemon[2].pokemon;
-    nomAttaque.innerText = tabPokemon[2].attaque[0];
+    nomPokemonAtt.innerText = tabPokemonUtilisateur[2].pokemon;
+    nomAttaque.innerText = pokemon3.attaque[0];
     attaquePoKBot(tabPokemon[2]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
@@ -202,8 +204,8 @@ btn1AttaquePok3.addEventListener('click', function () {
 })
 
 btn2AttaquePok3.addEventListener('click', function () {
-    nomPokemonAtt.innerText = tabPokemon[2].pokemon;
-    nomAttaque.innerText = tabPokemon[2].attaque[1];
+    nomPokemonAtt.innerText = tabPokemonUtilisateur[2].pokemon;
+    nomAttaque.innerText = pokemon3.attaque[1];
     attaquePoKBot(tabPokemon[2]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
@@ -312,7 +314,7 @@ function choixAttaqueBot(pokemonAdversaire){
         indexAttaque = Math.round(Math.random() * pokemonAdversaire.puissanceAttaque.length);
     }
 
-    nomAttaque.innerText = pokemonAdversaire.attaque[indexAttaque];
+    nomAttaqueAdv.innerText = pokemonAdversaire.attaque[indexAttaque];
     puissanceAttAdversaire = pokemonAdversaire.puissanceAttaque[indexAttaque];
     degatsSubis.innerText = puissanceAttAdversaire;
     puissanceAttAdversaire = parseInt(puissanceAttAdversaire);
