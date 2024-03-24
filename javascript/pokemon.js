@@ -383,8 +383,9 @@ function randomizerAttaqueBot(tabPokemonUtilisateur) {
     //Permet de controler que le Pokémon attaqué est toujours des points de vie
     //Autrement le pokémon IA pourrait attaquer des pokémons qui n'ont plus de pv
     do {
-            pokemonJoueurCible = Math.round(Math.random() * tabPokemonUtilisateur.length);
+            pokemonJoueurCible = Math.floor(Math.random() * tabPokemonUtilisateur.length);
     }while(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0)
+
 
     return pokemonJoueurCible;
 }
