@@ -348,7 +348,7 @@ function choixAttaqueBot(pokemonAdversaire){
     puissanceAttAdversaire = parseInt(puissanceAttAdversaire);
 
     console.log(puissanceAttAdversaire);
-
+    //retourne les points de puissance d'attaque à l'eventListener
     return puissanceAttAdversaire;
 }
 //Fonction qui permet de désactiver le pokémon et l'attaque lorsqu'il n'a plus de PV
