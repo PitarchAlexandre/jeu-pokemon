@@ -203,7 +203,7 @@ btn1AttaquePok1.addEventListener('click', function () {
         // Désactive les boutons d'attaque associés au Pokémon
         disableAttackButtons(pokemonJoueurCible);
     };
-    verifierFinDuJeu(tabPokemonUtilisateur)
+    verifierFinDuJeu(tabPokemonUtilisateur);
 })
 btn2AttaquePok1.addEventListener('click', function () {
     nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
@@ -384,7 +384,7 @@ function popNiveau1() {
     let nbrPokemon = 3;
     let categoriePokemon = 1;
     let pokemonNiveau1 = generateurPokemonNiveau(nbrPokemon, categoriePokemon);
-    console.log(pokemonNiveau1)
+
     return pokemonNiveau1;
 }
 //Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
@@ -617,8 +617,7 @@ function secondeChance(tabPokemonUtilisateur) {
 
     // Réactiver les boutons d'attaque pour les nouveaux Pokémon
     reactiverBoutonsAttaque();
-
-}
+};
 
 // Fonction pour réactiver les boutons d'attaque
 function reactiverBoutonsAttaque() {
@@ -628,22 +627,18 @@ function reactiverBoutonsAttaque() {
     btn2AttaquePok2.disabled = false;
     btn1AttaquePok3.disabled = false;
     btn2AttaquePok3.disabled = false;
-}
+};
 
 // Fonction pour mettre à jour l'affichage des points de vie
 function mettreAJourAffichagePV(tabPokemonUtilisateur) {
     pvPokemon1.innerText = tabPokemonUtilisateur[0].viePokemon;
     pvPokemon2.innerText = tabPokemonUtilisateur[1].viePokemon;
-}
-
-// Appel de la fonction verifierFinDuJeu lorsque nécessaire
-verifierFinDuJeu(tabPokemonUtilisateur);
-
+};
 function tousLesPokemonsMorts(tabPokemonUtilisateur) {
     for (let i = 0; i < tabPokemonUtilisateur.length; i++) {
         if (tabPokemonUtilisateur[i].viePokemon > 0) {
-            return false; // Au moins un Pokémon est en vie
+            return false;
         }
     }
-    return true; // Tous les Pokémon sont morts
+    return true;
 }
