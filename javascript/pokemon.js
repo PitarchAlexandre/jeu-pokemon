@@ -83,11 +83,11 @@ btnPokemonAleatoire.addEventListener('click', () => {
 })
 
 ///////////////////////////////////
-//LE TABLEAU CONTENANT LES OBJETS//
+// TABLEAU CONTENANT LES OBJETS  //
 ///////////////////////////////////
 
 //Tableau contenant tous les pokémons du jeu
-let tabPokemon = [
+const tabPokemon = [
     { pokemon: 'Bulbizarre',
         attaque: ['Vive-Attaque', 'Tranch\'Herbe'],
         puissanceAttaque: [25, 35],
@@ -161,6 +161,34 @@ let tabPokemon = [
     }
 ];
 
+//contient les niveau
+const tabNiveau = [
+    {
+        Niveau:1,
+        nombrePokemon:3,
+        categorieNiveau:1
+    }   ,
+    {
+        Niveau:2,
+        nombrePokemon:3,
+        categorieNiveau:2
+    },
+    {
+        Niveau:3,
+        nombrePokemon:3,
+        categorieNiveau:3
+    },
+    {
+        Niveau:4,
+        nombrePokemon:4,
+        categorieNiveau:2
+    },
+    {
+        Niveau:5,
+        nombrePokemon:3,
+        categorieNiveau:4
+    }
+]
 /////////////////////
 //LE JEU DEBUTE ICI//
 /////////////////////
@@ -566,9 +594,11 @@ function niveauSuperieur() {
         case 2:
             //Chargement du niveau 2
             let pokemonNiveau2 = popNiveau2();
-            // Montre le premier pokémon du niveau 2 à l'utilisateur
-            pokemonAdverse = affichagePokAdverse(pokemonNiveau2);
-            alert('Félicitations, vous allez au niveau 2!');
+            if (pokemonNiveau2.length > 0) {
+                // Montre le premier pokémon du niveau 2 à l'utilisateur
+                pokemonAdverse = affichagePokAdverse(pokemonNiveau2);
+                alert('Félicitations, vous allez au niveau 2!');
+            }
             break;
         case 3:
             //Niveau 3
@@ -594,6 +624,7 @@ function niveauSuperieur() {
             alert('Félicitations, vous avez terminé tous les niveaux !');
             break;
     }
+    ret
 }
 // 1. Vérification des Pokémon morts
 function verifierFinDuJeu(tabPokemonUtilisateur) {
