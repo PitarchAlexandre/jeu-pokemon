@@ -249,8 +249,8 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Couleur de fond semi-transparente pour l'overlay */
-    z-index: 9999; /* Assure que l'overlay s'affiche par-dessus tout */
+    background-color: rgba(0, 0, 0, 0.50); /* Couleur de fond semi-transparente pour l'overlay */
+    z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;

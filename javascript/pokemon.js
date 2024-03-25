@@ -203,6 +203,7 @@ btn1AttaquePok1.addEventListener('click', function () {
         // Désactive les boutons d'attaque associés au Pokémon
         disableAttackButtons(pokemonJoueurCible);
     };
+    verifierFinDuJeu(tabPokemonUtilisateur)
 })
 btn2AttaquePok1.addEventListener('click', function () {
     nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
@@ -221,6 +222,7 @@ btn2AttaquePok1.addEventListener('click', function () {
         // Désactive les boutons d'attaque associés au Pokémon
         disableAttackButtons(pokemonJoueurCible);
     };
+    verifierFinDuJeu(tabPokemonUtilisateur)
 })
 
 btn1AttaquePok2.addEventListener('click', function () {
@@ -240,6 +242,7 @@ btn1AttaquePok2.addEventListener('click', function () {
         // Désactive les boutons d'attaque associés au Pokémon
         disableAttackButtons(pokemonJoueurCible);
     };
+    verifierFinDuJeu(tabPokemonUtilisateur)
 })
 
 btn2AttaquePok2.addEventListener('click', function () {
@@ -259,6 +262,7 @@ btn2AttaquePok2.addEventListener('click', function () {
         // Désactive les boutons d'attaque associés au Pokémon
         disableAttackButtons(pokemonJoueurCible);
     };
+    verifierFinDuJeu(tabPokemonUtilisateur)
 })
 
 btn1AttaquePok3.addEventListener('click', function () {
@@ -278,6 +282,7 @@ btn1AttaquePok3.addEventListener('click', function () {
         // Désactive les boutons d'attaque associés au Pokémon
         disableAttackButtons(pokemonJoueurCible);
     };
+    verifierFinDuJeu(tabPokemonUtilisateur)
 })
 
 btn2AttaquePok3.addEventListener('click', function () {
@@ -297,6 +302,7 @@ btn2AttaquePok3.addEventListener('click', function () {
         // Désactive les boutons d'attaque associés au Pokémon
         disableAttackButtons(pokemonJoueurCible);
     };
+    verifierFinDuJeu(tabPokemonUtilisateur)
 })
 
 /////////////////
@@ -488,11 +494,7 @@ function randomizerAttaqueBot(tabPokemonUtilisateur) {
     //Autrement le pokémon IA pourrait attaquer des pokémons qui n'ont plus de pv
     do {
             pokemonJoueurCible = Math.floor(Math.random() * tabPokemonUtilisateur.length);
-            if (tabPokemonUtilisateur.length === 0) {
-                alert('Vous avez perdu!')
-            }
     }while(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0)
-
 
     return pokemonJoueurCible;
 }
@@ -516,7 +518,6 @@ function choixAttaqueBot(pokemonAdversaire){
     return puissanceAttAdversaire;
 }
 //Fonction qui permet de désactiver le pokémon et l'attaque lorsqu'il n'a plus de PV
-// Fonction pour désactiver les boutons d'attaque associés au Pokémon
 function disableAttackButtons(pokemonIndex) {
     // Désactive les boutons d'attaque du Pokémon correspondant
     switch (pokemonIndex) {
@@ -535,7 +536,7 @@ function disableAttackButtons(pokemonIndex) {
         default:
             break;
     }
-    if (btn1AttaquePok1 && btn1AttaquePok2.disabled && btn2AttaquePok2.disabled && btn2AttaquePok3.disabled &&
+    if (btn1AttaquePok1 && btn1AttaquePok1.disabled && btn1AttaquePok2.disabled && btn2AttaquePok2.disabled &&
         btn1AttaquePok3 && btn2AttaquePok3.disabled) {
         alert('Vous avez perdu !')
     }
@@ -544,7 +545,6 @@ function disableAttackButtons(pokemonIndex) {
 function misAjourPvPokemonUtilisateur(pokemonJoueurCible) {
     switch (pokemonJoueurCible) {
         case 0:
-
             pvPokemon1.innerText = tabPokemonUtilisateur[0].viePokemon;
             break;
         case 1:
@@ -574,24 +574,76 @@ function niveauSuperieur() {
             //Niveau 3
             let pokemonNiveau3 = popNiveau3();
             // Montre le premier pokémon du niveau 2 à l'utilisateur
-            pokemonAdverse = affichagePokAdverse(pokemonNiveau2);
-            alert('Félicitations, vous allez au niveau 2!');
+            pokemonAdverse = affichagePokAdverse(pokemonNiveau3);
+            alert('Félicitations, vous allez au niveau 3!');
             break;
         case 4:
             let pokemonNiveau4 = popNiveau4();
             // Montre le premier pokémon du niveau 2 à l'utilisateur
-            pokemonAdverse = affichagePokAdverse(pokemonNiveau2);
-            alert('Félicitations, vous allez au niveau 2!');
+            pokemonAdverse = affichagePokAdverse(pokemonNiveau4);
+            alert('Félicitations, vous allez au niveau 4!');
             break;
          case 5:
              let pokemonNiveau5 = popNiveau5();
              // Montre le premier pokémon du niveau 2 à l'utilisateur
-             pokemonAdverse = affichagePokAdverse(pokemonNiveau2);
-             alert('Félicitations, vous allez au niveau 2!');
+             pokemonAdverse = affichagePokAdverse(pokemonNiveau5);
+             alert('Félicitations, vous allez au niveau 5!');
              break;
         default:
             // Si tous les niveaux sont passés un message de victoire s'affiche
             alert('Félicitations, vous avez terminé tous les niveaux !');
             break;
     }
+}
+// 1. Vérification des Pokémon morts
+function verifierFinDuJeu(tabPokemonUtilisateur) {
+    if (tousLesPokemonsMorts(tabPokemonUtilisateur)) {
+        secondeChance(tabPokemonUtilisateur);
+        // Réinitialiser le crédit de l'utilisateur ici si nécessaire
+    }
+}
+
+// 2. Seconde chance
+function secondeChance(tabPokemonUtilisateur) {
+    // Régénérez deux nouveaux Pokémon pour l'utilisateur
+    tabPokemonUtilisateur = modePokemonAleatoire();
+
+    // Réinitialisez les vies disponibles
+    tabVie.shift();
+    vieJoueur();
+
+    // Mettre à jour l'affichage des points de vie des nouveaux Pokémon
+    mettreAJourAffichagePV(tabPokemonUtilisateur);
+
+    // Réactiver les boutons d'attaque pour les nouveaux Pokémon
+    reactiverBoutonsAttaque();
+
+}
+
+// Fonction pour réactiver les boutons d'attaque
+function reactiverBoutonsAttaque() {
+    btn1AttaquePok1.disabled = false;
+    btn2AttaquePok1.disabled = false;
+    btn1AttaquePok2.disabled = false;
+    btn2AttaquePok2.disabled = false;
+    btn1AttaquePok3.disabled = false;
+    btn2AttaquePok3.disabled = false;
+}
+
+// Fonction pour mettre à jour l'affichage des points de vie
+function mettreAJourAffichagePV(tabPokemonUtilisateur) {
+    pvPokemon1.innerText = tabPokemonUtilisateur[0].viePokemon;
+    pvPokemon2.innerText = tabPokemonUtilisateur[1].viePokemon;
+}
+
+// Appel de la fonction verifierFinDuJeu lorsque nécessaire
+verifierFinDuJeu(tabPokemonUtilisateur);
+
+function tousLesPokemonsMorts(tabPokemonUtilisateur) {
+    for (let i = 0; i < tabPokemonUtilisateur.length; i++) {
+        if (tabPokemonUtilisateur[i].viePokemon > 0) {
+            return false; // Au moins un Pokémon est en vie
+        }
+    }
+    return true; // Tous les Pokémon sont morts
 }
