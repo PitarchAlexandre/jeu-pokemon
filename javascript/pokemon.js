@@ -7,8 +7,6 @@
 
 'use strict'; // Active le mode strict du JavaScript
 
-const button = document.querySelectorAll('button');
-
 //Pokémon de l'utilisateur
 let pokemon1 = document.getElementById('pokemon1');
 let pokemon2 = document.getElementById('pokemon2');
@@ -28,6 +26,8 @@ let btn2AttaquePok2 = document.getElementById('attaque4');
 let btn1AttaquePok3 = document.getElementById('attaque5');
 let btn2AttaquePok3 = document.getElementById('attaque6');
 
+//Permet de stocker les pokemon adverses
+let pokemonNiveau = [];
 //Stocke le pokemon que le bot choisi d'attaquer
 let pokemonJoueurCible;
 let pokemonAdverse;
@@ -65,26 +65,42 @@ const btnPokemonLegendaire = document.querySelector('#btnPokemonLegendaire');
 let typeNiveau = '';
 
 //Permet à l'utilisateur de commencer avec Bulbizzare, Salamèche et Carapuce
+//Mode pokémon classique
 btnPokemonClassique.addEventListener('click', () => {
     //Affiche les Pokémons de l'utilisiateur
     tabPokemonUtilisateur = modePokemonClassique();
     overlay.style.display = 'none';
     typeNiveau = 'classique';
+    //Génère un tableau de 3 pokémons enemis
+    pokemonNiveau = pushNiveau(typeNiveau);
+    //Montre le pokémon adverse à l'utilisateur
+    pokemonAdverse = affichagePokAdverse(pokemonNiveau);
 })
+
 //Mode pokémon aléatoire
 btnPokemonAleatoire.addEventListener('click', () => {
     //Affiche les Pokémons de l'utilisateur
     tabPokemonUtilisateur = modePokemonAleatoire();
     overlay.style.display = 'none';
     typeNiveau = 'aleatoire';
+    //Génère un tableau de 3 pokémons enemis
+    pokemonNiveau = pushNiveau(typeNiveau);
+    //Montre le pokémon adverse à l'utilisateur
+    pokemonAdverse = affichagePokAdverse(pokemonNiveau);
 })
+
 //Mode pokémon légendaire
 btnPokemonLegendaire.addEventListener('click', ()=> {
     //Affiche les Pokémons de l'utilisateur
     tabPokemonUtilisateur = modePokemonAleatoire();
     overlay.style.display = 'none';
     typeNiveau = 'legendaire';
+    //Génère un tableau de 3 pokémons enemis
+    pokemonNiveau = pushNiveau(typeNiveau);
+    //Montre le pokémon adverse à l'utilisateur
+    pokemonAdverse = affichagePokAdverse(pokemonNiveau);
 })
+
 ///////////////////////////////////
 // TABLEAU CONTENANT LES OBJETS  //
 ///////////////////////////////////
@@ -193,11 +209,6 @@ const tabPokemonLegendaires = [
 //LE JEU DEBUTE ICI//
 /////////////////////
 
-//Génère un tableau de 3 pokémons enemis
-let pokemonNiveau = pushNiveau(typeNiveau);
-//Montre le pokémon adverse à l'utilisateur
-pokemonAdverse = affichagePokAdverse(pokemonNiveau);
-
 //////////////////////////////////
 //LES CLIQUES / ADDEVENTLISTENER//
 //////////////////////////////////
@@ -262,7 +273,7 @@ btn1AttaquePok1.addEventListener('click', function () {
         }
         // Désactive les boutons d'attaque associés au Pokémon
         disableAttackButtons(pokemonJoueurCible);
-    };
+    }
     verifierFinDuJeu(tabPokemonUtilisateur);
 })
 btn2AttaquePok1.addEventListener('click', function () {
@@ -429,16 +440,28 @@ function modePokemonAleatoire() {
     return [pokemon1, pokemon2, pokemon3];
 }
 
+
 //Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
 //de pokémons ennemis.
 function pushNiveau(typeNiveau) {
     //variable contenant le nombre de pokémons dans le niveau
+    let choixTabPokemon = [];
     let nbrPokemon = 3;
+    console.log('avant le switch');
+    switch (typeNiveau) {
 
-    // Génère les Pokémons pour le niveau
-    let pokemonNiveau = generateurPokemonNiveau(nbrPokemon);
-
-    return pokemonNiveau;
+        case 'classique':
+            console.log('dans le switch');
+            choixTabPokemon = generateurPokemonNiveau(nbrPokemon);
+            break;
+        case 'aleatoire':
+            choixTabPokemon = generateurPokemonNiveau(nbrPokemon);
+            break;
+        case 'legendaire':
+            choixTabPokemon = generateurPokemonLegendaire();
+            break;
+    };
+    return choixTabPokemon;
 }
 
 // Fonction pour générer Pokémons aléatoires pour le niveau
@@ -465,15 +488,14 @@ function generateurPokemonNiveau(nombrePokemons) {
 
 function generateurPokemonLegendaire() {
     // Choisissez un Pokémon légendaire aléatoire dans le tableau tabPokemonLegendaires
-    let randomIndex = Math.floor(Math.random() * tabPokemonLegendaires.length);
-    let pokemonLegendaire = tabPokemonLegendaires[randomIndex];
-    return [pokemonLegendaire];
+   let  pokemonLegendaire = tabPokemonLegendaires ;
+
+    return pokemonLegendaire;
 }
 
 //Affiche le premier pokémon du niveau après la génération du niveau et du tableau des pokémons
 function affichagePokAdverse(pokemonNiveau) {
     let pokemonAdverse = pokemonNiveau[0];
-    console.log('les pokemon adverse est affiché ici : ', pokemonAdverse);
     imgPokemonAdversaire.src = pokemonAdverse.imgPokemon;
     // Initialisation des points de vie actuels
     pvPokAdverseActuel = pokemonAdverse.viePokemon;
@@ -499,6 +521,7 @@ function    attaquePoKBot(pokemon) {
             } else {
                 // Si aucun Pokémon adverse n'est reste dans le tableau, afficher un message de victoire
                 alert('Vous avez vaincu tous les Pokémon adverses !')
+                window.location.reload()
             }
         }
     }
@@ -556,7 +579,8 @@ function disableAttackButtons(pokemonIndex) {
     }
     if (btn1AttaquePok1 && btn1AttaquePok1.disabled && btn1AttaquePok2.disabled && btn2AttaquePok2.disabled &&
         btn1AttaquePok3 && btn2AttaquePok3.disabled) {
-        alert('Vous avez perdu !')
+        alert('Vous avez malheuresement perdu ! \nVous allez retourner au menu principal.');
+        window.location.reload();
     }
 }
 //Fonction qui permet de mettre l'affichage des pv utilisateur à jour
