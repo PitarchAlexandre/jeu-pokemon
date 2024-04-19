@@ -46,7 +46,6 @@ let pvAdversaire = document.getElementById('pvAvdersaire')
 
 //Les variables qui contiennent les nom et attaque du pokemon (lors d'une attaque)
 let nomPokemonAtt = document.getElementById('nomPokemonAtt');
-let nomAdvPokemonAtt = document.getElementById('nomAdvPokemonAtt');
 let nomAttaque = document.getElementById('nomAttaque');
 let nomPokemonAdv = document.getElementById('nomPokemonAdv');
 
@@ -55,8 +54,6 @@ const imgPokemonAdversaire = document.getElementById('imgPokemonAdversaire');
 //Contitent les pokémons que l'utilisateur possède dans son jeu
 let tabPokemonUtilisateur;
 //Niveau du joueur
-let niveauJoueur = document.getElementById('niveauJoueur');
-let compteurNiveauJoueur = 1;
 
 //Nombre vie du joueur
 const nbrVie = document.getElementById('nbrVie');
@@ -160,20 +157,35 @@ const tabPokemon = [
     }
 ];
 
-//contient les niveau
-/*const tabHarcore = [
+//Les pokémons légendaires
+const tabPokemonLegendaires = [
     {
-
+        pokemon: 'Artikodin',
+        attaque: ['Blizzard', 'Laser Glace'],
+        puissanceAttaque: [40, 35],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/144.png',
+        viePokemon: 170
+    },
+    {
+        pokemon: 'Électhor',
+        attaque: ['Tonnerre', 'Fatal-Foudre'],
+        puissanceAttaque: [45, 40],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/145.png',
+        viePokemon: 175
+    },
+    {
+        pokemon: 'Sulfura',
+        attaque: ['Lance-Flammes', 'Déflagration'],
+        puissanceAttaque: [45, 40],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/146.png',
+        viePokemon: 180
+    }
 ];
 
-
- */
 /////////////////////
 //LE JEU DEBUTE ICI//
 /////////////////////
 
-//Affiche la vie du joueur
-vieJoueur();
 //Génère un tableau de 3 pokémons enemis
 let pokemonNiveau = popNiveau1();
 //Montre le pokémon adverse à l'utilisateur
@@ -183,39 +195,39 @@ pokemonAdverse = affichagePokAdverse(pokemonNiveau);
 //LES CLIQUES / ADDEVENTLISTENER//
 //////////////////////////////////
 //L'utilisateur choisi un pokémon
+/////////////////////////////////
+//LES CLIQUES / ADDEVENTLISTENER//
+//////////////////////////////////
+//L'utilisateur choisi un pokémon
 
 pokemon1.addEventListener('click', ()=> {
+    btn1AttaquePok1.style.display = 'flex';
+    btn2AttaquePok1.style.display = 'flex';
 
-    if (btn1AttaquePok1.style.display === 'none' && btn2AttaquePok1.style.display === 'none') {
-        btn1AttaquePok1.style.display = 'flex';
-        btn2AttaquePok1.style.display = 'flex';
-    };
-    else {
-        btn1AttaquePok1.style.display = 'none';
-        btn2AttaquePok1.style.display = 'none';
-    };
+    btn1AttaquePok2.style.display = 'none';
+    btn2AttaquePok2.style.display = 'none';
+    btn1AttaquePok3.style.display = 'none';
+    btn2AttaquePok3.style.display = 'none';
 });
 
 pokemon2.addEventListener('click', ()=> {
-    if (btn1AttaquePok2.style.display === 'none' && btn2AttaquePok2.style.display === 'none') {
-        btn1AttaquePok2.style.display = 'flex';
-        btn2AttaquePok2.style.display = 'flex';
-    }
-    else {
-        btn1AttaquePok2.style.display = 'none';
-        btn2AttaquePok2.style.display = 'none';
-    };
+    btn1AttaquePok2.style.display = 'flex';
+    btn2AttaquePok2.style.display = 'flex';
+
+    btn1AttaquePok1.style.display = 'none';
+    btn2AttaquePok1.style.display = 'none';
+    btn1AttaquePok3.style.display = 'none';
+    btn2AttaquePok3.style.display = 'none';
 });
 
-pokemon2.addEventListener('click', ()=> {
-    if (btn1AttaquePok3.style.display === 'none' && btn2AttaquePok3.style.display === 'none') {
-        btn1AttaquePok3.style.display = 'flex';
-        btn2AttaquePok3.style.display = 'flex';
-    };
-   else {
-       btn1AttaquePok3.style.display = 'none';
-       btn2AttaquePok3.style.display = 'none';
-    }
+pokemon3.addEventListener('click', ()=> {
+    btn1AttaquePok3.style.display = 'flex';
+    btn2AttaquePok3.style.display = 'flex';
+
+    btn1AttaquePok1.style.display = 'none';
+    btn2AttaquePok1.style.display = 'none';
+    btn1AttaquePok2.style.display = 'none';
+    btn2AttaquePok2.style.display = 'none';
 });
 
 //L'utilisateur choisi une attaque avec le pokémon 1
@@ -409,15 +421,7 @@ function modePokemonAleatoire() {
 
     return [pokemon1, pokemon2, pokemon3];
 }
-//Permet de mettre à jour et d'afficher les vies du joueur grace à un tableau
-function vieJoueur() {
-    //Permet d'effacer la nombre de vie affiché
-    nbrVie.innerText = '';
-    //Remet à jour le nombre de vies du joueur
-    for (let i = 0; i < tabVie.length; i++) {
-        nbrVie.innerText += tabVie[i]; // Ajoute chaque cœur au texte affiché
-    }
-}
+
 //Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
 //de pokémons ennemis.
 function popNiveau1() {
@@ -605,32 +609,6 @@ function verifierFinDuJeu(tabPokemonUtilisateur) {
         // Réinitialiser le crédit de l'utilisateur ici si nécessaire
     }
 }
-
-// 2. Seconde chance
-function secondeChance(tabPokemonUtilisateur) {
-    // Régénérez deux nouveaux Pokémon pour l'utilisateur
-    tabPokemonUtilisateur = modePokemonAleatoire();
-
-    // Réinitialisez les vies disponibles
-    tabVie.shift();
-    vieJoueur();
-
-    // Mettre à jour l'affichage des points de vie des nouveaux Pokémon
-    mettreAJourAffichagePV(tabPokemonUtilisateur);
-
-    // Réactiver les boutons d'attaque pour les nouveaux Pokémon
-    reactiverBoutonsAttaque();
-};
-
-// Fonction pour réactiver les boutons d'attaque
-function reactiverBoutonsAttaque() {
-    btn1AttaquePok1.disabled = false;
-    btn2AttaquePok1.disabled = false;
-    btn1AttaquePok2.disabled = false;
-    btn2AttaquePok2.disabled = false;
-    btn1AttaquePok3.disabled = false;
-    btn2AttaquePok3.disabled = false;
-};
 
 // Fonction pour mettre à jour l'affichage des points de vie
 function mettreAJourAffichagePV(tabPokemonUtilisateur) {
