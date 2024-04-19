@@ -53,11 +53,6 @@ const imgPokemonAdversaire = document.getElementById('imgPokemonAdversaire');
 
 //Contitent les pokémons que l'utilisateur possède dans son jeu
 let tabPokemonUtilisateur;
-//Niveau du joueur
-
-//Nombre vie du joueur
-const nbrVie = document.getElementById('nbrVie');
-let tabVie = ['♡'];
 
 ///////////////////////////////////
 /// POP UP  /  POP UP /  POP UP ///
@@ -65,19 +60,26 @@ let tabVie = ['♡'];
 const overlay = document.getElementById('overlay');
 const btnPokemonClassique = document.getElementById('btnPokemonClassique');
 const btnPokemonAleatoire = document.getElementById('btnPokemonAleatoire');
-const btnPokemonHarcore = document.querySelector('#btnPokemonHarcore');
+const btnPokemonLegendaire = document.querySelector('#btnPokemonLegendaire');
+
 //Permet à l'utilisateur de commencer avec Bulbizzare, Salamèche et Carapuce
 btnPokemonClassique.addEventListener('click', () => {
-    //Affiche les Pokémons et la vie des Pokémons de l'utilisiateur
+    //Affiche les Pokémons de l'utilisiateur
     tabPokemonUtilisateur = modePokemonClassique();
     overlay.style.display = 'none';
 })
+//Mode pokémon aléatoire
 btnPokemonAleatoire.addEventListener('click', () => {
-    //Affiche les Pokémons et la vie des de l'utilisateur
+    //Affiche les Pokémons de l'utilisateur
     tabPokemonUtilisateur = modePokemonAleatoire();
     overlay.style.display = 'none';
 })
-
+//Mode pokémon légendaire
+btnPokemonLegendaire.addEventListener('click', ()=> {
+    //Affiche les Pokémons de l'utilisateur
+    tabPokemonUtilisateur = modePokemonAleatoire();
+    overlay.style.display = 'none';
+})
 ///////////////////////////////////
 // TABLEAU CONTENANT LES OBJETS  //
 ///////////////////////////////////
@@ -88,21 +90,21 @@ const tabPokemon = [
         attaque: ['Vive-Attaque', 'Tranch\'Herbe'],
         puissanceAttaque: [25, 35],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png',
-        viePokemon: 100,
+        viePokemon: 1,
         categorieNiveau:1
     },
     { pokemon: 'Salamèche',
         attaque: ['Flammèche', 'Griffe'],
         puissanceAttaque: [30, 25],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png',
-        viePokemon: 95,
+        viePokemon: 1,
         categorieNiveau:1
     },
     { pokemon: 'Carapuce',
         attaque: ['Pistolet à O', 'Charge'],
         puissanceAttaque: [20, 30],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png',
-        viePokemon: 110,
+        viePokemon: 1,
         categorieNiveau:1
     },
     { pokemon: 'Racaillou',
@@ -187,7 +189,7 @@ const tabPokemonLegendaires = [
 /////////////////////
 
 //Génère un tableau de 3 pokémons enemis
-let pokemonNiveau = popNiveau1();
+let pokemonNiveau = pushNiveau();
 //Montre le pokémon adverse à l'utilisateur
 pokemonAdverse = affichagePokAdverse(pokemonNiveau);
 
@@ -424,66 +426,23 @@ function modePokemonAleatoire() {
 
 //Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
 //de pokémons ennemis.
-function popNiveau1() {
+function pushNiveau() {
     //variable contenant le nombre de pokémons dans le niveau
     let nbrPokemon = 3;
-    let categoriePokemon = 1;
-    let pokemonNiveau1 = generateurPokemonNiveau(nbrPokemon, categoriePokemon);
+    let pokemonNiveau = generateurPokemonNiveau(nbrPokemon);
 
-    return pokemonNiveau1;
+    return pokemonNiveau;
 }
-//Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
-//de pokémons ennemis.
-function popNiveau2() {
-    //variable contenant le nombre de pokémons dans le niveau
-    let nbrPokemon = 4;
-    let categoriePokemon = 1;
-    let pokemonNiveau2 = generateurPokemonNiveau(nbrPokemon, categoriePokemon);
-    console.log(pokemonNiveau2)
-    return pokemonNiveau2;
-}
-//Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
-//de pokémons ennemis.
-function popNiveau3() {
-    //variable contenant le nombre de pokémons dans le niveau
-    let nbrPokemon = 4;
-    let categoriePokemon = 2;
-    let pokemonNiveau3 = generateurPokemonNiveau(nbrPokemon, categoriePokemon);
 
-    return pokemonNiveau3;
-}
-//Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
-//de pokémons ennemis.
-function popNiveau4() {
-    //variable contenant le nombre de pokémons dans le niveau
-    let nbrPokemon = 3;
-    let categoriePokemon = 3;
-    let pokemonNiveau4 = generateurPokemonNiveau(nbrPokemon, categoriePokemon);
-
-    return pokemonNiveau3;
-}
-//Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
-//de pokémons ennemis.
-function popNiveau5() {
-    //variable contenant le nombre de pokémons dans le niveau
-    let nbrPokemon = 2;
-    let categoriePokemon = 4;
-    let pokemonNiveau5 = generateurPokemonNiveau(nbrPokemon, categoriePokemon);
-
-    return pokemonNiveau5;
-}
 // Fonction pour générer Pokémons aléatoires pour le niveau
-function generateurPokemonNiveau(nombrePokemons, categorieNiveau) {
+function generateurPokemonNiveau(nombrePokemons) {
     let pokemons = [];
     // Parcours le tableau tabPokemon
     for (let i = 0; i < tabPokemon.length; i++) {
-        // Vérifie si la catégorieNiveau du Pokémon correspond à celle spécifiée
-        if (tabPokemon[i].categorieNiveau === categorieNiveau) {
             // Ajoute le Pokémon au tableau pokemons
             pokemons.push(tabPokemon[i]);
         }
-    }
-    // Sélectionne aléatoirement le nombre de Pokémons requis
+        // Sélectionne aléatoirement le nombre de Pokémons requis
     let pokemonsSelectionnes = [];
     for (let j = 0; j < nombrePokemons; j++) {
         // Sélectionne un index aléatoire dans le tableau des Pokémons de la catégorieNiveau spécifiée
