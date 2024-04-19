@@ -61,24 +61,29 @@ const overlay = document.getElementById('overlay');
 const btnPokemonClassique = document.getElementById('btnPokemonClassique');
 const btnPokemonAleatoire = document.getElementById('btnPokemonAleatoire');
 const btnPokemonLegendaire = document.querySelector('#btnPokemonLegendaire');
+//permet de savoir quel type de niveau à choisi l'utilisateur
+let typeNiveau = '';
 
 //Permet à l'utilisateur de commencer avec Bulbizzare, Salamèche et Carapuce
 btnPokemonClassique.addEventListener('click', () => {
     //Affiche les Pokémons de l'utilisiateur
     tabPokemonUtilisateur = modePokemonClassique();
     overlay.style.display = 'none';
+    typeNiveau = 'classique';
 })
 //Mode pokémon aléatoire
 btnPokemonAleatoire.addEventListener('click', () => {
     //Affiche les Pokémons de l'utilisateur
     tabPokemonUtilisateur = modePokemonAleatoire();
     overlay.style.display = 'none';
+    typeNiveau = 'aleatoire';
 })
 //Mode pokémon légendaire
 btnPokemonLegendaire.addEventListener('click', ()=> {
     //Affiche les Pokémons de l'utilisateur
     tabPokemonUtilisateur = modePokemonAleatoire();
     overlay.style.display = 'none';
+    typeNiveau = 'legendaire';
 })
 ///////////////////////////////////
 // TABLEAU CONTENANT LES OBJETS  //
@@ -126,7 +131,7 @@ const tabPokemon = [
         puissanceAttaque: [15, 35],
         imgPokemon: "https://preview.redd.it/pokemon-of-the-day-ivysaur-v0-4pinv95tbnlb1.png?width=475&format=png&" +
             "auto=webp&s=940399261f3648bf9339ae31ebb5abd53f6d933b",
-        viePokemon: 1,
+        viePokemon: 135,
         categorieNiveau:2
     },
     { pokemon: 'Tropius',
@@ -189,7 +194,7 @@ const tabPokemonLegendaires = [
 /////////////////////
 
 //Génère un tableau de 3 pokémons enemis
-let pokemonNiveau = pushNiveau();
+let pokemonNiveau = pushNiveau(typeNiveau);
 //Montre le pokémon adverse à l'utilisateur
 pokemonAdverse = affichagePokAdverse(pokemonNiveau);
 
@@ -426,9 +431,11 @@ function modePokemonAleatoire() {
 
 //Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
 //de pokémons ennemis.
-function pushNiveau() {
+function pushNiveau(typeNiveau) {
     //variable contenant le nombre de pokémons dans le niveau
     let nbrPokemon = 3;
+
+    // Génère les Pokémons pour le niveau
     let pokemonNiveau = generateurPokemonNiveau(nbrPokemon);
 
     return pokemonNiveau;
@@ -439,23 +446,34 @@ function generateurPokemonNiveau(nombrePokemons) {
     let pokemons = [];
     // Parcours le tableau tabPokemon
     for (let i = 0; i < tabPokemon.length; i++) {
-            // Ajoute le Pokémon au tableau pokemons
-            pokemons.push(tabPokemon[i]);
-        }
-        // Sélectionne aléatoirement le nombre de Pokémons requis
+        // Ajoute le Pokémon au tableau pokemons
+        pokemons.push(tabPokemon[i]);
+    }
+    // Sélectionne aléatoirement le nombre de Pokémons requis
     let pokemonsSelectionnes = [];
     for (let j = 0; j < nombrePokemons; j++) {
         // Sélectionne un index aléatoire dans le tableau des Pokémons de la catégorieNiveau spécifiée
         let randomIndex = Math.floor(Math.random() * pokemons.length);
         // Ajoute le Pokémon sélectionné aléatoirement au tableau des Pokémons sélectionnés
         pokemonsSelectionnes.push(pokemons[randomIndex]);
+        // Retire le Pokémon sélectionné pour éviter les doublons
+        pokemons.splice(randomIndex, 1);
     }
     console.log(pokemonsSelectionnes);
     return pokemonsSelectionnes;
 }
+
+function generateurPokemonLegendaire() {
+    // Choisissez un Pokémon légendaire aléatoire dans le tableau tabPokemonLegendaires
+    let randomIndex = Math.floor(Math.random() * tabPokemonLegendaires.length);
+    let pokemonLegendaire = tabPokemonLegendaires[randomIndex];
+    return [pokemonLegendaire];
+}
+
 //Affiche le premier pokémon du niveau après la génération du niveau et du tableau des pokémons
 function affichagePokAdverse(pokemonNiveau) {
-    pokemonAdverse = pokemonNiveau[0];
+    let pokemonAdverse = pokemonNiveau[0];
+    console.log('les pokemon adverse est affiché ici : ', pokemonAdverse);
     imgPokemonAdversaire.src = pokemonAdverse.imgPokemon;
     // Initialisation des points de vie actuels
     pvPokAdverseActuel = pokemonAdverse.viePokemon;
@@ -561,7 +579,7 @@ function misAjourPvPokemonUtilisateur(pokemonJoueurCible) {
 function niveauSuperieur() {
 
 }
-// 1. Vérification des Pokémon morts
+// Vérification des Pokémon morts
 function verifierFinDuJeu(tabPokemonUtilisateur) {
     if (tousLesPokemonsMorts(tabPokemonUtilisateur)) {
         secondeChance(tabPokemonUtilisateur);
