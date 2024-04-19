@@ -153,6 +153,10 @@ button img {
     margin:20px;
 }
 
+#attaque1, #attaque2, #attaque3, #attaque4,#attaque5,#attaque6 {
+    display:none;
+}
+
 p {
     display: inline;
     font-size:large;

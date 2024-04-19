@@ -161,10 +161,13 @@ const tabPokemon = [
 ];
 
 //contient les niveau
-const tabHarcore = [
+/*const tabHarcore = [
     {
 
-]
+];
+
+
+ */
 /////////////////////
 //LE JEU DEBUTE ICI//
 /////////////////////
@@ -176,12 +179,46 @@ let pokemonNiveau = popNiveau1();
 //Montre le pokémon adverse à l'utilisateur
 pokemonAdverse = affichagePokAdverse(pokemonNiveau);
 
-//L'utilisateur choisi un pokémon et une attaque
 //////////////////////////////////
 //LES CLIQUES / ADDEVENTLISTENER//
 //////////////////////////////////
-//L'utilisateur choisi un pokémon et une attaque
+//L'utilisateur choisi un pokémon
 
+pokemon1.addEventListener('click', ()=> {
+
+    if (btn1AttaquePok1.style.display === 'none' && btn2AttaquePok1.style.display === 'none') {
+        btn1AttaquePok1.style.display = 'flex';
+        btn2AttaquePok1.style.display = 'flex';
+    };
+    else {
+        btn1AttaquePok1.style.display = 'none';
+        btn2AttaquePok1.style.display = 'none';
+    };
+});
+
+pokemon2.addEventListener('click', ()=> {
+    if (btn1AttaquePok2.style.display === 'none' && btn2AttaquePok2.style.display === 'none') {
+        btn1AttaquePok2.style.display = 'flex';
+        btn2AttaquePok2.style.display = 'flex';
+    }
+    else {
+        btn1AttaquePok2.style.display = 'none';
+        btn2AttaquePok2.style.display = 'none';
+    };
+});
+
+pokemon2.addEventListener('click', ()=> {
+    if (btn1AttaquePok3.style.display === 'none' && btn2AttaquePok3.style.display === 'none') {
+        btn1AttaquePok3.style.display = 'flex';
+        btn2AttaquePok3.style.display = 'flex';
+    };
+   else {
+       btn1AttaquePok3.style.display = 'none';
+       btn2AttaquePok3.style.display = 'none';
+    }
+});
+
+//L'utilisateur choisi une attaque avec le pokémon 1
 btn1AttaquePok1.addEventListener('click', function () {
     //Affiche le nom du pokémon dans le bouton 1
     nomPokemonAtt.innerText = tabPokemonUtilisateur[0].pokemon;
@@ -464,7 +501,7 @@ function affichagePokAdverse(pokemonNiveau) {
     return pokemonAdverse;
 }
 // Fonction qui déduit les PV du bot suite à une attaque de l'utilisateur
-function attaquePoKBot(pokemon) {
+function    attaquePoKBot(pokemon) {
     let degatContreBot = pokemon.puissanceAttaque[0];
     // Déduit les points de vie suite à l'attaque
     pvPokAdverseActuel -= degatContreBot;
