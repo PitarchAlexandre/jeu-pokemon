@@ -14,6 +14,7 @@ let pokemon1 = document.getElementById('pokemon1');
 let pokemon2 = document.getElementById('pokemon2');
 let pokemon3 = document.getElementById('pokemon3');
 
+
 //Contient les images du Pokémons
 const imgPokemon1 = document.getElementById('imgPokemon1');
 const imgPokemon2 = document.getElementById('imgPokemon2');
@@ -33,8 +34,6 @@ let pokemonAdverse;
 let pvPokAdverseActuel;
 //Permet de stocker la puissance des dégats du pokémon adverse
 let puissanceAttAdversaire;
-//Nombre de dégats que le pokémon IA inflige au pokemon du joueur
-let degatRecuPokUtilisateur;
 
 let degatsSubis = document.getElementById('degatsSubis');
 
@@ -69,7 +68,7 @@ let tabVie = ['♡'];
 const overlay = document.getElementById('overlay');
 const btnPokemonClassique = document.getElementById('btnPokemonClassique');
 const btnPokemonAleatoire = document.getElementById('btnPokemonAleatoire');
-
+const btnPokemonHarcore = document.querySelector('#btnPokemonHarcore');
 //Permet à l'utilisateur de commencer avec Bulbizzare, Salamèche et Carapuce
 btnPokemonClassique.addEventListener('click', () => {
     //Affiche les Pokémons et la vie des Pokémons de l'utilisiateur
@@ -162,32 +161,9 @@ const tabPokemon = [
 ];
 
 //contient les niveau
-const tabNiveau = [
+const tabHarcore = [
     {
-        Niveau:1,
-        nombrePokemon:3,
-        categorieNiveau:1
-    }   ,
-    {
-        Niveau:2,
-        nombrePokemon:3,
-        categorieNiveau:2
-    },
-    {
-        Niveau:3,
-        nombrePokemon:3,
-        categorieNiveau:3
-    },
-    {
-        Niveau:4,
-        nombrePokemon:4,
-        categorieNiveau:2
-    },
-    {
-        Niveau:5,
-        nombrePokemon:3,
-        categorieNiveau:4
-    }
+
 ]
 /////////////////////
 //LE JEU DEBUTE ICI//
@@ -506,10 +482,6 @@ function attaquePoKBot(pokemon) {
                 // Si aucun Pokémon adverse n'est reste dans le tableau, afficher un message de victoire
                 alert('Vous avez vaincu tous les Pokémon adverses !')
             }
-            if (pokemonNiveau.length === 0) {
-                //appel la fonction qui permet de charger le niveau supperieur
-                niveauSuperieur();
-            }
         }
     }
     // Met à jour l'affichage des PV après l'attaque
@@ -587,44 +559,7 @@ function misAjourPvPokemonUtilisateur(pokemonJoueurCible) {
 }
 //fonction qui permet d'augmenter de niveau
 function niveauSuperieur() {
-    compteurNiveauJoueur++;
 
-    // Appelez la fonction de génération de niveau en fonction du niveau actuel
-    switch (compteurNiveauJoueur) {
-        case 2:
-            //Chargement du niveau 2
-            let pokemonNiveau2 = popNiveau2();
-            if (pokemonNiveau2.length > 0) {
-                // Montre le premier pokémon du niveau 2 à l'utilisateur
-                pokemonAdverse = affichagePokAdverse(pokemonNiveau2);
-                alert('Félicitations, vous allez au niveau 2!');
-            }
-            break;
-        case 3:
-            //Niveau 3
-            let pokemonNiveau3 = popNiveau3();
-            // Montre le premier pokémon du niveau 2 à l'utilisateur
-            pokemonAdverse = affichagePokAdverse(pokemonNiveau3);
-            alert('Félicitations, vous allez au niveau 3!');
-            break;
-        case 4:
-            let pokemonNiveau4 = popNiveau4();
-            // Montre le premier pokémon du niveau 2 à l'utilisateur
-            pokemonAdverse = affichagePokAdverse(pokemonNiveau4);
-            alert('Félicitations, vous allez au niveau 4!');
-            break;
-         case 5:
-             let pokemonNiveau5 = popNiveau5();
-             // Montre le premier pokémon du niveau 2 à l'utilisateur
-             pokemonAdverse = affichagePokAdverse(pokemonNiveau5);
-             alert('Félicitations, vous allez au niveau 5!');
-             break;
-        default:
-            // Si tous les niveaux sont passés un message de victoire s'affiche
-            alert('Félicitations, vous avez terminé tous les niveaux !');
-            break;
-    }
-    ret
 }
 // 1. Vérification des Pokémon morts
 function verifierFinDuJeu(tabPokemonUtilisateur) {
