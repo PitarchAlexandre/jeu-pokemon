@@ -274,7 +274,7 @@ btn1AttaquePok1.addEventListener('click', function () {
         // Désactive les boutons d'attaque associés au Pokémon
         disableAttackButtons(pokemonJoueurCible);
     }
-    verifierFinDuJeu(tabPokemonUtilisateur);
+
 })
 btn2AttaquePok1.addEventListener('click', function () {
     nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
@@ -598,29 +598,4 @@ function misAjourPvPokemonUtilisateur(pokemonJoueurCible) {
         default:
             break;
     }
-}
-//fonction qui permet d'augmenter de niveau
-function niveauSuperieur() {
-
-}
-// Vérification des Pokémon morts
-function verifierFinDuJeu(tabPokemonUtilisateur) {
-    if (tousLesPokemonsMorts(tabPokemonUtilisateur)) {
-        secondeChance(tabPokemonUtilisateur);
-        // Réinitialiser le crédit de l'utilisateur ici si nécessaire
-    }
-}
-
-// Fonction pour mettre à jour l'affichage des points de vie
-function mettreAJourAffichagePV(tabPokemonUtilisateur) {
-    pvPokemon1.innerText = tabPokemonUtilisateur[0].viePokemon;
-    pvPokemon2.innerText = tabPokemonUtilisateur[1].viePokemon;
-};
-function tousLesPokemonsMorts(tabPokemonUtilisateur) {
-    for (let i = 0; i < tabPokemonUtilisateur.length; i++) {
-        if (tabPokemonUtilisateur[i].viePokemon > 0) {
-            return false;
-        }
-    }
-    return true;
 }
