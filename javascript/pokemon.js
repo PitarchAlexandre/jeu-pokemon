@@ -139,12 +139,12 @@ const tabPokemon = [
         attaque: ['Pince-Masse!', 'Martobois'],
         puissanceAttaque: [15, 25],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/099.png',
-        viePokemon: 1,
+        viePokemon: 130,
         categorieNiveau:1
     },
     { pokemon: 'Herbizarre',
         attaque: ['Tranch\'Herbe!','Fouet Lianes'],
-        puissanceAttaque: [15, 35],
+        puissanceAttaque: [30, 40],
         imgPokemon: "https://preview.redd.it/pokemon-of-the-day-ivysaur-v0-4pinv95tbnlb1.png?width=475&format=png&" +
             "auto=webp&s=940399261f3648bf9339ae31ebb5abd53f6d933b",
         viePokemon: 135,
@@ -164,37 +164,89 @@ const tabPokemon = [
         viePokemon: 85,
         categorieNiveau:2
     },
-    { pokemon: 'Mewtwo',
-        attaque: ['Psycho', 'Lance-Soleil'],
-        puissanceAttaque: [40, 30],
-        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/150.png',
-        viePokemon: 180,
-        categorieNiveau:4
-    },
     { pokemon: 'Dracaufeu',
         attaque: ['Lance-Flammes', 'Griffe'],
-        puissanceAttaque: [45, 25],
+        puissanceAttaque: [45, 30],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png',
         viePokemon: 160,
         categorieNiveau:3
+    },
+    {
+        pokemon: 'Carabaffe',
+        attaque: ['Pistolet à O', 'Hydrocanon'],
+        puissanceAttaque: [20, 40],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/008.png',
+        viePokemon: 120,
+        categorieNiveau: 2
+    },
+    {
+        pokemon: 'Tortank',
+        attaque: ['Pistolet à O', 'Hydrocanon'],
+        puissanceAttaque: [25, 50],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/009.png',
+        viePokemon: 130,
+        categorieNiveau: 3
+    },
+    {
+        pokemon: 'Florizarre',
+        attaque: ['Tranch\'Herbe', 'Fouet Lianes'],
+        puissanceAttaque: [35, 45],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png',
+        viePokemon: 105,
+        categorieNiveau: 2
+    },
+    {
+        pokemon: 'Miaouss',
+        attaque: ['Griffe', 'Morsure'],
+        puissanceAttaque: [25, 30],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/052.png',
+        viePokemon: 90,
+        categorieNiveau: 1
+    },
+    {
+        pokemon: 'Mew',
+        attaque: ['Psyko', 'Mégafouet'],
+        puissanceAttaque: [40, 50],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/151.png',
+        viePokemon: 150,
+        categorieNiveau: 4
+    },
+    { pokemon: 'Mewtwo',
+        attaque: ['Psycho', 'Lance-Soleil'],
+        puissanceAttaque: [40, 60],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/150.png',
+        viePokemon: 170,
+        categorieNiveau:4
+    },
+    {
+        pokemon: 'Togepy',
+        attaque: ['Charme', 'Écras\'Face'],
+        puissanceAttaque: [15, 20],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/175.png',
+        viePokemon: 80,
+        categorieNiveau: 1
+    },
+    {
+        pokemon: 'Ronflex',
+        attaque: ['Bélier', 'Amnésie'],
+        puissanceAttaque: [40, 20],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/143.png',
+        viePokemon: 200,
+        categorieNiveau: 5
     }
+
+
 ];
 
 //Les pokémons légendaires
 const tabPokemonLegendaires = [
+
     {
         pokemon: 'Artikodin',
         attaque: ['Blizzard', 'Laser Glace'],
         puissanceAttaque: [40, 35],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/144.png',
-        viePokemon: 170
-    },
-    {
-        pokemon: 'Électhor',
-        attaque: ['Tonnerre', 'Fatal-Foudre'],
-        puissanceAttaque: [45, 40],
-        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/145.png',
-        viePokemon: 175
+        viePokemon: 140
     },
     {
         pokemon: 'Sulfura',
@@ -202,7 +254,15 @@ const tabPokemonLegendaires = [
         puissanceAttaque: [45, 40],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/146.png',
         viePokemon: 180
-    }
+    },
+    {
+        pokemon: 'Électhor',
+        attaque: ['Tonnerre', 'Fatal-Foudre'],
+        puissanceAttaque: [45, 40],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/145.png',
+        viePokemon: 160
+    },
+
 ];
 
 /////////////////////
@@ -263,47 +323,40 @@ btn1AttaquePok1.addEventListener('click', function () {
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     //Attaque le pokémon de l'utilisateur grace au pokémon sélectionné dans le randomsizer sélectionné auparavant
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    //Mets à jour l'affichage des points de vie du Pokémon de l'utilisateur qui été attaqué
-    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 
     //Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
-        if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
+        //Initialise les pv du pokémon à zéro si les pv sont en dessous 0
             tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = 0
-        }
-        // Désactive les boutons d'attaque associés au Pokémon
-        disableAttackButtons(pokemonJoueurCible);
-    }
-
-})
-btn2AttaquePok1.addEventListener('click', function () {
-    nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
-    nomAttaque.innerText = pokemon1.attaque[1];
-    attaquePoKBot(tabPokemon[0]);
-    pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
-    puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
-    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
-
-    // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
-    if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
-        if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
-            tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = 0
-        }
         // Désactive les boutons d'attaque associés au Pokémon
         disableAttackButtons(pokemonJoueurCible);
     };
-    verifierFinDuJeu(tabPokemonUtilisateur)
-})
+    //Mets à jour l'affichage des points de vie du Pokémon de l'utilisateur qui été attaqué
+    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
+});
+btn2AttaquePok1.addEventListener('click', function () {
+    nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
+    nomAttaque.innerText = pokemon1.attaque[1];
+    attaquePoKBot(tabPokemonUtilisateur[0]);
+    pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
+    puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
+    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
+    // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
+    if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
+        tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = 0
+        // Désactive les boutons d'attaque associés au Pokémon
+        disableAttackButtons(pokemonJoueurCible);
+    };
+    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
+});
 
 btn1AttaquePok2.addEventListener('click', function () {
     nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
     nomAttaque.innerText = pokemon2.attaque[0];
-    attaquePoKBot(tabPokemon[1]);
+    attaquePoKBot(tabPokemonUtilisateur[1]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
@@ -313,17 +366,19 @@ btn1AttaquePok2.addEventListener('click', function () {
         // Désactive les boutons d'attaque associés au Pokémon
         disableAttackButtons(pokemonJoueurCible);
     };
-    verifierFinDuJeu(tabPokemonUtilisateur)
-})
+    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
+});
 
 btn2AttaquePok2.addEventListener('click', function () {
     nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
     nomAttaque.innerText = pokemon2.attaque[1];
-    attaquePoKBot(tabPokemon[1]);
+    attaquePoKBot(tabPokemonUtilisateur[1]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
-    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
+    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire
+    if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <  0){
+        tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = 0;
+    };
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
@@ -333,17 +388,16 @@ btn2AttaquePok2.addEventListener('click', function () {
         // Désactive les boutons d'attaque associés au Pokémon
         disableAttackButtons(pokemonJoueurCible);
     };
-    verifierFinDuJeu(tabPokemonUtilisateur)
-})
+    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
+});
 
 btn1AttaquePok3.addEventListener('click', function () {
     nomPokemonAtt.innerText = tabPokemonUtilisateur[2].pokemon;
     nomAttaque.innerText = pokemon3.attaque[0];
-    attaquePoKBot(tabPokemon[2]);
+    attaquePoKBot(tabPokemonUtilisateur[2]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
@@ -353,17 +407,16 @@ btn1AttaquePok3.addEventListener('click', function () {
         // Désactive les boutons d'attaque associés au Pokémon
         disableAttackButtons(pokemonJoueurCible);
     };
-    verifierFinDuJeu(tabPokemonUtilisateur)
-})
+    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
+});
 
 btn2AttaquePok3.addEventListener('click', function () {
     nomPokemonAtt.innerText = tabPokemonUtilisateur[2].pokemon;
     nomAttaque.innerText = pokemon3.attaque[1];
-    attaquePoKBot(tabPokemon[2]);
+    attaquePoKBot(tabPokemonUtilisateur[2]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
@@ -373,8 +426,8 @@ btn2AttaquePok3.addEventListener('click', function () {
         // Désactive les boutons d'attaque associés au Pokémon
         disableAttackButtons(pokemonJoueurCible);
     };
-    verifierFinDuJeu(tabPokemonUtilisateur)
-})
+    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
+});
 
 /////////////////
 //LES FONCTIONS//
