@@ -654,7 +654,7 @@ function disableAttackButtons(pokemonIndex) {
             break;
     }
     if (btn1AttaquePok1 && btn1AttaquePok1.disabled && btn1AttaquePok2.disabled && btn2AttaquePok2.disabled &&
-        btn1AttaquePok3 && btn2AttaquePok3.disabled) {
+        btn1AttaquePok3 && btn2AttaquePok3.disabled  && pokemonAdverse[length] !== 0 && pokemonAdverse.viePokemon !== 0 ) {
         alert('Vous avez malheuresement perdu ! \nVous allez retourner au menu principal.');
         window.location.reload();
     }
