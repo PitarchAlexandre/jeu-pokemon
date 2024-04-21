@@ -5,13 +5,13 @@
 }
 
 body {
-    height: 100vh;
+    height: 90vh;
     margin:0;
     font-family: Trebuchet MS, sans-serif;
-
-
+    background: rgb( 180, 226, 260);
     text-align:center;
 }
+
 
 ul {
     display:flex;
