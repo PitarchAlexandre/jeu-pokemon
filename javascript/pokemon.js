@@ -246,14 +246,14 @@ const tabPokemonLegendaires = [
         attaque: ['Blizzard', 'Laser Glace'],
         puissanceAttaque: [40, 35],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/144.png',
-        viePokemon: 140
+        viePokemon: 100
     },
     {
         pokemon: 'Sulfura',
         attaque: ['Lance-Flammes', 'Déflagration'],
         puissanceAttaque: [45, 40],
         imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/146.png',
-        viePokemon: 180
+        viePokemon: 130
     },
     {
         pokemon: 'Électhor',
@@ -315,7 +315,7 @@ btn1AttaquePok1.addEventListener('click', function () {
     //Affiche le nom de l'attaque du pokémon joueur 1
     nomAttaque.innerText = pokemon1.attaque[0];
     //Fonction qui permet d'attaquer le pokémon adverse et déduire les pv du pokémon avec l'attaque sélectionnée
-    attaquePoKBot(tabPokemon[0]);
+    attaque1PoKBot(tabPokemon[0]);
     //Appelle une fonction qui renvoie le pokémon de l'utilisateur (sélectionné au hasard) qui sera attaqué par le bot
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     //Fonction qui renvoie la puissance d'attaque du pokémon Adverse et affiche le nom, l'attaque et la puissance
@@ -337,7 +337,7 @@ btn1AttaquePok1.addEventListener('click', function () {
 btn2AttaquePok1.addEventListener('click', function () {
     nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
     nomAttaque.innerText = pokemon1.attaque[1];
-    attaquePoKBot(tabPokemonUtilisateur[0]);
+    attaque2PoKBot(tabPokemonUtilisateur[0]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
@@ -353,7 +353,7 @@ btn2AttaquePok1.addEventListener('click', function () {
 btn1AttaquePok2.addEventListener('click', function () {
     nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
     nomAttaque.innerText = pokemon2.attaque[0];
-    attaquePoKBot(tabPokemonUtilisateur[1]);
+    attaque1PoKBot(tabPokemonUtilisateur[1]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
@@ -372,7 +372,7 @@ btn1AttaquePok2.addEventListener('click', function () {
 btn2AttaquePok2.addEventListener('click', function () {
     nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
     nomAttaque.innerText = pokemon2.attaque[1];
-    attaquePoKBot(tabPokemonUtilisateur[1]);
+    attaque2PoKBot(tabPokemonUtilisateur[1]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire
@@ -394,7 +394,7 @@ btn2AttaquePok2.addEventListener('click', function () {
 btn1AttaquePok3.addEventListener('click', function () {
     nomPokemonAtt.innerText = tabPokemonUtilisateur[2].pokemon;
     nomAttaque.innerText = pokemon3.attaque[0];
-    attaquePoKBot(tabPokemonUtilisateur[2]);
+    attaque1PoKBot(tabPokemonUtilisateur[2]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
@@ -413,7 +413,7 @@ btn1AttaquePok3.addEventListener('click', function () {
 btn2AttaquePok3.addEventListener('click', function () {
     nomPokemonAtt.innerText = tabPokemonUtilisateur[2].pokemon;
     nomAttaque.innerText = pokemon3.attaque[1];
-    attaquePoKBot(tabPokemonUtilisateur[2]);
+    attaque1PoKBot(tabPokemonUtilisateur[2]);
     pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
@@ -557,7 +557,7 @@ function affichagePokAdverse(pokemonNiveau) {
     return pokemonAdverse;
 }
 // Fonction qui déduit les PV du bot suite à une attaque de l'utilisateur
-function    attaquePoKBot(pokemon) {
+function    attaque1PoKBot(pokemon) {
     let degatContreBot = pokemon.puissanceAttaque[0];
     // Déduit les points de vie suite à l'attaque
     pvPokAdverseActuel -= degatContreBot;
@@ -581,7 +581,30 @@ function    attaquePoKBot(pokemon) {
     // Met à jour l'affichage des PV après l'attaque
     pvAdversaire.innerText = pvPokAdverseActuel;
 }
-
+function  attaque2PoKBot(pokemon) {
+    let degatContreBot = pokemon.puissanceAttaque[1];
+    // Déduit les points de vie suite à l'attaque
+    pvPokAdverseActuel -= degatContreBot;
+    // Si les dégâts sont inférieurs à zéro, ils seront initialisés à zéro
+    if (pvPokAdverseActuel < 0) {
+        pvPokAdverseActuel = 0;
+        // Supprime le Pokémon adverse si ses PV sont nuls
+        if (pokemonNiveau.length > 0) {
+            // Supprime le premier Pokémon adverse du tableau
+            pokemonNiveau.shift();
+            // Afficher le prochain Pokémon adverse s'il en reste
+            if (pokemonNiveau.length > 0) {
+                pokemonAdverse = affichagePokAdverse(pokemonNiveau);
+            } else {
+                // Si aucun Pokémon adverse n'est reste dans le tableau, afficher un message de victoire
+                alert('Vous avez vaincu tous les Pokémon adverses !')
+                window.location.reload()
+            }
+        }
+    }
+    // Met à jour l'affichage des PV après l'attaque
+    pvAdversaire.innerText = pvPokAdverseActuel;
+}
  //Fonction qui permet au bot de choisir un pokémon au hasard
 function randomizerAttaqueBot(tabPokemonUtilisateur) {
     //Permet de controler que le Pokémon attaqué est toujours des points de vie
