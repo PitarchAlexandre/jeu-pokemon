@@ -2,15 +2,22 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>POKEMON</title>
+    <meta name="description" content="Jeu PokémonTrio - Combattez 3 Pokémon adverses avec votre équipe de 3 Pokémon dans
+     un jeu tour par tour.">
+    <meta name="keywords" content="Pokémon, PokémonTrio, jeu, combat, tour par tour, PvE">
+    <meta name="author" content="Alexandre Pitarch">
+    <meta name="robots" content="index, follow">
+    <title>PokemonTrio</title>
     <link rel="stylesheet" href="css/main.css">
-    <!--https://www.figma.com/file/WiuDpEaRgB6rRmHUakdn1h/Untitled?type=whiteboard&node-id=0%3A1&t=TTyf9MLSSm7kMsDD-1-->
-
 </head>
+
+<header>
+    <h1><img class="logoPokemon"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png"
+             alt="Pokémon"></h1>
+</header>
+
 <body>
-
-<h1>Pierre feuille ciseaux</h1>
-
 <div class="btnPokemonUtilisateur">
     <ul>
         <li><button id="pokemon1"><img src="" alt="pokémon-joueur" id="imgPokemon1"/>
@@ -18,11 +25,11 @@
         </button></li>
 
         <li><button id="pokemon2"><img
-        src="" alt="pokémon-joueur"  id="imgPokemon2"><span class="pvPokemon">PV:<p id="pvPokemon2">0</p></span>
+                src="" alt="pokémon-joueur"  id="imgPokemon2"><span class="pvPokemon">PV:<p id="pvPokemon2">0</p></span>
         </button></li>
 
         <li><button id="pokemon3"><img src=""
-        alt="pokémon-joueur"  id="imgPokemon3"><span class="pvPokemon">PV:<p id="pvPokemon3">0</p></span></button></li>
+                                       alt="pokémon-joueur"  id="imgPokemon3"><span class="pvPokemon">PV:<p id="pvPokemon3">0</p></span></button></li>
     </ul>
 </div>
 
@@ -48,24 +55,24 @@
                 <p>Dégats subis : </p>
                 <p id="degatsSubis"></p>
                 <img src=" " alt="Pokémon-adverse" id="imgPokemonAdversaire"/>
-                    <p>PV : <p id="pvAvdersaire">0</p></p>
+                <p>PV : <p id="pvAvdersaire">0</p></p>
             </div>
         </div>
     </div >
 </div>
 <span class="pokemonRestant">Pokémon restant : <p id="pokemonRestant">0</p></span>
-<aside class="stats">
+<div class="stats">
     <p><strong id="nomPokemonAdv"></strong> lance attaque : <strong id="nomAttaqueAdv"></strong> !</p>
-    <h2>Vie : <strong id="nbrVie"></strong></h2>
-    <h2>Niveau : <strong id="niveauJoueur">1</strong></h2>
-</aside>
-WORK IN PROGRESS...
+</div>
+
+<!--
 <aside class="conteneurBtnMusique">
     <div class="pokeball">
         <iframe class="battlePokemonMusic" width="110" height="100" src="https://www.myinstants.com/instant/pokemon/embed/" frameborder="0" scrolling="no"></iframe>
     </div>
     <h4>Cliquez sur la pokéball pour écouter le thème de combat Pokémon.</h4>
 </aside>
+-->
 
 <!--POP UP-->
 <div class="overlay" id="overlay">
@@ -80,9 +87,16 @@ WORK IN PROGRESS...
                 <h3>Pokémons classique</h3>
                 <p>Commencez une partie avec <br> Salamèche, Bulbizarre et Carapuce</p>
             </li>
-            <li><button class="btnChoixPokStart" id="btnPokemonAleatoire"><img src="https://content.imageresizer.com/images/memes/who-is-that-pokemon-meme-hirzn.jpg" alt=""></button>
-                <h3>Pokémons aléatoire</h3></li>
-            <li><button class="btnChoixPokStart"></button></li>
+            <li><button class="btnChoixPokStart" id="btnPokemonAleatoire"><img src="https://content.imageresizer.com/images/memes/who-is-that-pokemon-meme-hirzn.jpg"
+                                                                               alt="whosthatpokemon"></button>
+                <h3>Pokémons aléatoire</h3>
+                <p>Vous commencez avec des Pokémons <br> générés aléatoirement</p>
+            </li>
+            <li><button class="btnChoixPokStart" id="btnPokemonLegendaire"><img src="https://m1.quebecormedia.com/emp/emp/oiseaux2bacca853-dab8-4e4a-bfee-ee934668dc3f_ORIGINAL.jpg?impolicy=crop-resize&x=0&y=0&w=1500&h=1521&width=925"
+                                                                                alt="pokemons-legendaires"/> </button>
+                <h3>Mode pokémon légendaire</h3>
+                <p>Combattez les 3 pokémons légendaire <br> Artikodin, Électhor & Sulfura</p>
+            </li>
         </ul>
     </div>
 </div>
