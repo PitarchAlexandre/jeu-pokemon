@@ -35,6 +35,7 @@ let pvPokAdverseActuel;
 //Permet de stocker la puissance des dégats du pokémon adverse
 let puissanceAttAdversaire;
 
+//Permet d'afficher les dégats et le nom de l'attaque
 let degatsSubis = document.getElementById('degatsSubis');
 
 //Points de vies des pokémon
