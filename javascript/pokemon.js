@@ -12,7 +12,6 @@ let pokemon1 = document.getElementById('pokemon1');
 let pokemon2 = document.getElementById('pokemon2');
 let pokemon3 = document.getElementById('pokemon3');
 
-
 //Contient les images du Pokémons
 const imgPokemon1 = document.getElementById('imgPokemon1');
 const imgPokemon2 = document.getElementById('imgPokemon2');
@@ -34,6 +33,8 @@ let pokemonAdverse;
 let pvPokAdverseActuel;
 //Permet de stocker la puissance des dégats du pokémon adverse
 let puissanceAttAdversaire;
+//Nombre de dégats que le pokémon IA inflige au pokemon du joueur
+let degatRecuPokUtilisateur;
 
 //Permet d'afficher les dégats et le nom de l'attaque
 let degatsSubis = document.getElementById('degatsSubis');
