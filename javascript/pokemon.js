@@ -35,6 +35,7 @@ let pvPokAdverseActuel;
 //Permet de stocker la puissance des dégats du pokémon adverse
 let puissanceAttAdversaire;
 
+//Permet d'afficher les dégats et le nom de l'attaque
 let degatsSubis = document.getElementById('degatsSubis');
 
 //Points de vies des pokémon
@@ -149,6 +150,13 @@ const tabPokemon = [
             "auto=webp&s=940399261f3648bf9339ae31ebb5abd53f6d933b",
         viePokemon: 135,
         categorieNiveau:2
+    },
+    { pokemon: 'Reptincel',
+        attaque: ['Griffe', 'Flammeche'],
+        puissanceAttaque: [25, 35],
+        imgPokemon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/005.png',
+        viePokemon: 120,
+        categorieNiveau: 2
     },
     { pokemon: 'Tropius',
         attaque: ['Tempête Verte!', 'Dracogriffe'],
@@ -327,7 +335,7 @@ btn1AttaquePok1.addEventListener('click', function () {
     //Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
     if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
         //Initialise les pv du pokémon à zéro si les pv sont en dessous 0
-            tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = 0
+        tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = 0
         // Désactive les boutons d'attaque associés au Pokémon
         disableAttackButtons(pokemonJoueurCible);
     };
@@ -541,7 +549,7 @@ function generateurPokemonNiveau(nombrePokemons) {
 
 function generateurPokemonLegendaire() {
     // Choisissez un Pokémon légendaire aléatoire dans le tableau tabPokemonLegendaires
-   let  pokemonLegendaire = tabPokemonLegendaires ;
+    let  pokemonLegendaire = tabPokemonLegendaires ;
 
     return pokemonLegendaire;
 }
@@ -605,12 +613,12 @@ function  attaque2PoKBot(pokemon) {
     // Met à jour l'affichage des PV après l'attaque
     pvAdversaire.innerText = pvPokAdverseActuel;
 }
- //Fonction qui permet au bot de choisir un pokémon au hasard
+//Fonction qui permet au bot de choisir un pokémon au hasard
 function randomizerAttaqueBot(tabPokemonUtilisateur) {
     //Permet de controler que le Pokémon attaqué est toujours des points de vie
     //Autrement le pokémon IA pourrait attaquer des pokémons qui n'ont plus de pv
     do {
-            pokemonJoueurCible = Math.floor(Math.random() * tabPokemonUtilisateur.length);
+        pokemonJoueurCible = Math.floor(Math.random() * tabPokemonUtilisateur.length);
     }while(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0)
 
     return pokemonJoueurCible;
