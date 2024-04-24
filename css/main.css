@@ -189,7 +189,7 @@ p {
 .rectAttaquePokemonSauv {
     height: 290px;
     width: 550px;
-    border: solid black 0.2rem;
+    border: solid black 0.125rem;
     border-radius: 1rem;
     background-image: url('https://www.bhmpics.com/downloads/pokemon-forest-background-/15.512.png');
     background-size: cover;
@@ -329,4 +329,3 @@ footer p {
     color: black;
     text-decoration: none;
 }
-

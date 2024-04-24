@@ -56,6 +56,13 @@ const imgPokemonAdversaire = document.getElementById('imgPokemonAdversaire');
 //Contitent les pokémons que l'utilisateur possède dans son jeu
 let tabPokemonUtilisateur;
 
+//Permet d'envoyer le pokemon selectionner dans une fonction
+let pokemonChoisi;
+//Permet d'envoyer l'attaque dans une fonction
+let attaqueLance;
+//Permet d'envoyer la puissance d'attaque dans une fonction
+let puissanceAttaque;
+
 ///////////////////////////////////
 /// POP UP  /  POP UP /  POP UP ///
 ///////////////////////////////////
@@ -344,10 +351,18 @@ btn1AttaquePok1.addEventListener('click', function () {
     misAjourPvPokemonUtilisateur(pokemonJoueurCible);
 });
 btn2AttaquePok1.addEventListener('click', function () {
-    nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
-    nomAttaque.innerText = pokemon1.attaque[1];
-    attaque2PoKBot(tabPokemonUtilisateur[0]);
-    pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
+    pokemonChoisi = tabPokemonUtilisateur[0];
+    attaqueLance = tabPokemonUtilisateur[0].attaque[1];
+    puissanceAttaque = tabPokemonUtilisateur[0].puissanceAttaque[1];
+
+
+    attaque(pokemonChoisi,attaqueLance,puissanceAttaque);
+});
+
+function attaque(pokemonChoisi, attaqueLance, puissanceAttaque) {
+    nomPokemonAtt.innerText = pokemonChoisi.pokemon;
+    nomAttaque.innerText = attaqueLance;
+    attaque2PoKBot(pokemonChoisi, puissanceAttaque);
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
     // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
@@ -357,8 +372,7 @@ btn2AttaquePok1.addEventListener('click', function () {
         disableAttackButtons(pokemonJoueurCible);
     };
     misAjourPvPokemonUtilisateur(pokemonJoueurCible);
-});
-
+}
 btn1AttaquePok2.addEventListener('click', function () {
     nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
     nomAttaque.innerText = pokemon2.attaque[0];
