@@ -283,103 +283,6 @@ const tabPokemonLegendaires = [
 
 ];
 
-/////////////////////
-//LE JEU DEBUTE ICI//
-/////////////////////
-
-//////////////////////////////////
-//LES CLIQUES / ADDEVENTLISTENER//
-//////////////////////////////////
-//L'utilisateur choisi un pokémon
-/////////////////////////////////
-//LES CLIQUES / ADDEVENTLISTENER//
-//////////////////////////////////
-//L'utilisateur choisi un pokémon
-
-pokemon1.addEventListener('click', ()=> {
-    btn1AttaquePok1.style.display = 'flex';
-    btn2AttaquePok1.style.display = 'flex';
-
-    btn1AttaquePok2.style.display = 'none';
-    btn2AttaquePok2.style.display = 'none';
-    btn1AttaquePok3.style.display = 'none';
-    btn2AttaquePok3.style.display = 'none';
-});
-
-pokemon2.addEventListener('click', ()=> {
-    btn1AttaquePok2.style.display = 'flex';
-    btn2AttaquePok2.style.display = 'flex';
-
-    btn1AttaquePok1.style.display = 'none';
-    btn2AttaquePok1.style.display = 'none';
-    btn1AttaquePok3.style.display = 'none';
-    btn2AttaquePok3.style.display = 'none';
-});
-
-pokemon3.addEventListener('click', ()=> {
-    btn1AttaquePok3.style.display = 'flex';
-    btn2AttaquePok3.style.display = 'flex';
-
-    btn1AttaquePok1.style.display = 'none';
-    btn2AttaquePok1.style.display = 'none';
-    btn1AttaquePok2.style.display = 'none';
-    btn2AttaquePok2.style.display = 'none';
-});
-
-//L'utilisateur choisi une attaque avec le pokémon 1
-btn1AttaquePok1.addEventListener('click', function () {
-    pokemonChoisi = tabPokemonUtilisateur[0];
-    attaqueLance = tabPokemonUtilisateur[0].attaque[0];
-    puissanceAttaque = tabPokemonUtilisateur[0].puissanceAttaque[0];
-    indexPokemonChoisi = 0;
-
-    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
-});
-btn2AttaquePok1.addEventListener('click', function () {
-    pokemonChoisi = tabPokemonUtilisateur[0];
-    attaqueLance = tabPokemonUtilisateur[0].attaque[1];
-    puissanceAttaque = tabPokemonUtilisateur[0].puissanceAttaque[1];
-    indexPokemonChoisi = 0;
-
-    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
-});
-
-btn1AttaquePok2.addEventListener('click', function () {
-    pokemonChoisi = tabPokemonUtilisateur[1];
-    attaqueLance = tabPokemonUtilisateur[1].attaque[0];
-    puissanceAttaque = tabPokemonUtilisateur[1].puissanceAttaque[0];
-    indexPokemonChoisi = 1;
-
-    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
-});
-
-btn2AttaquePok2.addEventListener('click', function () {
-    pokemonChoisi = tabPokemonUtilisateur[1];
-    attaqueLance = tabPokemonUtilisateur[1].attaque[1];
-    puissanceAttaque = tabPokemonUtilisateur[1].puissanceAttaque[1];
-    indexPokemonChoisi = 1;
-
-    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
-});
-
-btn1AttaquePok3.addEventListener('click', function () {
-    pokemonChoisi = tabPokemonUtilisateur[2];
-    attaqueLance = tabPokemonUtilisateur[2].attaque[0];
-    puissanceAttaque = tabPokemonUtilisateur[2].puissanceAttaque[0];
-    indexPokemonChoisi = 2;
-
-    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
-});
-
-btn2AttaquePok3.addEventListener('click', function () {
-    pokemonChoisi = tabPokemonUtilisateur[2];
-    attaqueLance = tabPokemonUtilisateur[2].attaque[1];
-    puissanceAttaque = tabPokemonUtilisateur[2].puissanceAttaque[1];
-    indexPokemonChoisi = 2;
-
-    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
-});
-
 /////////////////
 //LES FONCTIONS//
 /////////////////
@@ -533,31 +436,8 @@ function attaque(pokemonChoisi, attaqueLance, puissanceAttaque,indexPokemonChois
     //Mets à jour les pv
     misAjourPvPokemonUtilisateur(indexPokemonChoisi);
 };
+
 // Fonction qui déduit les PV du bot suite à une attaque de l'utilisateur
-function attaque1PoKBot(pokemon) {
-    let degatContreBot = pokemon.puissanceAttaque[0];
-    // Déduit les points de vie suite à l'attaque
-    pvPokAdverseActuel -= degatContreBot;
-    // Si les dégâts sont inférieurs à zéro, ils seront initialisés à zéro
-    if (pvPokAdverseActuel < 0) {
-        pvPokAdverseActuel = 0;
-        // Supprime le Pokémon adverse si ses PV sont nuls
-        if (pokemonNiveau.length > 0) {
-            // Supprime le premier Pokémon adverse du tableau
-            pokemonNiveau.shift();
-            // Afficher le prochain Pokémon adverse s'il en reste
-            if (pokemonNiveau.length > 0) {
-                pokemonAdverse = affichagePokAdverse(pokemonNiveau);
-            } else {
-                // Si aucun Pokémon adverse n'est reste dans le tableau, afficher un message de victoire
-                alert('Vous avez vaincu tous les Pokémon adverses !')
-                window.location.reload()
-            }
-        }
-    }
-    // Met à jour l'affichage des PV après l'attaque
-    pvAdversaire.innerText = pvPokAdverseActuel;
-}
 function  attaquePoKBot(puissanceAttaque) {
     pvPokAdverseActuel -= puissanceAttaque;
     // Si les dégâts sont inférieurs à zéro, ils seront initialisés à zéro
@@ -578,6 +458,7 @@ function  attaquePoKBot(puissanceAttaque) {
     // Met à jour l'affichage des PV après l'attaque
     pvAdversaire.innerText = pvPokAdverseActuel;
 }
+
 //Fonction qui permet de choisir l'attaque que le bot va effectuer et affiche l'attaque ainsi que le nbr dégats
 //Renvoie le nombre de dégats
 function choixAttaqueBot(pokemonAdversaire){
@@ -598,6 +479,7 @@ function choixAttaqueBot(pokemonAdversaire){
 
     return puissanceAttAdversaire;
 };
+
 //Fonction qui permet de désactiver le pokémon et l'attaque lorsqu'il n'a plus de PV
 function disableAttackButtons(pokemonIndex) {
     // Désactive les boutons d'attaque du Pokémon correspondant
@@ -623,6 +505,7 @@ function disableAttackButtons(pokemonIndex) {
         window.location.reload();
     }
 }
+
 //Fonction qui permet de mettre l'affichage des pv utilisateur à jour
 function misAjourPvPokemonUtilisateur(pokemonJoueurCible) {
     switch (pokemonJoueurCible) {
@@ -639,3 +522,103 @@ function misAjourPvPokemonUtilisateur(pokemonJoueurCible) {
             break;
     }
 }
+
+/////////////////////
+//LE JEU DEBUTE ICI//
+/////////////////////
+
+//////////////////////////////////
+//LES CLIQUES / ADDEVENTLISTENER//
+//////////////////////////////////
+
+///////////////////////////////////
+//L'UTILISATEUR CHOISI UN POKEMON//
+///////////////////////////////////
+
+//Pokémon 1
+pokemon1.addEventListener('click', ()=> {
+    btn1AttaquePok1.style.display = 'flex';
+    btn2AttaquePok1.style.display = 'flex';
+
+    btn1AttaquePok2.style.display = 'none';
+    btn2AttaquePok2.style.display = 'none';
+    btn1AttaquePok3.style.display = 'none';
+    btn2AttaquePok3.style.display = 'none';
+});
+
+//Pokémon 2
+pokemon2.addEventListener('click', ()=> {
+    btn1AttaquePok2.style.display = 'flex';
+    btn2AttaquePok2.style.display = 'flex';
+
+    btn1AttaquePok1.style.display = 'none';
+    btn2AttaquePok1.style.display = 'none';
+    btn1AttaquePok3.style.display = 'none';
+    btn2AttaquePok3.style.display = 'none';
+});
+
+//Pokémon 3
+pokemon3.addEventListener('click', ()=> {
+    btn1AttaquePok3.style.display = 'flex';
+    btn2AttaquePok3.style.display = 'flex';
+
+    btn1AttaquePok1.style.display = 'none';
+    btn2AttaquePok1.style.display = 'none';
+    btn1AttaquePok2.style.display = 'none';
+    btn2AttaquePok2.style.display = 'none';
+});
+
+//Attaque 1 Pokémon 1
+btn1AttaquePok1.addEventListener('click', function () {
+    pokemonChoisi = tabPokemonUtilisateur[0];
+    attaqueLance = tabPokemonUtilisateur[0].attaque[0];
+    puissanceAttaque = tabPokemonUtilisateur[0].puissanceAttaque[0];
+    indexPokemonChoisi = 0;
+
+    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
+});
+//Attaque 2 Pokémon 1
+btn2AttaquePok1.addEventListener('click', function () {
+    pokemonChoisi = tabPokemonUtilisateur[0];
+    attaqueLance = tabPokemonUtilisateur[0].attaque[1];
+    puissanceAttaque = tabPokemonUtilisateur[0].puissanceAttaque[1];
+    indexPokemonChoisi = 0;
+
+    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
+});
+//Attaque 1 Pokémon 2
+btn1AttaquePok2.addEventListener('click', function () {
+    pokemonChoisi = tabPokemonUtilisateur[1];
+    attaqueLance = tabPokemonUtilisateur[1].attaque[0];
+    puissanceAttaque = tabPokemonUtilisateur[1].puissanceAttaque[0];
+    indexPokemonChoisi = 1;
+
+    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
+});
+//Attaque 2 Pokémon 2
+btn2AttaquePok2.addEventListener('click', function () {
+    pokemonChoisi = tabPokemonUtilisateur[1];
+    attaqueLance = tabPokemonUtilisateur[1].attaque[1];
+    puissanceAttaque = tabPokemonUtilisateur[1].puissanceAttaque[1];
+    indexPokemonChoisi = 1;
+
+    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
+});
+//Attaque 1 Pokémon 3
+btn1AttaquePok3.addEventListener('click', function () {
+    pokemonChoisi = tabPokemonUtilisateur[2];
+    attaqueLance = tabPokemonUtilisateur[2].attaque[0];
+    puissanceAttaque = tabPokemonUtilisateur[2].puissanceAttaque[0];
+    indexPokemonChoisi = 2;
+
+    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
+});
+//Attaque 2 Pokémon 3
+btn2AttaquePok3.addEventListener('click', function () {
+    pokemonChoisi = tabPokemonUtilisateur[2];
+    attaqueLance = tabPokemonUtilisateur[2].attaque[1];
+    puissanceAttaque = tabPokemonUtilisateur[2].puissanceAttaque[1];
+    indexPokemonChoisi = 2;
+
+    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
+});
