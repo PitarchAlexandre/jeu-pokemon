@@ -317,9 +317,19 @@ function    modePokemonClassique() {
 
 function modePokemonAleatoire() {
     //sélectionne les indices des pokémons de l'utilisateur aléatoirement
-    let index1 = Math.floor(Math.random() * tabPokemon.length);
-    let index2 = Math.floor(Math.random() * tabPokemon.length);
-    let index3 = Math.floor(Math.random() * tabPokemon.length);
+    let index1;
+    let index2 ;
+    let index3;
+
+    index1 = Math.floor(Math.random() * tabPokemon.length);
+
+    do {
+        index2 = Math.floor(Math.random() * tabPokemon.length);
+    }while(index2 === index1);
+
+    do {
+        index3 = Math.floor(Math.random() * tabPokemon.length);
+    }while(index3 === index1 || index3 === index2);
 
     // Assigne les Pokémon choisis aléatoirement aux variables pokemon1, pokemon2 et pokemon3
     pokemon1 = tabPokemon[index1];
