@@ -287,6 +287,29 @@ const tabPokemonLegendaires = [
 //LES FONCTIONS//
 /////////////////
 
+//Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
+//de pokémons ennemis.
+function pushNiveau(typeNiveau) {
+    //variable contenant le nombre de pokémons dans le niveau
+    let choixTabPokemon = [];
+    let nbrPokemon = 3;
+    //console.log('avant le switch Push niveau');
+    switch (typeNiveau) {
+
+        case 'classique':
+            // console.log('dans le switch Push niveau');
+            choixTabPokemon = generateurPokemonNiveau(nbrPokemon);
+            break;
+        case 'aleatoire':
+            choixTabPokemon = generateurPokemonNiveau(nbrPokemon);
+            break;
+        case 'legendaire':
+            choixTabPokemon = generateurPokemonLegendaire();
+            break;
+    }
+    return choixTabPokemon;
+};
+
 //Function permettant d'afficher les 3 premiers pokémons de départ de l'utilisateur ainsi que leur PV et attaques
 function    modePokemonClassique() {
     //sélectionne les pokémons de l'utilisateur
@@ -359,28 +382,6 @@ function modePokemonAleatoire() {
 }
 
 
-//Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
-//de pokémons ennemis.
-function pushNiveau(typeNiveau) {
-    //variable contenant le nombre de pokémons dans le niveau
-    let choixTabPokemon = [];
-    let nbrPokemon = 3;
-    console.log('avant le switch');
-    switch (typeNiveau) {
-
-        case 'classique':
-            console.log('dans le switch');
-            choixTabPokemon = generateurPokemonNiveau(nbrPokemon);
-            break;
-        case 'aleatoire':
-            choixTabPokemon = generateurPokemonNiveau(nbrPokemon);
-            break;
-        case 'legendaire':
-            choixTabPokemon = generateurPokemonLegendaire();
-            break;
-    };
-    return choixTabPokemon;
-}
 
 // Fonction pour générer Pokémons aléatoires pour le niveau
 function generateurPokemonNiveau(nombrePokemons) {
@@ -403,10 +404,9 @@ function generateurPokemonNiveau(nombrePokemons) {
     console.log(pokemonsSelectionnes);
     return pokemonsSelectionnes;
 }
-
+// Choisis un Pokémon légendaire aléatoire dans le tableau tabPokemonLegendaires
 function generateurPokemonLegendaire() {
-    // Choisissez un Pokémon légendaire aléatoire dans le tableau tabPokemonLegendaires
-    let  pokemonLegendaire = tabPokemonLegendaires ;
+    let  pokemonLegendaire =   tabPokemonLegendaires ;
 
     return pokemonLegendaire;
 }
