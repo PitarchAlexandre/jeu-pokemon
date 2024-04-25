@@ -315,6 +315,7 @@ function    modePokemonClassique() {
     return [pokemon1, pokemon2, pokemon3];
 }
 
+// Fonction qui permet de généré des pokémons aléatoirement pour l'utilisateur
 function modePokemonAleatoire() {
     //sélectionne les indices des pokémons de l'utilisateur aléatoirement
     let index1;
