@@ -429,12 +429,19 @@ function attaque(pokemonChoisi, attaqueLance, idImgPokemon, puissanceAttaque,ind
     nomPokemonAtt.innerText = pokemonChoisi.pokemon;
     //Affiche le nom de l'attaque du Pokémon de l'utilisateur
     nomAttaque.innerText = attaqueLance;
+    //fais bouger le pokemon lorsqu'il attaque
     shakeImage(idImgPokemon);
     //Permet d'attaquer le pokemon adverse et de déduire ses pv
     attaquePoKBot(puissanceAttaque);
     //Randomizer qui choisi l'attaque du Pokémon Adverse
     puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
     console.log('attaque adversaire : '+  puissanceAttAdversaire);
+    //laisse un délais de 1,5 secondes avant l'attaque du bot
+    setTimeout(()=> {
+        //Fais bouger le pokemon adverse lors de l'attaque
+        shakeImage('#imgPokemonAdversaire');
+
+    console.log('coucou la bite');
     //Déduits les PV du pokémon de l'utilisateur
     pokemonChoisi.viePokemon -= puissanceAttAdversaire;
     console.log('pv pokemon restants : '+ pokemonChoisi.viePokemon);
@@ -447,9 +454,8 @@ function attaque(pokemonChoisi, attaqueLance, idImgPokemon, puissanceAttaque,ind
         // Désactive les boutons d'attaque associés au Pokémon
         disableAttackButtons(indexPokemonChoisi);
     };
-
     //Mets à jour les pv
-    misAjourPvPokemonUtilisateur(indexPokemonChoisi);
+    misAjourPvPokemonUtilisateur(indexPokemonChoisi)},800);;
 };
 
 // Fonction qui déduit les PV du bot suite à une attaque de l'utilisateur
