@@ -1,0 +1,68 @@
+@media screen and (max-width: 1000px) {
+    /*HEADER*/
+    header {
+        height: 14em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .logoPokemon  {
+        width: 12em;
+    }
+    /*POKEMON UTILISATEUR*/
+    .btnPokemonUtilisateur > ul > li > button  {
+        margin-top: 10em;
+        border: none;
+        width: 16rem;
+        height: 16rem;
+    }
+    /*BOUTONS D'ATTAQUES*/
+    .btnAttaques > ul > li > button  {
+        width: 35rem;
+        height: 6.5rem;
+    }
+
+    .btnAttaques > ul > li > button {
+        font-size: x-large;
+    }
+    /*POKEMON SAUVAGE*/
+    .pokemonSauvage {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .contourPokemonEnemi {
+        margin-top: 10em;
+        border: none;
+        width: 55em;
+        height: 40em;
+    }
+
+    .rectAttaquePokemonSauv {
+        width: 47em;
+        height: 34em;
+    }
+    .degatPokAdv {
+        display: inline-block;
+    }
+    .rectAttaquePokemonSauv > img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60%;
+        height: 70%;
+    }
+    /*OVERLAY*/
+    .popUp-container {
+        width: calc(100% - 1px);
+    }
+
+    /*MUSIQUE*/
+    audio{
+        width: 30rem;
+    }
+}
+
+
+

@@ -12,7 +12,6 @@ let pokemon1 = document.getElementById('pokemon1');
 let pokemon2 = document.getElementById('pokemon2');
 let pokemon3 = document.getElementById('pokemon3');
 
-
 //Contient les images du Pokémons
 const imgPokemon1 = document.getElementById('imgPokemon1');
 const imgPokemon2 = document.getElementById('imgPokemon2');
@@ -34,6 +33,8 @@ let pokemonAdverse;
 let pvPokAdverseActuel;
 //Permet de stocker la puissance des dégats du pokémon adverse
 let puissanceAttAdversaire;
+//Nombre de dégats que le pokémon IA inflige au pokemon du joueur
+let degatRecuPokUtilisateur;
 
 //Permet d'afficher les dégats et le nom de l'attaque
 let degatsSubis = document.getElementById('degatsSubis');
@@ -54,6 +55,17 @@ const imgPokemonAdversaire = document.getElementById('imgPokemonAdversaire');
 
 //Contitent les pokémons que l'utilisateur possède dans son jeu
 let tabPokemonUtilisateur;
+
+//Permet d'envoyer le pokemon selectionner dans une fonction
+let pokemonChoisi;
+//Permet d'envoyer l'attaque dans une fonction
+let attaqueLance;
+// Permet de stocker l'image d'un pokémon dans une fonction
+let idImgPokemon;
+//Permet d'envoyer la puissance d'attaque dans une fonction
+let puissanceAttaque;
+//Permet d'envoyer l'index du pokémon choisi par l'utilisateur dans plusieurs fonctions
+let indexPokemonChoisi;
 
 ///////////////////////////////////
 /// POP UP  /  POP UP /  POP UP ///
@@ -273,173 +285,32 @@ const tabPokemonLegendaires = [
 
 ];
 
-/////////////////////
-//LE JEU DEBUTE ICI//
-/////////////////////
-
-//////////////////////////////////
-//LES CLIQUES / ADDEVENTLISTENER//
-//////////////////////////////////
-//L'utilisateur choisi un pokémon
-/////////////////////////////////
-//LES CLIQUES / ADDEVENTLISTENER//
-//////////////////////////////////
-//L'utilisateur choisi un pokémon
-
-pokemon1.addEventListener('click', ()=> {
-    btn1AttaquePok1.style.display = 'flex';
-    btn2AttaquePok1.style.display = 'flex';
-
-    btn1AttaquePok2.style.display = 'none';
-    btn2AttaquePok2.style.display = 'none';
-    btn1AttaquePok3.style.display = 'none';
-    btn2AttaquePok3.style.display = 'none';
-});
-
-pokemon2.addEventListener('click', ()=> {
-    btn1AttaquePok2.style.display = 'flex';
-    btn2AttaquePok2.style.display = 'flex';
-
-    btn1AttaquePok1.style.display = 'none';
-    btn2AttaquePok1.style.display = 'none';
-    btn1AttaquePok3.style.display = 'none';
-    btn2AttaquePok3.style.display = 'none';
-});
-
-pokemon3.addEventListener('click', ()=> {
-    btn1AttaquePok3.style.display = 'flex';
-    btn2AttaquePok3.style.display = 'flex';
-
-    btn1AttaquePok1.style.display = 'none';
-    btn2AttaquePok1.style.display = 'none';
-    btn1AttaquePok2.style.display = 'none';
-    btn2AttaquePok2.style.display = 'none';
-});
-
-//L'utilisateur choisi une attaque avec le pokémon 1
-btn1AttaquePok1.addEventListener('click', function () {
-    //Affiche le nom du pokémon dans le bouton 1
-    nomPokemonAtt.innerText = tabPokemonUtilisateur[0].pokemon;
-    //Affiche le nom de l'attaque du pokémon joueur 1
-    nomAttaque.innerText = pokemon1.attaque[0];
-    //Fonction qui permet d'attaquer le pokémon adverse et déduire les pv du pokémon avec l'attaque sélectionnée
-    attaque1PoKBot(tabPokemon[0]);
-    //Appelle une fonction qui renvoie le pokémon de l'utilisateur (sélectionné au hasard) qui sera attaqué par le bot
-    pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
-    //Fonction qui renvoie la puissance d'attaque du pokémon Adverse et affiche le nom, l'attaque et la puissance
-    //d'attaque du pokémon adverse
-    puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
-    //Attaque le pokémon de l'utilisateur grace au pokémon sélectionné dans le randomsizer sélectionné auparavant
-    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-
-    //Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
-    if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
-        //Initialise les pv du pokémon à zéro si les pv sont en dessous 0
-        tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = 0
-        // Désactive les boutons d'attaque associés au Pokémon
-        disableAttackButtons(pokemonJoueurCible);
-    };
-    //Mets à jour l'affichage des points de vie du Pokémon de l'utilisateur qui été attaqué
-    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
-});
-btn2AttaquePok1.addEventListener('click', function () {
-    nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
-    nomAttaque.innerText = pokemon1.attaque[1];
-    attaque2PoKBot(tabPokemonUtilisateur[0]);
-    pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
-    puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
-    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-    // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
-    if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
-        tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = 0
-        // Désactive les boutons d'attaque associés au Pokémon
-        disableAttackButtons(pokemonJoueurCible);
-    };
-    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
-});
-
-btn1AttaquePok2.addEventListener('click', function () {
-    nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
-    nomAttaque.innerText = pokemon2.attaque[0];
-    attaque1PoKBot(tabPokemonUtilisateur[1]);
-    pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
-    puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
-    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-
-    // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
-    if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
-        if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
-            tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = 0
-        }
-        // Désactive les boutons d'attaque associés au Pokémon
-        disableAttackButtons(pokemonJoueurCible);
-    };
-    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
-});
-
-btn2AttaquePok2.addEventListener('click', function () {
-    nomPokemonAtt.innerText = tabPokemonUtilisateur[1].pokemon;
-    nomAttaque.innerText = pokemon2.attaque[1];
-    attaque2PoKBot(tabPokemonUtilisateur[1]);
-    pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
-    puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
-    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire
-    if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <  0){
-        tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = 0;
-    };
-
-    // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
-    if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
-        if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
-            tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = 0
-        }
-        // Désactive les boutons d'attaque associés au Pokémon
-        disableAttackButtons(pokemonJoueurCible);
-    };
-    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
-});
-
-btn1AttaquePok3.addEventListener('click', function () {
-    nomPokemonAtt.innerText = tabPokemonUtilisateur[2].pokemon;
-    nomAttaque.innerText = pokemon3.attaque[0];
-    attaque1PoKBot(tabPokemonUtilisateur[2]);
-    pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
-    puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
-    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-
-    // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
-    if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
-        if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
-            tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = 0
-        }
-        // Désactive les boutons d'attaque associés au Pokémon
-        disableAttackButtons(pokemonJoueurCible);
-    };
-    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
-});
-
-btn2AttaquePok3.addEventListener('click', function () {
-    nomPokemonAtt.innerText = tabPokemonUtilisateur[2].pokemon;
-    nomAttaque.innerText = pokemon3.attaque[1];
-    attaque1PoKBot(tabPokemonUtilisateur[2]);
-    pokemonJoueurCible = randomizerAttaqueBot(tabPokemonUtilisateur);
-    puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
-    tabPokemonUtilisateur[pokemonJoueurCible].viePokemon -= puissanceAttAdversaire;
-
-    // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
-    if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
-        if (tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0) {
-            tabPokemonUtilisateur[pokemonJoueurCible].viePokemon = 0
-        }
-        // Désactive les boutons d'attaque associés au Pokémon
-        disableAttackButtons(pokemonJoueurCible);
-    };
-    misAjourPvPokemonUtilisateur(pokemonJoueurCible);
-});
-
 /////////////////
 //LES FONCTIONS//
 /////////////////
+
+//Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
+//de pokémons ennemis.
+function pushNiveau(typeNiveau) {
+    //variable contenant le nombre de pokémons dans le niveau
+    let choixTabPokemon = [];
+    let nbrPokemon = 3;
+    //console.log('avant le switch Push niveau');
+    switch (typeNiveau) {
+
+        case 'classique':
+            // console.log('dans le switch Push niveau');
+            choixTabPokemon = generateurPokemonNiveau(nbrPokemon);
+            break;
+        case 'aleatoire':
+            choixTabPokemon = generateurPokemonNiveau(nbrPokemon);
+            break;
+        case 'legendaire':
+            choixTabPokemon = generateurPokemonLegendaire();
+            break;
+    }
+    return choixTabPokemon;
+};
 
 //Function permettant d'afficher les 3 premiers pokémons de départ de l'utilisateur ainsi que leur PV et attaques
 function    modePokemonClassique() {
@@ -469,11 +340,22 @@ function    modePokemonClassique() {
     return [pokemon1, pokemon2, pokemon3];
 }
 
+// Fonction qui permet de généré des pokémons aléatoirement pour l'utilisateur
 function modePokemonAleatoire() {
     //sélectionne les indices des pokémons de l'utilisateur aléatoirement
-    let index1 = Math.floor(Math.random() * tabPokemon.length);
-    let index2 = Math.floor(Math.random() * tabPokemon.length);
-    let index3 = Math.floor(Math.random() * tabPokemon.length);
+    let index1;
+    let index2 ;
+    let index3;
+
+    index1 = Math.floor(Math.random() * tabPokemon.length);
+
+    do {
+        index2 = Math.floor(Math.random() * tabPokemon.length);
+    }while(index2 === index1);
+
+    do {
+        index3 = Math.floor(Math.random() * tabPokemon.length);
+    }while(index3 === index1 || index3 === index2);
 
     // Assigne les Pokémon choisis aléatoirement aux variables pokemon1, pokemon2 et pokemon3
     pokemon1 = tabPokemon[index1];
@@ -502,28 +384,6 @@ function modePokemonAleatoire() {
 }
 
 
-//Fonction qui envoie le nombre de pokémons qu'il y aura dans le niveau à la fonction qui permet de créer le tableau
-//de pokémons ennemis.
-function pushNiveau(typeNiveau) {
-    //variable contenant le nombre de pokémons dans le niveau
-    let choixTabPokemon = [];
-    let nbrPokemon = 3;
-    console.log('avant le switch');
-    switch (typeNiveau) {
-
-        case 'classique':
-            console.log('dans le switch');
-            choixTabPokemon = generateurPokemonNiveau(nbrPokemon);
-            break;
-        case 'aleatoire':
-            choixTabPokemon = generateurPokemonNiveau(nbrPokemon);
-            break;
-        case 'legendaire':
-            choixTabPokemon = generateurPokemonLegendaire();
-            break;
-    };
-    return choixTabPokemon;
-}
 
 // Fonction pour générer Pokémons aléatoires pour le niveau
 function generateurPokemonNiveau(nombrePokemons) {
@@ -546,10 +406,9 @@ function generateurPokemonNiveau(nombrePokemons) {
     console.log(pokemonsSelectionnes);
     return pokemonsSelectionnes;
 }
-
+// Choisis un Pokémon légendaire aléatoire dans le tableau tabPokemonLegendaires
 function generateurPokemonLegendaire() {
-    // Choisissez un Pokémon légendaire aléatoire dans le tableau tabPokemonLegendaires
-    let  pokemonLegendaire = tabPokemonLegendaires ;
+    let  pokemonLegendaire =   tabPokemonLegendaires ;
 
     return pokemonLegendaire;
 }
@@ -564,65 +423,71 @@ function affichagePokAdverse(pokemonNiveau) {
 
     return pokemonAdverse;
 }
-// Fonction qui déduit les PV du bot suite à une attaque de l'utilisateur
-function    attaque1PoKBot(pokemon) {
-    let degatContreBot = pokemon.puissanceAttaque[0];
-    // Déduit les points de vie suite à l'attaque
-    pvPokAdverseActuel -= degatContreBot;
-    // Si les dégâts sont inférieurs à zéro, ils seront initialisés à zéro
-    if (pvPokAdverseActuel < 0) {
-        pvPokAdverseActuel = 0;
-        // Supprime le Pokémon adverse si ses PV sont nuls
-        if (pokemonNiveau.length > 0) {
-            // Supprime le premier Pokémon adverse du tableau
-            pokemonNiveau.shift();
-            // Afficher le prochain Pokémon adverse s'il en reste
-            if (pokemonNiveau.length > 0) {
-                pokemonAdverse = affichagePokAdverse(pokemonNiveau);
-            } else {
-                // Si aucun Pokémon adverse n'est reste dans le tableau, afficher un message de victoire
-                alert('Vous avez vaincu tous les Pokémon adverses !')
-                window.location.reload()
-            }
-        }
-    }
-    // Met à jour l'affichage des PV après l'attaque
-    pvAdversaire.innerText = pvPokAdverseActuel;
-}
-function  attaque2PoKBot(pokemon) {
-    let degatContreBot = pokemon.puissanceAttaque[1];
-    // Déduit les points de vie suite à l'attaque
-    pvPokAdverseActuel -= degatContreBot;
-    // Si les dégâts sont inférieurs à zéro, ils seront initialisés à zéro
-    if (pvPokAdverseActuel < 0) {
-        pvPokAdverseActuel = 0;
-        // Supprime le Pokémon adverse si ses PV sont nuls
-        if (pokemonNiveau.length > 0) {
-            // Supprime le premier Pokémon adverse du tableau
-            pokemonNiveau.shift();
-            // Afficher le prochain Pokémon adverse s'il en reste
-            if (pokemonNiveau.length > 0) {
-                pokemonAdverse = affichagePokAdverse(pokemonNiveau);
-            } else {
-                // Si aucun Pokémon adverse n'est reste dans le tableau, afficher un message de victoire
-                alert('Vous avez vaincu tous les Pokémon adverses !')
-                window.location.reload()
-            }
-        }
-    }
-    // Met à jour l'affichage des PV après l'attaque
-    pvAdversaire.innerText = pvPokAdverseActuel;
-}
-//Fonction qui permet au bot de choisir un pokémon au hasard
-function randomizerAttaqueBot(tabPokemonUtilisateur) {
-    //Permet de controler que le Pokémon attaqué est toujours des points de vie
-    //Autrement le pokémon IA pourrait attaquer des pokémons qui n'ont plus de pv
-    do {
-        pokemonJoueurCible = Math.floor(Math.random() * tabPokemonUtilisateur.length);
-    }while(tabPokemonUtilisateur[pokemonJoueurCible].viePokemon <= 0)
+//Fonction qui permet de déclencher une attaque pour le joueur et le bot
+function attaque(pokemonChoisi, attaqueLance, idImgPokemon, puissanceAttaque,indexPokemonChoisi ) {
+    //Affiche le nom du pokémon de l'utilisateur qui effecture l'attaque
+    nomPokemonAtt.innerText = pokemonChoisi.pokemon;
+    //Affiche le nom de l'attaque du Pokémon de l'utilisateur
+    nomAttaque.innerText = attaqueLance;
+    //fais bouger le pokemon lorsqu'il attaque
+    shakeImage(idImgPokemon);
+    //Permet d'attaquer le pokemon adverse et de déduire ses pv
+    attaquePoKBot(puissanceAttaque);
+    //Randomizer qui choisi l'attaque du Pokémon Adverse
+    puissanceAttAdversaire = choixAttaqueBot(pokemonAdverse);
+    console.log('attaque adversaire : '+  puissanceAttAdversaire);
+    //laisse un délais de 1,5 secondes avant l'attaque du bot
+    setTimeout(()=> {
+        //Fais bouger le pokemon adverse lors de l'attaque
+        shakeImage('#imgPokemonAdversaire');
 
-    return pokemonJoueurCible;
+    console.log('coucou la bite');
+    //Déduits les PV du pokémon de l'utilisateur
+    pokemonChoisi.viePokemon -= puissanceAttAdversaire;
+    console.log('pv pokemon restants : '+ pokemonChoisi.viePokemon);
+
+    // Vérifie si le Pokémon de l'utilisateur a perdu tous ses PV
+    if (pokemonChoisi.viePokemon <= 0){
+        if (pokemonChoisi.viePokemon <= 0) {
+            pokemonChoisi.viePokemon = 0
+        }
+        // Désactive les boutons d'attaque associés au Pokémon
+        disableAttackButtons(indexPokemonChoisi);
+    };
+    //Mets à jour les pv
+    misAjourPvPokemonUtilisateur(indexPokemonChoisi)},800);;
+};
+
+// Fonction qui déduit les PV du bot suite à une attaque de l'utilisateur
+function  attaquePoKBot(puissanceAttaque) {
+    pvPokAdverseActuel -= puissanceAttaque;
+    // Si les dégâts sont inférieurs à zéro, ils seront initialisés à zéro
+    if (pvPokAdverseActuel <= 0) {
+        // Supprime le premier Pokémon adverse du tableau
+        pokemonNiveau.shift();
+       // imgPokemonAdversaire.src = pokemonNiveau.;
+        imgPokemonAdversaire.style.display = 'flex';
+            // Afficher le prochain Pokémon adverse s'il en reste
+            if (pokemonNiveau.length > 0) {
+                pokemonAdverse = affichagePokAdverse(pokemonNiveau);
+            } else {
+                // Si aucun Pokémon adverse n'est reste dans le tableau, afficher un message de victoire
+                alert('Vous avez vaincu tous les Pokémon adverses !')
+                window.location.reload()
+        }
+    }
+    // Met à jour l'affichage des PV après l'attaque
+    pvAdversaire.innerText = pvPokAdverseActuel;
 }
+// Fonction permettant d'ajouter un effet de shaking au pokemon qui attaque
+function shakeImage(idImgPokemon) {
+    let image = document.querySelector(idImgPokemon);
+    image.classList.add('shake');
+    setTimeout(function(){
+        image.classList.remove('shake');
+    }, 1000); // Durée de l'effet en millisecondes (1 seconde dans cet exemple)
+}
+
 //Fonction qui permet de choisir l'attaque que le bot va effectuer et affiche l'attaque ainsi que le nbr dégats
 //Renvoie le nombre de dégats
 function choixAttaqueBot(pokemonAdversaire){
@@ -638,10 +503,12 @@ function choixAttaqueBot(pokemonAdversaire){
     degatsSubis.innerText = puissanceAttAdversaire;
     puissanceAttAdversaire = parseInt(puissanceAttAdversaire);
 
-    console.log(puissanceAttAdversaire);
-    //retourne les points de puissance d'attaque à l'eventListener
+    console.log('puissance d\'attaque de l\'adversaire' + puissanceAttAdversaire);
+    //retourne les points de puissance d'attaque à la fonction attaque
+
     return puissanceAttAdversaire;
 };
+
 //Fonction qui permet de désactiver le pokémon et l'attaque lorsqu'il n'a plus de PV
 function disableAttackButtons(pokemonIndex) {
     // Désactive les boutons d'attaque du Pokémon correspondant
@@ -667,6 +534,7 @@ function disableAttackButtons(pokemonIndex) {
         window.location.reload();
     }
 }
+
 //Fonction qui permet de mettre l'affichage des pv utilisateur à jour
 function misAjourPvPokemonUtilisateur(pokemonJoueurCible) {
     switch (pokemonJoueurCible) {
@@ -683,3 +551,109 @@ function misAjourPvPokemonUtilisateur(pokemonJoueurCible) {
             break;
     }
 }
+
+/////////////////////
+//LE JEU DEBUTE ICI//
+/////////////////////
+
+//////////////////////////////////
+//LES CLIQUES / ADDEVENTLISTENER//
+//////////////////////////////////
+
+///////////////////////////////////
+//L'UTILISATEUR CHOISI UN POKEMON//
+///////////////////////////////////
+
+//Pokémon 1
+pokemon1.addEventListener('click', ()=> {
+    btn1AttaquePok1.style.display = 'flex';
+    btn2AttaquePok1.style.display = 'flex';
+
+    btn1AttaquePok2.style.display = 'none';
+    btn2AttaquePok2.style.display = 'none';
+    btn1AttaquePok3.style.display = 'none';
+    btn2AttaquePok3.style.display = 'none';
+});
+
+//Pokémon 2
+pokemon2.addEventListener('click', ()=> {
+    btn1AttaquePok2.style.display = 'flex';
+    btn2AttaquePok2.style.display = 'flex';
+
+    btn1AttaquePok1.style.display = 'none';
+    btn2AttaquePok1.style.display = 'none';
+    btn1AttaquePok3.style.display = 'none';
+    btn2AttaquePok3.style.display = 'none';
+});
+
+//Pokémon 3
+pokemon3.addEventListener('click', ()=> {
+    btn1AttaquePok3.style.display = 'flex';
+    btn2AttaquePok3.style.display = 'flex';
+
+    btn1AttaquePok1.style.display = 'none';
+    btn2AttaquePok1.style.display = 'none';
+    btn1AttaquePok2.style.display = 'none';
+    btn2AttaquePok2.style.display = 'none';
+});
+
+//Attaque 1 Pokémon 1
+btn1AttaquePok1.addEventListener('click', function () {
+    pokemonChoisi = tabPokemonUtilisateur[0];
+    attaqueLance = tabPokemonUtilisateur[0].attaque[0];
+    idImgPokemon = '#imgPokemon1';
+    puissanceAttaque = tabPokemonUtilisateur[0].puissanceAttaque[0];
+    indexPokemonChoisi = 0;
+
+    attaque(pokemonChoisi,attaqueLance, idImgPokemon, puissanceAttaque, indexPokemonChoisi);
+});
+//Attaque 2 Pokémon 1
+btn2AttaquePok1.addEventListener('click', function () {
+    pokemonChoisi = tabPokemonUtilisateur[0];
+    attaqueLance = tabPokemonUtilisateur[0].attaque[1];
+    idImgPokemon = '#imgPokemon1';
+    puissanceAttaque = tabPokemonUtilisateur[0].puissanceAttaque[1];
+    indexPokemonChoisi = 0;
+
+    attaque(pokemonChoisi,attaqueLance, idImgPokemon,puissanceAttaque, indexPokemonChoisi);
+});
+//Attaque 1 Pokémon 2
+btn1AttaquePok2.addEventListener('click', function () {
+    pokemonChoisi = tabPokemonUtilisateur[1];
+    attaqueLance = tabPokemonUtilisateur[1].attaque[0];
+    idImgPokemon = '#imgPokemon2';
+    puissanceAttaque = tabPokemonUtilisateur[1].puissanceAttaque[0];
+    indexPokemonChoisi = 1;
+
+    attaque(pokemonChoisi,attaqueLance,idImgPokemon,puissanceAttaque, indexPokemonChoisi);
+});
+//Attaque 2 Pokémon 2
+btn2AttaquePok2.addEventListener('click', function () {
+    pokemonChoisi = tabPokemonUtilisateur[1];
+    attaqueLance = tabPokemonUtilisateur[1].attaque[1];
+    idImgPokemon = '#imgPokemon2';
+    puissanceAttaque = tabPokemonUtilisateur[1].puissanceAttaque[1];
+    indexPokemonChoisi = 1;
+
+    attaque(pokemonChoisi,attaqueLance,idImgPokemon,puissanceAttaque, indexPokemonChoisi);
+});
+//Attaque 1 Pokémon 3
+btn1AttaquePok3.addEventListener('click', function () {
+    pokemonChoisi = tabPokemonUtilisateur[2];
+    attaqueLance = tabPokemonUtilisateur[2].attaque[0];
+    idImgPokemon = '#imgPokemon3';
+    puissanceAttaque = tabPokemonUtilisateur[2].puissanceAttaque[0];
+    indexPokemonChoisi = 2;
+
+    attaque(pokemonChoisi,attaqueLance,idImgPokemon,puissanceAttaque, indexPokemonChoisi);
+});
+//Attaque 2 Pokémon 3
+btn2AttaquePok3.addEventListener('click', function () {
+    pokemonChoisi = tabPokemonUtilisateur[2];
+    attaqueLance = tabPokemonUtilisateur[2].attaque[1];
+    idImgPokemon = '#imgPokemon3';
+    puissanceAttaque = tabPokemonUtilisateur[2].puissanceAttaque[1];
+    indexPokemonChoisi = 2;
+
+    attaque(pokemonChoisi,attaqueLance,idImgPokemon,puissanceAttaque, indexPokemonChoisi);
+});
