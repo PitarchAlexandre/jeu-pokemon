@@ -60,6 +60,8 @@ let tabPokemonUtilisateur;
 let pokemonChoisi;
 //Permet d'envoyer l'attaque dans une fonction
 let attaqueLance;
+// Permet de stocker l'image d'un pokémon dans une fonction
+let idImgPokemon;
 //Permet d'envoyer la puissance d'attaque dans une fonction
 let puissanceAttaque;
 //Permet d'envoyer l'index du pokémon choisi par l'utilisateur dans plusieurs fonctions
@@ -421,11 +423,13 @@ function affichagePokAdverse(pokemonNiveau) {
 
     return pokemonAdverse;
 }
-function attaque(pokemonChoisi, attaqueLance, puissanceAttaque,indexPokemonChoisi ) {
+//Fonction qui permet de déclencher une attaque pour le joueur et le bot
+function attaque(pokemonChoisi, attaqueLance, idImgPokemon, puissanceAttaque,indexPokemonChoisi ) {
     //Affiche le nom du pokémon de l'utilisateur qui effecture l'attaque
     nomPokemonAtt.innerText = pokemonChoisi.pokemon;
     //Affiche le nom de l'attaque du Pokémon de l'utilisateur
     nomAttaque.innerText = attaqueLance;
+    shakeImage(idImgPokemon);
     //Permet d'attaquer le pokemon adverse et de déduire ses pv
     attaquePoKBot(puissanceAttaque);
     //Randomizer qui choisi l'attaque du Pokémon Adverse
@@ -468,6 +472,14 @@ function  attaquePoKBot(puissanceAttaque) {
     }
     // Met à jour l'affichage des PV après l'attaque
     pvAdversaire.innerText = pvPokAdverseActuel;
+}
+// Fonction permettant d'ajouter un effet de shaking au pokemon qui attaque
+function shakeImage(idImgPokemon) {
+    let image = document.querySelector(idImgPokemon);
+    image.classList.add('shake');
+    setTimeout(function(){
+        image.classList.remove('shake');
+    }, 1000); // Durée de l'effet en millisecondes (1 seconde dans cet exemple)
 }
 
 //Fonction qui permet de choisir l'attaque que le bot va effectuer et affiche l'attaque ainsi que le nbr dégats
@@ -583,53 +595,59 @@ pokemon3.addEventListener('click', ()=> {
 btn1AttaquePok1.addEventListener('click', function () {
     pokemonChoisi = tabPokemonUtilisateur[0];
     attaqueLance = tabPokemonUtilisateur[0].attaque[0];
+    idImgPokemon = '#imgPokemon1';
     puissanceAttaque = tabPokemonUtilisateur[0].puissanceAttaque[0];
     indexPokemonChoisi = 0;
 
-    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
+    attaque(pokemonChoisi,attaqueLance, idImgPokemon, puissanceAttaque, indexPokemonChoisi);
 });
 //Attaque 2 Pokémon 1
 btn2AttaquePok1.addEventListener('click', function () {
     pokemonChoisi = tabPokemonUtilisateur[0];
     attaqueLance = tabPokemonUtilisateur[0].attaque[1];
+    idImgPokemon = '#imgPokemon1';
     puissanceAttaque = tabPokemonUtilisateur[0].puissanceAttaque[1];
     indexPokemonChoisi = 0;
 
-    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
+    attaque(pokemonChoisi,attaqueLance, idImgPokemon,puissanceAttaque, indexPokemonChoisi);
 });
 //Attaque 1 Pokémon 2
 btn1AttaquePok2.addEventListener('click', function () {
     pokemonChoisi = tabPokemonUtilisateur[1];
     attaqueLance = tabPokemonUtilisateur[1].attaque[0];
+    idImgPokemon = '#imgPokemon2';
     puissanceAttaque = tabPokemonUtilisateur[1].puissanceAttaque[0];
     indexPokemonChoisi = 1;
 
-    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
+    attaque(pokemonChoisi,attaqueLance,idImgPokemon,puissanceAttaque, indexPokemonChoisi);
 });
 //Attaque 2 Pokémon 2
 btn2AttaquePok2.addEventListener('click', function () {
     pokemonChoisi = tabPokemonUtilisateur[1];
     attaqueLance = tabPokemonUtilisateur[1].attaque[1];
+    idImgPokemon = '#imgPokemon2';
     puissanceAttaque = tabPokemonUtilisateur[1].puissanceAttaque[1];
     indexPokemonChoisi = 1;
 
-    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
+    attaque(pokemonChoisi,attaqueLance,idImgPokemon,puissanceAttaque, indexPokemonChoisi);
 });
 //Attaque 1 Pokémon 3
 btn1AttaquePok3.addEventListener('click', function () {
     pokemonChoisi = tabPokemonUtilisateur[2];
     attaqueLance = tabPokemonUtilisateur[2].attaque[0];
+    idImgPokemon = '#imgPokemon3';
     puissanceAttaque = tabPokemonUtilisateur[2].puissanceAttaque[0];
     indexPokemonChoisi = 2;
 
-    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
+    attaque(pokemonChoisi,attaqueLance,idImgPokemon,puissanceAttaque, indexPokemonChoisi);
 });
 //Attaque 2 Pokémon 3
 btn2AttaquePok3.addEventListener('click', function () {
     pokemonChoisi = tabPokemonUtilisateur[2];
     attaqueLance = tabPokemonUtilisateur[2].attaque[1];
+    idImgPokemon = '#imgPokemon3';
     puissanceAttaque = tabPokemonUtilisateur[2].puissanceAttaque[1];
     indexPokemonChoisi = 2;
 
-    attaque(pokemonChoisi,attaqueLance,puissanceAttaque, indexPokemonChoisi);
+    attaque(pokemonChoisi,attaqueLance,idImgPokemon,puissanceAttaque, indexPokemonChoisi);
 });
