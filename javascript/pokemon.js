@@ -472,7 +472,10 @@ function  attaquePoKBot(puissanceAttaque) {
                 pokemonAdverse = affichagePokAdverse(pokemonNiveau);
             } else {
                 // Si aucun Pokémon adverse n'est reste dans le tableau, afficher un message de victoire
-                alert('Vous avez vaincu tous les Pokémon adverses !')
+                // et jouer la musique de victoire
+                const musiqueVictoire = document.querySelector('#musiqueVictoire');
+                musiqueVictoire.play();
+                alert('Vous avez vaincu tous les Pokémon adverses !');
                 window.location.reload()
         }
     }
@@ -530,6 +533,7 @@ function disableAttackButtons(pokemonIndex) {
     }
     if (btn1AttaquePok1 && btn1AttaquePok1.disabled && btn1AttaquePok2.disabled && btn2AttaquePok2.disabled &&
         btn1AttaquePok3 && btn2AttaquePok3.disabled  && pokemonAdverse[length] !== 0 && pokemonAdverse.viePokemon !== 0 ) {
+        const musiqueDefaite = document.querySelector('#musiqueDefaite');
         alert('Vous avez malheuresement perdu ! \nVous allez retourner au menu principal.');
         window.location.reload();
     }
