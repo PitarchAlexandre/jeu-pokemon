@@ -431,6 +431,7 @@ function attaque(pokemonChoisi, attaqueLance, idImgPokemon, puissanceAttaque,ind
     nomAttaque.innerText = attaqueLance;
     //fais bouger le pokemon lorsqu'il attaque
     shakeImage(idImgPokemon);
+    //Met bruit
     //Permet d'attaquer le pokemon adverse et de déduire ses pv
     attaquePoKBot(puissanceAttaque);
     //Randomizer qui choisi l'attaque du Pokémon Adverse
